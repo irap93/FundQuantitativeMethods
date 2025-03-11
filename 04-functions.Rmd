@@ -1,0 +1,221 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Deterministic Functions: Understanding function shape, pattern, and meaning of parameters
+
+## Research Objective
+The research objective is critical to identifying the *Conceptual* and the *Specific* question.
+
+Evaluate the effects of Yeast supplementation during pre-weaning and(or) post-weaning periods on performance (growth, intake, feed efficiency), physiologic (e.g., rumen temperature, cortisol, haptoglobin), behavioral, and immunologic responses in newly arrived beef calves.
+
+### Conceptual Question
+
+
+
+### Specific Question 
+
+
+## Plotting deterministic functions
+### Linear Model
+#### First order quadratic model
+R provides the power to consider unique equations and easily see how they describe the relationships between variables. Understanding what the parameters of various functions mean is critical to allow you to estimate what values may take on when looking at the data. However, there is also value in seeing how to create a controlled system that follows a specified pattern, and then assess how consistently the chosen models explain the data. Consider the linear model, which takes the form of $y=\beta_{o} + \beta_1x + \epsilon$; where $y$ is the dependent variable $\beta_o$ is the intercept on the *Y* axis, $\beta_1$ is the  slope of the $x$ parameter along the *X* axis, and $\epsilon$ is the error for each *i*th data point along the regression line. 
+
+```{r, linearmod}
+x = seq(1,12, 1) # Independent X parameter placed on the X axis
+b0 = 10 # Specify the Y intercept
+b1 = 3 # Specify the B1 coefficient i.e. the slope
+y = b0 + b1*x
+
+par(mfrow = c(1,3))
+hist(x)
+hist(y)
+{
+plot(x,y, ylim = c(0,max(y)), main = expression(y == beta0 + beta*1*x + epsilon))
+abline(lm(y~x), col = 'blue')
+}
+par(mfrow = c(1,1))
+summary(lm(y~x))
+```
+So here we see a basic linear plot derived from data using a deterministic linear model. Next, we will plot the same data, except adding in an element of expected randomness due to some error associated with measuring the data.
+#### Second order exponential
+A negative exponential function takes on the characteristics of $ae^{bx}$ 
+```{r expo}
+a = 1
+b = 1
+x = seq(0,10,length = 100)
+y = a*exp(b*x)
+plot.new()
+{
+plot(x,y, type = 'b', main = 'Exponetial')
+lines(x, y)
+}
+```
+#### Negative Exponential  
+A negative exponential function takes on the characteristics of $ae^{-bx}$ 
+```{r negexpo}
+a = 1
+b = 0.5
+x = seq(0,10,length = 100)
+y = a*exp(-b*x)
+plot.new()
+{
+plot(x,y, type = 'b', main = 'Negative Exponetial')
+lines(x, y)
+}
+```
+
+#### Saturating exponential growth function
+```{r}
+a = 1
+b = 0.5
+x = seq(0,10,length = 100)
+y = a*(1-exp(-b*x))
+plot.new()
+{
+plot(x,y, type = 'b', main = 'Saturating Exponential Growth')
+lines(x, y)
+}
+```
+
+#### Ricker Function. 
+A Ricker function takes on the characteristics of $axe^{bx}$ 
+```{r ricker}
+a = 2
+b = 0.5
+x = seq(0,10,length = 100)
+y = a*x*exp(-b*x)
+plot.new()
+{
+plot(x,y, type = 'b', main = 'Ricker')
+lines(x, y)
+}
+```
+What happens as the Ricker function approaches infinity?
+
+```{r infexpo}
+a = 1
+b = 1
+x = seq(0,10,length = 100)
+y = a*x*exp(-b*x)
+plot.new()
+{
+plot(x,y, type = 'b', main = 'Exponetial')
+lines(x, y)
+abline(lm(x~y))
+}
+```
+
+#### Michaelis-Menton Equation
+Enzyme subjugation or predator-prey relationships. 
+```{r}
+a = 1
+b = 1
+x = seq(0,10,length = 100)
+summary(x)
+y = (a*x)/(b+x)
+{
+plot(x,y, ylim = c(0,1), type = 'b', main = 'Michaelis-Menton')
+lines(x, y)
+}
+```
+
+#### Logistic Function
+The basic logistic function
+$$({e^{a+bx}})/({1+e^{a+bx}})$$
+
+```{r}
+a = 0 # Shifts left to right
+b = 1 # Controls inflection point
+x = seq(-10,10,length = 100)
+summary(x)
+y = (exp(a+b*x)/(1+exp(a+b*x)))
+{
+plot(x,y, ylim = c(0,1), type = 'b', main = 'Logistic Function')
+lines(x, y)
+}
+```
+
+
+## Stoichasticity 
+```{r rlinearmod}
+set.seed(1)
+x = runif(n = 100, min = 0, max = 12) # Independent X parameter placed on the X axis
+b0 = 10 # Specify the Y intercept
+b1 = 3 # Specify the B1 coefficient i.e. the slope
+r = rnorm(length(x), mean = 0, sd = 5)
+y = b0 + b1*x + r
+
+par(mfrow = c(1,5))
+hist(x)
+hist(y)
+hist(r)
+plot(x,y, ylim = c(0,max(y)), main = expression(y == beta*0 + beta*1*x + epsilon))
+abline(lm(y~x), col = 'blue')
+
+m = lm(y~x)
+hist(residuals(m))
+summary(lm(y~x))
+```
+
+Notice how this has changed the relationship, and due to the randomness, the intercept is no longer exactly where we placed it? Rather, due to the controlled but intentionally introduced error and random variation in the data, the fit has changed and the intercept, and slope have all been affected. However, they may not be that different. Consider how this relates to our perception of truth, and expectations on the underlying systems has discussed in Module 1.
+
+
+
+## Intake vs BW Relationship
+```{r, data}
+# Libraries ----
+library(tidyverse) # Graphing 
+library(data.table) # Reading data and manipulating data
+library(readxl) # Reading excel
+
+# Data -----
+## BW data -----
+excel_sheets(path = '../Data/LAN/LAN_1504_DATA.xlsx')
+d.bw = read_excel(path = '../Data/LAN/LAN_1504_DATA.xlsx',
+                   sheet = "RawWeight(lbs)") %>% 
+  as.data.table()
+d.bw2 = melt.data.table(data = d.bw, measure.vars = c(7:18), value.name = 'BW', variable.name = 'name')
+d.bw2$Day = parse_number(as.character(d.bw2$name))
+### Assign day
+days = seq(min(d.bw2$Day), max(d.bw2$Day), by = 1)
+days = days[days >= 0]
+days
+d.days = data.table(Day = days)
+VIDs = data.table(VID = unique(d.bw2$VID))
+d.daysvid = merge(days, VIDs, by = NULL) %>% 
+  as.data.table
+names(d.daysvid) = c('Day','VID')
+
+names(d.days)
+
+d.bw3 = merge.data.table(d.daysvid, d.bw2, by = c('VID','Day'), all = T)
+
+## Intake data ----
+d.int = read_excel(path = '../Data/LAN/LAN_1504_DATA.xlsx',
+                   sheet = "Day70_Intake_SAS")
+```
+
+```{r}
+excel_sheets(path = '../Data/LAN/LAN_1504_DATA.xlsx')
+d.lan =  read_excel(path = '../Data/LAN/LAN_1504_DATA.xlsx',
+                   sheet = "LAN_1504") %>% 
+  as.data.table()
+str(d.lan)
+
+m.anova = lm(Day56_ADG ~ Creep*Trial, data = d.lan)
+summary(m.anova)
+library(emmeans)
+emmeans(m.anova, specs = 'Creep','Trial')
+
+library(lme4)
+
+m.lmer = lmer(Day56_ADG ~ Creep*Trial + (1|Pen), data = d.lan)
+summary(m.lmer)
+
+emmeans(m.lmer, specs = 'Creep', 'Trial')
+
+```
+
+
