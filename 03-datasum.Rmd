@@ -1,0 +1,132 @@
+# Exploratory Data Analysis and Graphics
+
+When approaching a data set, it is important to do due diligence and ensure that a complete understanding of the data is achieved before further analysis or publication is undertaken. This can be achieved in a number of ways, which will be enumerated below. As with any analysis, an understanding of the studies experimental design is critical to understanding what values may be expected within the data sheet, and will lend insight into what potential analysis may be conducted. 
+
+When opening a data set, it is important to have an understanding of what to expect. This includes such things as the study design and description, and the meta-data associated with the data sheets. Meta data, at the very least, should include descriptions of the column names, and indicate the type of data you might expect to be within. It may also include information concerning individual observations, such as animals that died or were pulled from the study, why they might have been pulled, and other factors that should be considered when analyzing the data. 
+
+File and column names should be kept as simple, yet descriptive, as possible. Use well known naming conventions, and avoid the use of spaces, instead using underscores or dots. You will quickly understand the value of having well concieved naming conventions for things you will type a lot, such as the names of columns and data frames. As we go through the class, you will likely notice some of the naming conventions that I have adopted. Feel free to use and adopt these for you own use. You will undoubtedly find a specific style which better suits your specific fancy and needs, but I think it is important that you do adopt a style for your own sanity.
+
+## Study description 
+Experimental Animals and Design: Seventy-two crossbred beef heifers (25% Bos indicus) born and raised at the McGregor AgriLife Research Center will be weaned in October at a range in age of 194-232 d. Forty-two days prior to weaning, calves will be weighed, exit velocity and chute scores (subjective temperament) recorded, and randomly allotted to 1 of 2 treatments (Control or Yeast) provided in a creep ration containing 18% CP (as-fed basis). 
+
+Upon weaning, blood samples will be collected for analyses of IgG titers, cortisol and haptaglobian concentrations, and body weight, exit velocity and chute score data collected. At this time, 32 heifers (16 Control, 16 Yeast) will have rumen temperature boluses inserted and HOBO accelerometer devices placed on the left hind leg to record activity data. Heifers will then be placed into a holding pen with hay and water. The following day, all heifers will be loaded on to a truck and shipped approximately 800 kilometers, before being returned to the Research Center. As heifers come off the truck, blood samples will be collected to determine cortisol and haptaglobin concentrations. The heifers will be placed in holding pens for the night. The following morning, heifer calves will be weighed, vaccinated for IBR, PI3, BVD, BRSV (product?) and Mannheimia (Niplura), and chute score and exit velocity measured.  
+
+Within creep treatment, heifers will be randomly assigned to 1 of 2 post-weaning treatments in a 2 x 2 factorial arrangement: (1) Pre-weaning Yeast and post-weaning Yeast, (2) Pre-weaning Yeast and post-weaning control, (3) Pre-weaning control and post-weaning control, and (4) Pre-weaning control and post-weaning Yeast. Heifers will be weighed at 7-d intervals and re-vaccinated on d 21 (IBR, PI3, BVD, BRSV, and Nuplora). Heifers in the 2 pens on the post-weaning Yeast treatments will be rotated every 7-d to minimize the potential pen effect. Likewise, heifers in the 2 pens on the post-weaning control treatments will be rotated weekly. Blood samples will be collected at the start of the study, and at weekly intervals to measure IgG titer responses to IBR and Mannheimia vaccinations. Individual-animal intakes and feeding behavior (e.g., bunk visit and meal frequency and duration) data will be collected daily by the GrowSafe System. Time to bunk following feed truck delivery will also be measured daily using the GrowSafe System. Throughout the trial, the system will be monitored twice daily to ensure accuracy of the feed intake data. To ensure data quality of the feed intake and feeding behavior data, the average assigned feed disappearance (AFD) rate will be computed daily, and data for all animals in a pen deleted if AFD for a given day is less than 95%. Exit velocity and chute scores (objective and subjective temperature traits) will be measured at prior to creep feeding, weaning, prior to sorting, and the end of the trial. The HOBO devices will measure physical activity. Serum cortisol and haptaglobin concentrations will be measured before and after shipping and 28-d and 56-d after the beginning of the study. Treatment premixes, and treatment total mixed ration samples will be collected weekly and stored at 20 C (refrigerator). Immediately following the completion of the study, the weekly samples will be composited by weight, and samples sent for yeast analysis. The TMR composite samples will be analyzed to obtain a complete nutritional profile. The treatment TMRs will be fed once daily, and feed bunks will be cleaned once weakly with ort samples collected and stored at 20 C as deemed necessary.  
+
+ 
+```{r}
+# 2 Exploratory Analysis and Graphics
+# Libraries ----
+library(tidyverse) # Graphing 
+library(data.table) # Reading data and manipulating data
+library(readxl) # Reading excel
+
+# Data -----
+excel_sheets(path = '../Data/LAN/LAN_1504_DATA.xlsx')
+d.bw = read_excel(path = '../Data/LAN/LAN_1504_DATA.xlsx',
+                   sheet = "RawWeight(lbs)")
+
+# Summary Statistics -----
+str(d.bw)
+nrow(d.bw)
+unique(d.bw$VID)
+length(unique(d.bw$VID))
+
+## Data Wrangling -----
+names(d.bw)
+d.bw2 = pivot_longer(data = d.bw, cols = c(7:18))
+(18-6) * length(unique(d.bw$VID))
+(18-6) * length(unique(d.bw$VID)) == nrow(d.bw2)
+
+length(unique(d.bw2$VID))
+str(d.bw2)
+d.bw2$Day = extract_numeric(d.bw2$name)
+str(d.bw2)
+
+## Summary statistics
+summary(d.bw)
+summary(d.bw2)
+
+d.bw2 %>% # Calculating summary statistics from long data by day
+  group_by(Day) %>% 
+  summarise(mean = mean(value),
+            SD = sd(value),
+            min = min(value),
+            max = max(value))
+
+d.bw2 %>% 
+  group_by(VID) %>% 
+  summarise(mean = mean(value),
+            SD = sd(value),
+            min = min(value),
+            max = max(value))
+
+```
+
+```{r}
+# Check for NA's 
+days = seq(min(d.bw2$Day), max(d.bw2$Day), by = 1)
+Days = data.table(Day = days)
+d.bw2 = as.data.table(d.bw2)
+VIDs = data.table(VID = unique(d.bw2$VID))
+78*113
+
+d.bw3 = merge.data.table(d.bw2,Days, all = T)
+unique(d.bw3$Day)
+summary(d.bw3)
+```
+
+```{r}
+# Calculate ADG ----
+d.bw2$VID = as.character(d.bw2$VID)
+str(d.bw2)
+m.adg = lm(value ~ Day, data = d.bw2)
+summary(m.adg)
+hist(residuals(m.adg))
+shapiro.test(residuals(m.adg))
+d.bw2$pBW = predict(m.adg)
+
+d.bw2 %>% 
+  ggplot(aes(x = Day))+
+  geom_line(aes(y = pBW), color = 'blue')+
+  geom_point(aes(y = value), color = 'red')
+
+```
+```{r}
+# ADG whole Period ----
+d.bw2 = as.data.table(d.bw2)
+
+d.bw2[VID == '249', list(initialBW=coef(lm(value ~ Day))[1], 
+                         ADG=coef(lm(value~Day))[2],
+                         NoWeights = length(unique(Day)))]
+
+d.bw2.249 = d.bw2[VID == '249',]
+m.249 = lm(value ~ Day, data = d.bw2.249)
+summary(m.249)
+coef(lm(value~Day, data = d.bw2.249))[1]
+
+d.adg = d.bw2[,list(initialBW=coef(lm(value ~ Day))[1], 
+                    ADG=coef(lm(value~Day))[2],
+                    NoWeights = length(unique(Day))),
+              by=VID]
+```
+
+## Graphs
+```{r}
+# Summary graphs ----
+
+d.adg %>% 
+  ggplot(aes(x = ADG))+
+  geom_histogram()+
+  geom_vline(aes(xintercept = mean(d.adg$ADG)), color = 'red')
+
+d.adg %>% 
+  ggplot(aes(x = ADG))+
+  geom_density()
+
+d.bw2 %>% 
+  ggplot(aes(x = Day, y = value, color = Creep))+
+  geom_point()+
+  geom_smooth(method = 'lm', se = F)
+```
+
