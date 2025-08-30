@@ -1,7 +1,6 @@
-# Developing and Modeling Hypothesis
+# Developing and Modeling Hypothesis  
 
-
-# Deterministic Functions: Understanding function shape, pattern, and meaning of parameters
+Deterministic Functions: Understanding function shape, pattern, and meaning of parameters
 
 ## Research Objective
 The research objective is critical to identifying the *Conceptual* and the *Specific* question.
