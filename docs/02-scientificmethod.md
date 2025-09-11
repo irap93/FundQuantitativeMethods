@@ -75,7 +75,7 @@ Now that you have R installed, you have access to basic functions and that come 
 
 # or you can install a bunch of packages at one time
 # Libraries to install
-packages <- c("data.table", "tidyverse", "rjags", "MCMCvis", "ggExtra", "devtools")# List of packages to check/install
+packages <- c("data.table", "tidyverse", "MCMCvis", "ggExtra", "devtools")# List of packages to check/install
 
 # Function to check and install packages
 install_if_missing = function(pkg) {
@@ -136,17 +136,6 @@ lapply(packages, install_if_missing)
 ```
 
 ```
-## Loading required package: rjags
-## Loading required package: coda
-## Linked to JAGS 4.3.2
-## Loaded modules: basemod,bugs
-```
-
-```
-## Package rjags is already installed.
-```
-
-```
 ## Loading required package: MCMCvis
 ```
 
@@ -186,9 +175,6 @@ lapply(packages, install_if_missing)
 ## 
 ## [[5]]
 ## NULL
-## 
-## [[6]]
-## NULL
 ```
 
 However, the beauty of R is that anyone can publish a package to serve there purposes, encapsulate their methods, or share their ideas. And that is what I have done to facilitate sharing data within this course. Please load the package below to install the example datasets which will be used throughout this course. I may add datasets as we go, and will tell you if you need to update to the most current version of this package. If so, simply rerun the code below in your R console. I built the following package, and it is available on my github in the qthink repository.
@@ -220,7 +206,7 @@ Or, you can load them all at once like this using a for loop, which cycles throu
 
 
 ``` r
-packages <- c("data.table", "tidyverse", "rjags", "MCMCvis", "ggExtra", "devtools")# List of packages to check/install
+packages <- c("data.table", 'qthink','tidyverse')# List of packages to check/install
 
 # Load each package, install if missing
 for (pkg in packages) {
@@ -240,25 +226,7 @@ There are numerous ways to load data into R using a number of different librarie
 # load the heifer dataset from the qthink package
 data("heifer")
 head(heifer) # Look at the heifer data
-```
 
-```
-## # A tibble: 6 × 21
-##     VID   Pen CreepTrt WeanTrt D_42_BW Creep_Gain Shipping_Loss Day56_InitialBW
-##   <dbl> <dbl> <chr>    <chr>     <dbl>      <dbl>         <dbl>           <dbl>
-## 1   248     8 A        A          261.       34.5         -5.44            287.
-## 2   249     8 A        A          210.       23.1         -4.54            223.
-## 3   276     6 B        A          177.       29.0         -3.63            200.
-## 4   298     6 B        A          198.       30.8         -6.80            218.
-## 5   322     8 A        A          198.       34.5         -3.63            233.
-## 6   346     6 B        A          189.       13.6         -2.27            185.
-## # ℹ 13 more variables: Day56_ADG <dbl>, Day56_MMBW <dbl>, Day56_DMI <dbl>,
-## #   Day56_Residual <dbl>, D_1_EV <dbl>, AVE_TTB <dbl>, BVFREQ <dbl>,
-## #   BVDUR <dbl>, BVFREQsd <dbl>, BVDURsd <dbl>, uDMI <dbl>, sdDMI <dbl>,
-## #   cvDMI <dbl>
-```
-
-``` r
 # Save it to your workspace, change out the file path name to reflect your computer
 write.csv(heifer, file = '/Users/iraparsons/Documents/AS791_FundQuantThink/Data/heifer.csv')
 ```
@@ -298,7 +266,7 @@ File and column names should be kept as simple, yet descriptive, as possible. Us
 We might first want to know some basic information about the dataframe we've loaded.
 
 
-First, we might want to know how many rows are in the dataframe by running `nrow(heifer)` 
+How many rows are in the dataframe by running `nrow(heifer)` 
 
 Second, it might be important to know what our column names are `names(heifer)`
 
@@ -495,7 +463,7 @@ summary(bodyweight)
 
 Now we have an understanding of each variable, if NAs are in it,
 
-**!! DO NOT PUT PERIODS IN FOR MISSING DATA!! ** This is not only extremely annoying, it messes with Rs ability to automatically categorize variables as numeric, character, integer, etc. Just leave those cells blank when entering the data. This is a convention that is leftover from antiquated programs such as SAS. However, should you get such a datasheet, you can write a replace function to put NAs in the place of the periods, but it is extremely annoying to have to do so.
+**!! DO NOT PUT PERIODS IN FOR MISSING DATA!! ** This is not only extremely annoying, it messes with Rs ability to automatically categorize variables as numeric, character, integer, etc. Just leave those cells blank when entering the data. This is a convention that is leftover from programs such as SAS. However, should you get such a datasheet, you can write a replace function to put NAs in the place of the periods, but it is extremely annoying to have to do so.
  
 Next, lets graphically look at our data.
 
@@ -529,7 +497,31 @@ for (v in vars) {
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-3.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-4.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-5.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-6.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-7.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-8.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-9.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-10.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-11.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-12.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-13.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-14.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-15.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-16.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-13-17.png" width="672" />
 
-Cool, our data looks cool and we are comfortable with the distribution of the data, as everything looks like it fits so far, i.e. now large outliers which may indicate a misentered data point. Now, lets start to explore the effects of our treatments using box and violin plots.
+## Relationships among covariates  
+
+"There are no routine statistical questions, only questionable statistical routines."
+-- Sir David Cox
+
+"Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
+-- John Tukey
+
+Part of the creative process is understanding relationships among covariates within a dataset. Breaking down the data by some categorical variable is the next step in zooming into our dataset. 
+
+Box and whisker plots, or their modern cousins violin plots, give a compact visual summary of the datasets distributions and can be broken out by categorical variables. They give a visual representation of 5 key variables
+
+- **Minimum:** The smallest value excluding outliers
+- **First quartile:** the 25^th^ percentile
+- **Median (Q2):** the middle value of the data
+- **Third quartile:** the 75^th^ percentile
+- **Maximum:** The largest value of hte data exlcuding outliers
+
+It also shows other information such as:
+
+- *Interquartile range (IQR):* spread between Q1 and Q3
+- *Whiskers:* Indicate variability outside the middle 50% of the data
+- *Outliers:* Plotted individual points beyond the whiskers
+
+This allows you to evaluate the *central tendency*, *spread*, and *skewness* of the dataset, and is useful for comparing results across groups.
 
 
 ``` r
@@ -598,6 +590,7 @@ for (v in vars) {
 ```
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-1.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-2.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-3.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-4.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-5.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-6.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-7.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-8.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-9.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-10.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-11.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-12.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-13.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-14.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-15.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-16.png" width="672" /><img src="02-scientificmethod_files/figure-html/unnamed-chunk-16-17.png" width="672" />
+
 
 
 ### Scatter plots   
@@ -683,7 +676,7 @@ ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+
 
 Cool. What do we notice about the pattern, and what can we intuite about that from the data?
 
-Lets look at  more linear relationship.
+Lets look at  more linear relationship. 
 
 
 ``` r
@@ -755,19 +748,18 @@ ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = paste(CreepTrt,WeanTrt))
 
 What do we notice about these graphs? What might we learn from these that was not apparent in the *heifer* data sheet?
 
-## Developing and Modeling Hypothesis  
-
-Deterministic Functions: Understanding function shape, pattern, and meaning of parameters
-
-### Research Objective
-The research objective is critical to identifying the *Conceptual* and the *Specific* question.
-
-Evaluate the effects of Yeast supplementation during pre-weaning and(or) post-weaning periods on performance (growth, intake, feed efficiency), physiologic (e.g., rumen temperature, cortisol, haptoglobin), behavioral, and immunologic responses in newly arrived beef calves.
 
 
-### Plotting deterministic functions
 
-#### First order quadratic model {-}
+## Deterministic functions  
+
+Deterministic functions are repeatable, where $f(x)$ always gives the same results for $x$ without randomness or other stochastic functions which allows the function's rules to completely determine its output. Deterministic functions are by their nature, cause and effect. You will most likely use predefined deterministic functions to develop and test your hypothesis. Below are several examples of deterministic functions that are found and used in the literature. 
+
+Run the code in your R interface and see if you get the same results. Play with the parameters and see how that effects the shape of the resulting data. Perhaps consider creating other plots that describe the data created by each of these functions.
+
+All of statistics is centered around describing the fit of data to a model. That data model may be simple or complex, but it is fundamentally seeking to understand a system or the effect of a treatment or *thing* 
+
+### First order quadratic model {-}
 
 R provides the power to consider unique equations and easily see how they describe the relationships between variables. Understanding what the parameters of various functions mean is critical to allow you to estimate what values may take on when looking at the data. However, there is also value in seeing how to create a controlled system that follows a specified pattern, and then assess how consistently the chosen models explain the data. Consider the linear model, which takes the form of $y=\beta_{o} + \beta_1x + \epsilon$; where $y$ is the dependent variable $\beta_o$ is the intercept on the *Y* axis, $\beta_1$ is the  slope of the $x$ parameter along the *X* axis, and $\epsilon$ is the error for each *i*th data point along the regression line. 
 
@@ -821,10 +813,12 @@ summary(lm(y~x))
 ```
 
 So here we see a basic linear plot derived from data using a deterministic linear model. Next, we will plot the same data, except adding in an element of expected randomness due to some error associated with measuring the data.
-### Second order exponential  
 
-A negative exponential function takes on the characteristics of $ae^{bx}$ 
+### First order exponential {-}  
 
+A first exponential function takes on the characteristics of $ae^{bx}$ where $a$ is the initial scaling factor, $e$ represents euler's number (-2.718), $b$ represents the rate parameter, where positive represents exponential growth, and negative represents exponential decay, and x represents the independent variable, often time, but may be another variable. 
+
+**Positive exponential**
 
 ``` r
 a = 1
@@ -840,7 +834,7 @@ lines(x, y)
 
 <img src="02-scientificmethod_files/figure-html/expo-1.png" width="672" />
 
-### Negative Exponential  
+**Negative Exponential**
 
 A negative exponential function takes on the characteristics of $ae^{-bx}$ 
 
@@ -859,7 +853,7 @@ lines(x, y)
 
 <img src="02-scientificmethod_files/figure-html/negexpo-1.png" width="672" />
 
-### Saturating exponential growth function  
+**Saturating exponential growth function **
 
 
 ``` r
@@ -876,9 +870,9 @@ lines(x, y)
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
-### Ricker Function  
+### Ricker Function  {-}
 
-A Ricker function takes on the characteristics of $axe^{bx}$ 
+A Ricker function takes on the characteristics of $axe^{bx}$ or alternatively $N_t + 1 = N_t e^{r(1-N_t/K)}$ and is commonly used in ecology and population modeling. It results in a bell shaped curve where $N_t$ represents the population at time $t$, $r$ is the intrinsic growth rate, and $K$ is the carrying capacity.
 
 
 ``` r
@@ -913,9 +907,9 @@ abline(lm(x~y))
 
 <img src="02-scientificmethod_files/figure-html/infexpo-1.png" width="672" />
 
-### Michaelis-Menton Equation 
+### Michaelis-Menton Equation {-}
 
-Enzyme subjugation or predator-prey relationships. 
+The Michaelis-Menton equation is commonly used in enzyme subjugation or predator-prey relationships, and takes on the form of $f(v) = V_max[S] / K_m + [S]$. Here $v$ indicates the rate velocity, $V_max$ rpresents the maximum reaction rate when the enzyme is saturated, [S] indicates the substrate concentration, and $K_m$ the Michaelis constant - the substrate concentration at which $V = V_max / 2$.
 
 
 ``` r
@@ -940,9 +934,9 @@ lines(x, y)
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
-### Logistic Function  
+### Logistic Function {-} 
 
-The basic logistic function $$({e^{a+bx}})/({1+e^{a+bx}})$$
+The basic logistic function $f(x) = L/1+e^{-k(x-x_0)}$ where $L$ is the carrying capacity or the maximum value the function approaches, $k$ is the growth rate, $x_0$ is the inflection point where growth is the fastest, and $x$ represents the variable along which the equation is integrated, often time.
 
 
 ``` r
@@ -969,9 +963,89 @@ lines(x, y)
 
 ## Stoichasticity 
 
+Stoichasticity represents the variation or randomness in a system. By definition it is non-deterministic, at least within the outline of our model. Thus the same input can lead to different outcomes. However, the probability of receiving a certain outcome within certain range can be calculated using probability, which is where what we know of as **Probability distributions** come from. This variability, or noise as it is often refered to, can be used to represent what we might expect to find in real world situations as it introduces noise to our deterministic models.
+
+Below we will explore several common probability distributions usefull for statistics.
+
+### Probability Distributions 
+
+#### Normal {-}
+
+The **normal** or more correctly, **gaussian** distribution is the most commonly employed distribution. $z$ takes on Continuously distributed quantities that can take on positive or negative values. Sums of things are normally distributed.
+
 
 ``` r
-set.seed(1)
+z = rnorm(1000, mean = 0, sd = 1)
+par(mfrow = c(1,2))
+hist(z, main = 'Normal')
+plot(density(z), main = 'Density normal')
+```
+
+<img src="02-scientificmethod_files/figure-html/normal-1.png" width="672" />
+#### Lognormal {-}  
+
+Continously distributed with positive values. Random variables that have the property that their logs are normally distributed. Thus if $z$ is normally distributed then the $exp(z)$ is lognormally distributed. Products of things are normally distributed.
+
+
+``` r
+z = rlnorm(1000, meanlog = 0, sdlog = 1)
+par(mfrow = c(1,2))
+hist(z, main = 'lognormal')
+plot(density(z), main = 'Density lognormal')
+```
+
+<img src="02-scientificmethod_files/figure-html/lognormal-1.png" width="672" />
+#### Gamma {-}
+
+The time required for a specified number of events to occur in a Poisson process. Any continuous quantity that is nonnegative. 
+
+
+``` r
+z = rgamma(n=1000, shape = 1, rate = 1)
+par(mfrow = c(1,2))
+hist(z, main = 'gamma')
+plot(density(z), main = 'Density gamma')
+```
+
+<img src="02-scientificmethod_files/figure-html/gamma-1.png" width="672" />
+
+#### Uniform {-}
+
+The uniform distribution takes on any real number, typically bounded by an upper and a lower boundary where any number in between is equally probable.
+
+
+``` r
+z = runif(n=1000,min = -1,max = 1)
+par(mfrow = c(1,2))
+hist(z, main = 'uniform')
+plot(density(z), main = 'Density uniform')
+```
+
+<img src="02-scientificmethod_files/figure-html/uniform-1.png" width="672" />
+
+#### Poisson {-}  
+
+Counts of things taht occur randomly over space and time i.e. the number of birds in a forest stand, the number of fish in a kilometer of river, the number of prey captured per minute.
+
+
+``` r
+z = rpois(n = 1000, lambda = 10)
+par(mfrow = c(1,2))
+hist(z, main = 'Poisson')
+plot(density(z), main = 'Density poisson')
+```
+
+<img src="02-scientificmethod_files/figure-html/poisson-1.png" width="672" />
+
+### Stoichastity in functions  
+
+Randomness is typically predictable within biological systems, and we can add that to our functions expressed above to more closely approximate what we expect to observe in real life. Below we show an example using a simple linear model.
+
+#### First order quadratic {-}
+
+
+``` r
+set.seed(1) # Ensures our code returns the same random values each time
 x = runif(n = 100, min = 0, max = 12) # Independent X parameter placed on the X axis
 b0 = 10 # Specify the Y intercept
 b1 = 3 # Specify the B1 coefficient i.e. the slope
@@ -1018,10 +1092,13 @@ summary(lm(y~x))
 
 Notice how this has changed the relationship, and due to the randomness, the intercept is no longer exactly where we placed it? Rather, due to the controlled but intentionally introduced error and random variation in the data, the fit has changed and the intercept, and slope have all been affected. However, they may not be that different. Consider how this relates to our perception of truth, and expectations on the underlying systems has discussed in Module 1.
 
-
 ## Homework and Review Questions
 
 1. What do the box and whiskers in a boxplot represent? (hint: use the `help(boxplot)` to help answer)
 2. What is your favorite between the box and whisker plot?
 3. What is something you noticed about the effect of pre and post supplemenation on the heifers?
-3. Copy and paste the code into your console, and turn in one plot of each kind covered today.
+4. Copy and paste the code into your console, and turn in one plot of each kind covered today.
+5. What are some common applications for each of the deterministic functions described above?
+6. What are some causes of stoichasticity in your study system?
+7. What distributions might they take on?
+8. Add randomness to one of the other deterministic functions illustrated above.
