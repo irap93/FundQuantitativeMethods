@@ -1,5 +1,5 @@
 ---
-title: "bookdown: Authoring Books and Technical Documents with R Markdown"
+title: "An introduction to Quantitative Thinking"
 author: "Yihui Xie"
 date: "2025-09-15"
 knit: "bookdown::render_book"
