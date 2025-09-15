@@ -1,4 +1,3 @@
-fig:unnamed-chunk-1
 fig:unnamed-chunk-2
 science
 how-you-know-what-you-know-and-is-what-you-know-really-so
@@ -16,15 +15,13 @@ loading-data-into-the-r-environment
 exploratory-data-analysis-and-graphics
 summary-statistics
 exploratory-graphics
+relationships-among-covariates
 scatter-plots
-research-objective
-plotting-deterministic-functions
-negative-exponential
-saturating-exponential-growth-function
-ricker-function
-michaelis-menton-equation
-logistic-function
+deterministic-functions
+why-deterministic-functions
 stoichasticity
+probability-distributions
+stoichastity-in-functions
 homework-and-review-questions
 frequentists-statistical-model
 intake-vs-bw-relationship
@@ -34,9 +31,3 @@ example-one
 example-two
 liklihood-vs.-probability
 demonstrating-equivalence
-developing-and-modeling-hypothesis
-relationships-among-covariates
-deterministic-functions
-developing-hypothesis
-probability-distributions
-stoichastity-in-functions

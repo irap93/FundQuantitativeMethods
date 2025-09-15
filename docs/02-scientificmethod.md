@@ -32,14 +32,6 @@ To use R, follow the following steps.
 Opening R should show you the R console, which looks something like this:
 
 
-``` r
-knitr::include_graphics("images/rconsole.png")
-```
-
-<div class="figure">
-<img src="images/rconsole.png" alt="R console" width="272" />
-<p class="caption">(\#fig:unnamed-chunk-1)R console</p>
-</div>
 
 This is powerful, but likely not as approachable as you would like. To address this, I strongly recommend using an IDE (Integrated Development Environment) which serves to put all of the best features of a programming languange at the forefront. For R, there are many, includinge [VSCode](https://code.visualstudio.com), [Jupyter Notebooks](https://jupyter.org), and [RStudio](https://posit.co/download/rstudio-desktop/).
 
@@ -78,17 +70,17 @@ Now that you have R installed, you have access to basic functions and that come 
 packages <- c("data.table", "tidyverse", "MCMCvis", "ggExtra", "devtools")# List of packages to check/install
 
 # Function to check and install packages
-install_if_missing = function(pkg) {
-  if (!require(pkg, character.only = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-    library(pkg, character.only = TRUE)
+install_if_missing = function(pkg) { #Create function command
+  if (!require(pkg, character.only = TRUE)) { # list of functions to iterate over
+    install.packages(pkg, dependencies = TRUE) # install packages command for each package in list
+    library(pkg, character.only = TRUE) # Load each package in the list using the library function
   } else {
-    cat(paste("Package", pkg, "is already installed.\n"))
+    cat(paste("Package", pkg, "is already installed.\n")) # If package is installed already skip and report
   }
 }
 
 # Apply the function to each package in the list
-lapply(packages, install_if_missing)
+lapply(packages, install_if_missing) # Run install packages command created above
 ```
 
 ```
@@ -181,7 +173,7 @@ However, the beauty of R is that anyone can publish a package to serve there pur
 
 
 ``` r
-devtools::install_github("irap93/qthink")
+devtools::install_github("irap93/qthink") # install a package from github using hte devtools package
 ```
 
 ```
@@ -197,7 +189,7 @@ Now, we need to load our packages. Loading packages is accomplished through the 
 
 
 ``` r
-library(qthink)
+library(qthink) # laod packages one by one using the "library" command
 library(data.table)
 library(tidyverse)
 ```
@@ -208,7 +200,7 @@ Or, you can load them all at once like this using a for loop, which cycles throu
 ``` r
 packages <- c("data.table", 'qthink','tidyverse')# List of packages to check/install
 
-# Load each package, install if missing
+# Load each package, install if missing using a loop
 for (pkg in packages) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     install.packages(pkg)
@@ -224,11 +216,11 @@ There are numerous ways to load data into R using a number of different librarie
 
 ``` r
 # load the heifer dataset from the qthink package
-data("heifer")
+data("heifer") # Load the heifer data from the qthink package
 head(heifer) # Look at the heifer data
 
 # Save it to your workspace, change out the file path name to reflect your computer
-write.csv(heifer, file = '/Users/iraparsons/Documents/AS791_FundQuantThink/Data/heifer.csv')
+write.csv(heifer, file = '/Users/iraparsons/Documents/AS791_FundQuantThink/Data/heifer.csv') # Save the data to your machine
 ```
 
 Now go look in your folder to see if a csv file was saved. Open it up and look at it.
@@ -237,7 +229,7 @@ Now lets reload it into the workspace. You can load csv files you create from ex
 
 
 ``` r
-heifer1 = read.csv(file = '/Users/iraparsons/Documents/AS791_FundQuantThink/Data/heifer.csv')
+heifer1 = read.csv(file = '/Users/iraparsons/Documents/AS791_FundQuantThink/Data/heifer.csv') # Example of how to read the file back into 
 ```
 
 Did a new data file named heifer1 show up in your R environmnent? If so, you have been sucessfull. Now, lets explore the data a bit.
@@ -248,8 +240,8 @@ If you know about your data, as in you collected it for your research project, y
 
 
 ``` r
-help(heifer)
-help("bodyweight")
+help(heifer) # Look at the help and documentation material for the heifer data
+help("bodyweight") # Look at the help and documentation material for the bodyweight data set.
 ```
 
 The study description should appear in the lower right pane under the 'help' tab.
@@ -277,7 +269,7 @@ When approaching a dataset, it is important to understand what we have. Now that
 
 
 ``` r
-str(heifer)
+str(heifer) # check the structure of the dataset
 ```
 
 ```
@@ -331,7 +323,7 @@ str(heifer)
 ```
 
 ``` r
-str(bodyweight)
+str(bodyweight) # Check the structure of the dataset
 ```
 
 ```
@@ -364,7 +356,7 @@ This gives us a description of every column in the dataset and what time pf data
 
 
 ``` r
-summary(heifer)
+summary(heifer) # Summary statistics for each variable in the dataset
 ```
 
 ```
@@ -474,7 +466,7 @@ Next, lets graphically look at our data.
 Histograms are extremely useful, as they show the number of animals that fit in each area of the group.
 
 ``` r
-hist(heifer$D_42_BW)
+hist(heifer$D_42_BW) # histogram of the first bodyweight
 ```
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-12-1.png" width="672" />
@@ -484,14 +476,14 @@ Or we can use the code to create multiple plots in the same graphic to look at e
 
 ``` r
 vars = c('D_42_BW','Creep_Gain','Shipping_Loss','Day56_InitialBW','Day56_ADG','Day56_MMBW','Day56_DMI','Day56_Residual','D_1_EV',
-         'AVE_TTB','BVFREQ','BVDUR','BVFREQsd','BVDURsd','uDMI','sdDMI','cvDMI')
+         'AVE_TTB','BVFREQ','BVDUR','BVFREQsd','BVDURsd','uDMI','sdDMI','cvDMI') # List of variables we want histograms of
 
-for (v in vars) {
-  hist(heifer[[v]],
-       probability = T,
-       main = paste("Histogram of",v),
-       xlab = v)
-  lines(density(heifer[[v]]))
+for (v in vars) { # Set up a for loop to make a histogram of each variable (v) in the list of variables (vars)
+  hist(heifer[[v]], # create a histogram (hist) of each variable in data (heifer) and the variable in the list [[v]]
+       probability = T, # actual counts "F" vs. Proportions "T"
+       main = paste("Histogram of",v), # Past the text "Histogram of" with the variable name
+       xlab = v) # Label x axis with variable name
+  lines(density(heifer[[v]])) # Add lines of the density distribution "density(heifer[[v]])"
 }
 ```
 
@@ -525,19 +517,19 @@ This allows you to evaluate the *central tendency*, *spread*, and *skewness* of 
 
 
 ``` r
-boxplot(heifer$D_42_BW ~ heifer$WeanTrt,)
+boxplot(heifer$D_42_BW ~ heifer$WeanTrt) # plot boxplot with continuous variable "D_42_BW" relative to the categorical variable "WeanTrt" on the x axis
 ```
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 ``` r
-ggplot(data = heifer, aes(x=WeanTrt, y = D_42_BW, fill = WeanTrt))+
-  geom_violin(draw_quantiles = T)+
-  # geom_boxplot(fill = 'NA')
-  # stat_summary(fun = mean, geom = 'crossbar')+
-  geom_point(position = 'jitter')+
-  labs(x = 'Weaning Treatment',
-       y = 'Bodyweight Day -42, Kg')
+ggplot(data = heifer, aes(x=WeanTrt, y = D_42_BW, fill = WeanTrt))+ # initiate ggplot,specify data, and define x and y variables
+  geom_violin(draw_quantiles = T)+ # direct ggplot to create a violin plot
+  # geom_boxplot(fill = 'NA') # Direct ggplot to make a box plot
+  # stat_summary(fun = mean, geom = 'crossbar')+ # use stat_summary to draw a crossbar on the plot
+  geom_point(position = 'jitter')+ # Point points on the graph
+  labs(x = 'Weaning Treatment', # X label
+       y = 'Bodyweight Day -42, Kg') # Y label
 ```
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-14-2.png" width="672" />
@@ -550,8 +542,8 @@ For simplicities sake, we will create a new column including the combination of 
 
 
 ``` r
-heifer$pptrt = paste0(heifer$CreepTrt, '_', heifer$WeanTrt)
-head(heifer)
+heifer$pptrt = paste0(heifer$CreepTrt, '_', heifer$WeanTrt) # Create a new variable column in data combining pre and post weaning treatments
+head(heifer) # Look at the first 10 lines of the data
 ```
 
 ```
@@ -577,15 +569,15 @@ Lets make new plots comparing all of the variables for each treatment
 
 ``` r
 vars = c('D_42_BW','Creep_Gain','Shipping_Loss','Day56_InitialBW','Day56_ADG','Day56_MMBW','Day56_DMI','Day56_Residual','D_1_EV',
-         'AVE_TTB','BVFREQ','BVDUR','BVFREQsd','BVDURsd','uDMI','sdDMI','cvDMI')
-trt_colors = c("A_A" = "#0C2340", "B_A" = "#003087", "A_B" = '#C99700', "B_B"='#F1EB9C')
+         'AVE_TTB','BVFREQ','BVDUR','BVFREQsd','BVDURsd','uDMI','sdDMI','cvDMI') # List of variables to plot
+trt_colors = c("A_A" = "#0C2340", "B_A" = "#003087", "A_B" = '#C99700', "B_B"='#F1EB9C') # Make a vector defining colors of each treatment
 
-for (v in vars) {
-  boxplot(heifer[[v]]~heifer$pptrt,
-       main = paste("Boxplot of",v),
-       ylab = v,
-       xlab = 'Treatment',
-       col = trt_colors[levels(factor(heifer$pptrt))])
+for (v in vars) { # for loop to iterate over each variable v in the list vars
+  boxplot(heifer[[v]]~heifer$pptrt, # Make a boxplot
+       main = paste("Boxplot of",v), # title boxplot
+       ylab = v, # label y axis
+       xlab = 'Treatment', # label x axis
+       col = trt_colors[levels(factor(heifer$pptrt))]) # assign colors from list trt_colors
 }
 ```
 
@@ -599,7 +591,7 @@ Scatter plots are another great way of looking for patterns in the data relative
 
 
 ``` r
-head(bodyweight)
+head(bodyweight) # Look at head of bodyweight data
 ```
 
 ```
@@ -633,7 +625,7 @@ This data is in what we call *wide* format. We need to convert it to long to get
 
 
 ``` r
-names(bodyweight)
+names(bodyweight) # Look at names of bodyweight data
 ```
 
 ```
@@ -646,15 +638,15 @@ names(bodyweight)
 ```
 
 ``` r
-bw.l =  melt(bodyweight,
-             id.vars = c('Ref ID','VID','EID','Pen','Creep_Gain',
+bw.l =  melt(bodyweight, # initiate the melt command in data.table package to reshape data wide to long
+             id.vars = c('Ref ID','VID','EID','Pen','Creep_Gain', # variables to replicate. These columns will stay in the dataset
                          'Pre-Wean_ADG','CreepTrt','WeanTrt'),
-             variable.name = 'Day',
-             value.name = 'BW')
+             variable.name = 'Day', # Variable to pivot longer around
+             value.name = 'BW') # Variable to make longer
 
-bw.l[, Day := lapply(
-  str_extract_all(Day, "-?\\d+\\.?\\d*"),
-  as.numeric
+bw.l[, Day := lapply( # call the bodyweight data table using the datatable packate, use list apply to iterate down each row of the data table
+  str_extract_all(Day, "-?\\d+\\.?\\d*"), # use the str_extract_all function to parse the Day column at the set points
+  as.numeric # data type to designate the extracted numbers
 )]
 ```
 
@@ -663,8 +655,8 @@ Now that we have our data, lets look at the relationsip between time and bodywei
 
 
 ``` r
-ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+
-  geom_point()
+ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+ # call ggplot designate data and x and y variabls
+  geom_point() # Make a point scatter plot
 ```
 
 ```
@@ -681,7 +673,7 @@ Lets look at  more linear relationship.
 
 ``` r
 ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+
-  geom_smooth()
+  geom_smooth() # ggsmooth plot. Draws a best fit line according to method specified. defaults to smoothing splines
 ```
 
 ```
@@ -697,7 +689,7 @@ ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+
 
 ``` r
 ggplot(data = bw.l, aes(x=as.numeric(Day),y=BW, color = factor(VID)))+
-  geom_smooth(method = 'lm')
+  geom_smooth(method = 'lm') # ggsmooth plot. Specified using a linear line.
 ```
 
 ```
@@ -753,6 +745,10 @@ What do we notice about these graphs? What might we learn from these that was no
 
 ## Deterministic functions  
 
+### Why deterministic functions  
+
+Deterministic functions tie patterns to your data. These may be as simple as phenomenalogical descriptions of the data that describe the pattern as accurately as possible. Or they may be the explicit representation of some biological or ecological theory that we wish to test. Either way, they allow us to move forward from the purely explanatory observations of data explored above. Use functions with meaningfull parameters whenever possible, as this increases both the interpretability of the model. You may define your own functions, or, and this is more likely, apply a mathematical function that someone else has previously defined. Different functions describe different responses and should be selected based upon both the hypothesis you are testing, variables you have collected, and response you are attempting to achieve. 
+
 Deterministic functions are repeatable, where $f(x)$ always gives the same results for $x$ without randomness or other stochastic functions which allows the function's rules to completely determine its output. Deterministic functions are by their nature, cause and effect. You will most likely use predefined deterministic functions to develop and test your hypothesis. Below are several examples of deterministic functions that are found and used in the literature. 
 
 Run the code in your R interface and see if you get the same results. Play with the parameters and see how that effects the shape of the resulting data. Perhaps consider creating other plots that describe the data created by each of these functions.
@@ -768,22 +764,24 @@ R provides the power to consider unique equations and easily see how they descri
 x = seq(1,12, 1) # Independent X parameter placed on the X axis
 b0 = 10 # Specify the Y intercept
 b1 = 3 # Specify the B1 coefficient i.e. the slope
-y = b0 + b1*x
+y = b0 + b1*x # integrateing the linear model
 
-par(mfrow = c(1,3))
-hist(x)
-hist(y)
+par(mfrow = c(1,3)) # used for base graphing functions. Sets up a plot figure with 1 ro and 3 columns for 3 plots
+hist(x) # Histogram of x
+hist(y) # Histogram of y
 {
-plot(x,y, ylim = c(0,max(y)), main = expression(y == beta0 + beta*1*x + epsilon))
-abline(lm(y~x), col = 'blue')
+plot(x,y, # x and y variables for scatter plot
+     ylim = c(0,max(y)), # manually set the range of y
+     main = expression(y == beta0 + beta*1*x + epsilon)) # use the "expression" function to write the mathematical function for a linear equation
+abline(lm(y~x), col = 'blue') # add a line according to the function lm, colored blue
 }
 ```
 
 <img src="02-scientificmethod_files/figure-html/linearmod-1.png" width="672" />
 
 ``` r
-par(mfrow = c(1,1))
-summary(lm(y~x))
+par(mfrow = c(1,1)) # reset graphics parameter to 1x1 i.e. one plot per figure window.
+summary(lm(y~x)) # return the summary of the linear function. lm function is nested inside the summary function.
 ```
 
 ```
@@ -821,14 +819,14 @@ A first exponential function takes on the characteristics of $ae^{bx}$ where $a$
 **Positive exponential**
 
 ``` r
-a = 1
-b = 1
-x = seq(0,10,length = 100)
-y = a*exp(b*x)
-plot.new()
+a = 1 # alpha of the equation
+b = 1 # beta of the equation
+x = seq(0,10,length = 100) # x sequence to integrate over
+y = a*exp(b*x) # calculate the integral of y for each xi
+plot.new() # create a new plot
 {
-plot(x,y, type = 'b', main = 'Exponetial')
-lines(x, y)
+plot(x,y, type = 'b', main = 'Exponetial') # create a scatterplot, specifying hollow points "b"
+lines(x, y) # add a line between consecutive points
 }
 ```
 
@@ -840,14 +838,14 @@ A negative exponential function takes on the characteristics of $ae^{-bx}$
 
 
 ``` r
-a = 1
+a = 1 
 b = 0.5
 x = seq(0,10,length = 100)
 y = a*exp(-b*x)
 plot.new()
 {
 plot(x,y, type = 'b', main = 'Negative Exponetial')
-lines(x, y)
+lines(x, y) # add lines to the plot connecting the points            
 }
 ```
 
@@ -870,9 +868,11 @@ lines(x, y)
 
 <img src="02-scientificmethod_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
+
+
 ### Ricker Function  {-}
 
-A Ricker function takes on the characteristics of $axe^{bx}$ or alternatively $N_t + 1 = N_t e^{r(1-N_t/K)}$ and is commonly used in ecology and population modeling. It results in a bell shaped curve where $N_t$ represents the population at time $t$, $r$ is the intrinsic growth rate, and $K$ is the carrying capacity.
+A Ricker function takes on the characteristics of $axe^{bx}$ or alternatively $N_t + 1 = N_t e^{r(1-N_t/K)}$ and is commonly used in ecology and population modeling. It results in a bell shaped curve where $N_t$ represents the population at time $t$, $r$ is the intrinsic growth rate, and $K$ is the carrying capacity. 
 
 
 ``` r
@@ -963,7 +963,9 @@ lines(x, y)
 
 ## Stoichasticity 
 
-Stoichasticity represents the variation or randomness in a system. By definition it is non-deterministic, at least within the outline of our model. Thus the same input can lead to different outcomes. However, the probability of receiving a certain outcome within certain range can be calculated using probability, which is where what we know of as **Probability distributions** come from. This variability, or noise as it is often refered to, can be used to represent what we might expect to find in real world situations as it introduces noise to our deterministic models.
+Stoichasticity represents the variation or randomness in a system. By definition it is non-deterministic, at least within the outline of our model. Thus the same input can lead to different outcomes. However, the probability of receiving a certain outcome within certain range can be calculated using probability, which is where what we know of as **Probability distributions** come from. This variability, or noise as it is often refered to, can be used to represent what we might expect to find in real world situations as it introduces noise to our deterministic models. For most scientists, noise is just a nuisance that gets in the way of drawing conclusions from the data. The traditional approach is to just assume all variation is normally distributed, or transform the data until it is to allow us to use traditional statistical methods to draw conclusions from the data.
+
+Noise affects ecological data in two different ways. The first is measurement error, or the variability or noise associated with the accuracy and specificity of our measurement technique. Big measurement error makes it difficult to estimate parameters and make inference from our data, as it leads to large confidence intervals and lowers statistical power. Process noise is the natural variability that arises from the system, and isn't so much error as it is the result of the influence of unmeasured variables in the system.
 
 Below we will explore several common probability distributions usefull for statistics.
 

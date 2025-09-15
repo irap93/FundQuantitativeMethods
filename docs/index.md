@@ -1,7 +1,7 @@
 ---
 title: "bookdown: Authoring Books and Technical Documents with R Markdown"
 author: "Yihui Xie"
-date: "2025-09-10"
+date: "2025-09-15"
 knit: "bookdown::render_book"
 documentclass: krantz
 bibliography: [Quantitative Thinking.bib, packages.bib]
