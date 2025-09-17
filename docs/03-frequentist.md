@@ -1,12 +1,391 @@
-# Frequentists Statistical Model
+# Standard Statistics
 
-This is the section that most of you will find more familiar as we cover concepts typically considered "classical" statistics. These methods are tried and true, and are perhaps the most frequently seen in the literature and scientific presentations. In the best case, your data will match one of the these methods exactly. Many research projects are specifically designed to fit one of these classical techniques. Often, we may be able to transform our data or modify our model to fit a classical technique. However, this comes with the caveat that it will change the interpretability of our fitted model, and may make it more difficult to report or compare the results. But, this trade off comes with a number of positive attributes including 
-- Increasing the ability to improve the computational speed and stability of our analysis
-- Stable definitions of parameter estimation
-- Efficient communication of analytical methods
-- utilize existing R machinery
+This is the section that most of you will find more familiar as we cover concepts typically considered "classical" statistics. Studying complex systems with high levels of natural variability requires utilization of statistics to infer pattern and causation from data. 
 
-However, I strongly believe that our efforts taken build our own deterministic and statistical models engrained a deeper understanding of math and probability. These efforts should 
+## Null Hypothesis Testing   
+
+Null Hypothesis Significance Testing has been extensively used to make inference and test hypothesis [@stephensInferenceEcologyEvolution2007], but has also experienced extensive criticism due to the logical fallacies associated with the assumptions required to make inference regarding test statistics [@hagenPraiseNullHypothesis; @sedgwickTrialsTribulationsTeaching; @wuThereIntrinsicLogical2018]. Whichever side of the fence you fall on, you should be aware of both the arguments for and against the utilization of NHST and by extension **p-values** in making scientific inference. After extensive reading, I will give you my anedotal opionion as of today (09/17/2025) of the issue. Whatever inferential paradigm you choose to use for your research is warranted providing you understand the underlying assumptions the statistical test makes, and exactly what each test statistic is testing [@hagenPraiseNullHypothesis; @wassersteinASAStatementValues2016]. The most common critique of NHST that I have observed is that scientists and statisticians are not trained how to use tests appropriately, resulting in errant results being reported [@hagenPraiseNullHypothesis; @ioannidisWhyMostPublished2005].
+
+The magnitude of statistical tests designed for numerous experimental frameworks lend to the problem. Scientists without formal training in the choice of statistical tests are often highly motivated to find *significant* results, that is, to reject som $H_o$ hypothesis in support of the $H_A$. This motivation is counter to the primary motivation of NHST, which is to reject the $H_o$ with trepidation [@perezgonzalezFisherNeymanPearsonNHST2015]. This encourages researchers to go in search of *significant* results by utilizing any number of seemingly plausible available methods to obtain results which we find either either interesting, plausible, personally gratifying, or worse, important for the success of our career. However, whether made through ignorance or malice, that fact that we may report erroneous research results, and that most research results which we may build our research careers on are false [@ioannidisWhyMostPublished2005], should give us at least momentary pause. 
+
+Due to the magnitude of potential scientific tests, which fill tomes of literature and giant volumes of books, teaching standardized statistics which seek to make inference of population central values and affirm or nullify $H_o$ is extremely difficult task to undertake in the limited time we have here. Add in the conflation of **posterior** and **apriori** tests, and the conflation of the two, along with nonparametric and parametric tests, creating a clear picture of statistical analysis becomes difficult. So what should we do? I believe the answer rests in the application of two first principles. The first is to hold yourself to the highest set of moral ideals, seeking to reinforce your research findings through severe critique of the results by testing their endurance through multiple tests and alignment with quality research [@mayoStatisticalInferenceSevere2018]. Secondly and of equal importance is to put in serious effort to read and understand the machinery of statistical tests and their underlying assumptions to ensure that the hypothesis you're testing is the inference they are making [@wuThereIntrinsicLogical2018]. 
+
+### Population central values
+
+Making inference about a population is the foundation of beginning a good statistical analysis, and often starts in the exploratory analysis we began to explore in chapter 2. A population takes on numerical descriptive values known as parameters. Typical parameters of a population is the *mean* ($u$), *median* (*M*), standard deviation ($σ$), and proportion ($π$) [@ottStatisticalMethodsData2016]. For the purposes of hypothesis testing, we will make inference of these parameters in one of two ways. First is to *estimate* the value of the population, or we will *test a hypothesis*. The 95% confidence interval is the calculated interval over which 95% of the data will fall given a normal distribution around the central value, $u$ in this case. The 95% confidence interval can be retrieved using the **quantile** function in R, or calculated using the equation of $u ± 1.96σ/√n$.
+
+Here is an example of creating a population with known values of:
+
+N 10000 population size
+mean of 0
+standard deviation of 1
+
+
+
+``` r
+n = 10000 # Population size
+u = 0 # population mean or central value
+sd = 1 # Standard deviation
+x = rnorm(100000, mean = u, sd = sd)
+x.den = density(x)
+
+# 95% confidence interval time
+q0.025 = quantile(x, 0.025)
+q0.975 = quantile(x, 0.975)
+
+# Identify x-values within the 95% CI
+x.ci <- x.den$x[x.den$x >= q0.025 & x.den$x <= q0.975]
+y.ci <- x.den$y[x.den$x >= q0.025 & x.den$x <= q0.975]
+
+{
+  plot(x.den)
+  # Add shaded polygon for 95% CI
+  polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
+        c(0, y.ci, 0),
+        col = 'lightblue', border = NA)
+  abline(v = c(mean(x)-sd(x),mean(x), mean(x)+sd(x)), col = c('blue','red','blue'))
+legend("topright", 
+       legend = c('mean','standard deviation', '95% CI'),
+       col = c("red",'blue',NA), 
+       fill = c(NA,NA,'lightblue'),
+       border = NA,
+       lty = c(1,1,NA), 
+       lwd = c(2,2,NA),
+       seg.len = 3,
+       bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/H0-1.png" width="672" />
+
+Now lets do that in one of our example datasets.
+
+
+``` r
+library(qthink)
+data("bodyweight")
+x = bodyweight$BW0
+x.den = density(x)
+
+# 95% confidence interval time
+q0.025 = quantile(x, 0.025)
+q0.975 = quantile(x, 0.975)
+
+# Identify x-values within the 95% CI
+x.ci <- x.den$x[x.den$x >= q0.025 & x.den$x <= q0.975]
+y.ci <- x.den$y[x.den$x >= q0.025 & x.den$x <= q0.975]
+
+par(mfrow = c(1,2))
+
+{
+  hist(x)
+  plot(x.den)
+  # Add shaded polygon for 95% CI
+  polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
+        c(0, y.ci, 0),
+        col = 'lightblue', border = NA)
+  abline(v = c(mean(x)-sd(x),mean(x), mean(x)+sd(x)), col = c('blue','red','blue'))
+# legend("topright", 
+#        legend = c('mean','standard deviation', '95% CI'),
+#        col = c("red",'blue',NA), 
+#        fill = c(NA,NA,'lightblue'),
+#        border = NA,
+#        lty = c(1,1,NA), 
+#        lwd = c(2,2,NA),
+#        seg.len = 1,
+#        bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+Here we see a the same values of our population of bodyweights on day 0 from our heifers. Note how they do not follow the neat normal distribution, but do approximate it closely enough, at least visually. Here arises one of the first critiques of NHST that all tests assume that the population distribution follows a normal bell curve if enough samples are taken. 
+
+#### Sample size {-}
+
+This begs the question, how many samples are necessary to make inference of a populations central value? Here lies one of the first critiques of NHST, as we must assume that the overall greater population follows some known distribution, in this case, a normal distribution, and that we are sampling from that population. However, the greater population is actually unknowable outside of simply measuring the entire population. Samples are expensive, so at some point we have to simply accept that we have sampled *enough*, which is to say done our due diligence to collect an adequate representation of the greater population so we can make inference from it. Below we can show mathematically how many samples are required. The goal of sampling is to create a credible interval which has a given chance of containing $u$, or the population mean. This reasonable level of certainty is typically set at 90-95% due to tradition. However, this runs two risks. 1) 95% levels of confidence means you run a 1 in 20 chance of not capturing the population mean. Equate this to having a 20 round magazine clip loaded into a gun that you are taking on a camping trip to the Little Bighorns in Wyoming for protection against Grizzly bears, in which 1 of the 20 bullets is a blank. Is this a risk you ar willing to take? The second risk is the inverse of the first, which is that this may be an unreasonble and arbritarily high level of confidence that would reduce the percieved validity of aquired data, particularly if the data is novel, but funds or circumstances meant obtaining enough samples to obtain this level of confidence was not possible, and thus the research was not conducted or the findings not reported.
+
+The formula is as follows:  
+$n = (z_σ/2)^2^ σ^2^ / E^2^$
+
+and in code for the heifer bodyweight on day 0
+Because the heifers range from 364, 638, the typical assumption to approximate the population $σ$ is to take 68.5, and we might arbritrarily choose our accuracy to be 25 lbs.
+
+``` r
+x = bodyweight$BW0
+sigma = diff(range(x))/4
+E = 25
+n = (1.96^2 * sigma^2)/E^2
+n
+```
+
+```
+## [1] 28.8412
+```
+
+So, from this we can interpret that in order to quantify the central limit ($u$), of the population of heifers within 25 lbs with 95% confidence, we need 28 heifers. Now note how this changes as we tighten our accuracy levels.
+
+
+``` r
+E = seq(50,1,-1)
+sigma = diff(range(x))/4
+n = c()
+for (i in E) {
+ n[i] = (1.96^2 * sigma^2)/E[i]^2
+}
+
+{
+  par(mfrow = c(1,2))
+  plot(E,n, type = 'n')
+  points(E,n)
+  lines(E,n, col = 'blue', lwd = 2)
+  
+  plot(E,n, xlim = c(5,length(E)), ylim = c(0,500))
+  lines(E,n, col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take. 
+The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?
+
+
+``` r
+E = 25 # accuracy level
+sigma = seq(1,100,1)
+n = c()
+for (i in 1:length(sigma)) {
+ n[i] = (1.96^2 * sigma[i]^2)/E^2
+}
+
+{
+  plot(sigma,n, type = 'n')
+  points(sigma,n)
+  lines(sigma,n, col = 'blue', lwd = 2)
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+
+So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.
+
+#### Statistical test for u {-}
+
+The statistical test takes on the concept of proof by contradiction, aka, NHST and is comprised of 5 parts.
+
+1. Null hypothesis $H_o$
+2. Research hypothesis $H_a$
+3. Test statistics
+4. Rejection region
+5. Check assumptions and draw conclusions
+
+The question is if our current measured value is greater than previously measured values. Suppose that 
+
+$u_o$ = 520 representing the combined mean from previous years of measurements
+$u$ = 550 representing the mean from the current year
+
+We are testing the following if $H_a: u > 320 $ negates the $H_o: u<= 320$.
+
+We then have to define the rejection region, and determine if $u$ falls in the rejection region assuming that $H_o$ is true.
+
+
+``` r
+n = 36
+uo = 520 # Mean from previous measurements
+u = 550 # Current mean from this year
+sd = 124
+sigma = sd/sqrt(n)
+x0 = rnorm(n, mean = uo, sd = sd) 
+
+q025 = quantile(x0, 0.025)
+q975 = quantile(x0, 0.975)
+
+x0.den = density(x0)
+
+# Identify x-values within the 95% CI
+x.ci <- x0.den$x[x0.den$x >= q025 & x0.den$x <= q975]
+y.ci <- x0.den$y[x0.den$x >= q025 & x0.den$x <= q975]
+
+# Left tail: x < q025
+x.left <- x0.den$x[x0.den$x <= q025]
+y.left <- x0.den$y[x0.den$x <= q025]
+
+# Right tail: x > q975
+x.right <- x0.den$x[x0.den$x >= q975]
+y.right <- x0.den$y[x0.den$x >= q975]
+
+{
+  plot(x0.den)
+  # Add shaded polygon for 95% CI
+  polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
+        c(0, y.ci, 0),
+        col = 'lightblue', border = NA)
+  # Shade left rejection region
+  polygon(c(x.left[1], x.left, x.left[length(x.left)]),
+          c(0, y.left, 0),
+          col = 'salmon', border = NA)
+
+  # Shade right rejection region
+  polygon(c(x.right[1], x.right, x.right[length(x.right)]),
+          c(0, y.right, 0),
+          col = 'salmon', border = NA)
+  abline(v = u)
+  
+# legend("topright", 
+#        legend = c('mean','standard deviation', '95% CI'),
+#        col = c("red",'blue',NA), 
+#        fill = c(NA,NA,'lightblue'),
+#        border = NA,
+#        lty = c(1,1,NA), 
+#        lwd = c(2,2,NA),
+#        seg.len = 3,
+#        bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+
+``` r
+x = rnorm(100, mean = 1, sd = 1)
+xo = rnorm(100, mean = 0, sd = 1)
+t.test(x)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  x
+## t = 11.13, df = 99, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  0.8484379 1.2165656
+## sample estimates:
+## mean of x 
+##  1.032502
+```
+
+``` r
+x.den = density(x)
+x0.den = density(xo)
+f = ecdf(xo)
+f(0)
+```
+
+```
+## [1] 0.44
+```
+
+``` r
+{
+  plot(x.den, main = '', col = 'red')
+  lines(x0.den, col = 'lightblue')
+  abline(v = c(0,quantile(x, probs = c(0.5))), col = c('lightblue','red'), lty = 1)
+  legend("topright", legend = c(expression(H[0]), expression(H[a])), col = c('lightblue','red'), lty = 1, lwd = 2, bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+### Neyman-Pearson
+
+
+``` r
+set.seed(3)
+d = 0.75
+
+par(mfrow = c(1,2))
+p1 = rnorm(1000, mean = 0, sd = 1)
+p2 = rnorm(1000, mean = d, sd = 1)
+
+p1.den = density(p1)
+p2.den = density(p2)
+
+xo = rnorm(100, mean=0, sd=0.5)
+xa = rnorm(100, mean = d, sd = 0.5)
+
+xo.den = density(xo)
+xa.den = density(xa)
+
+{
+  plot(p1.den, col = 'blue', lty = 1, main = 'population')
+  lines(p2.den, col = 'red', lty = 2)
+  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
+  
+  plot(xo.den, col = 'blue', lty = 1, main = 'sample')
+  lines(xa.den, col = 'red', lty = 2)
+  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+### Two population inference  
+
+A statistical test is based upon the concept of the following five parts [@ottStatisticalMethodsData2016]:
+
+1. Resaerch hypothesis $H_a$
+2. Null hypothesis $H_o$
+3. Test statistic
+4. Rejection region
+5. Check assumptions, draw conclusions 
+
+
+``` r
+# Sample data
+xo = rnorm(100, mean = 320, sd = 10)
+xa = rnorm(100, mean = 350, sd = 10) 
+
+t.test(xo, xa, var.equal = T)
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  xo and xa
+## t = -21.315, df = 198, p-value < 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -33.24634 -27.61560
+## sample estimates:
+## mean of x mean of y 
+##  320.2175  350.6484
+```
+
+``` r
+# Compute density
+xo.den = density(xo)
+xa.den = density(xa) 
+
+{
+# Plot density
+plot(xo.den,
+     xlim = c(min(xo), max(xa)),
+     ylim = c(0, max(max(xo.den$y), max(xa.den$y))),
+     main = "", ylab = expression(f(x)))
+lines(xa.den, col = 'red')
+
+# # Shade upper 5%
+# xo.vals <- xo.den$x[xo.den$x >= q95]
+# yo.vals <- xo.den$y[xo.den$x >= q95]
+# 
+# polygon(c(q95, xo.vals, max(xo.vals)), 
+#         c(0, yo.vals, 0), 
+#         col = "pink", 
+#         border = NA)
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
+``` r
+# Add a vertical line at the 95th percentile
+# abline(v = q95, col = "red", lty = 2)
+```
+
 
 ## Intake vs BW Relationship
 

@@ -23,7 +23,11 @@ stoichasticity
 probability-distributions
 stoichastity-in-functions
 homework-and-review-questions
-frequentists-statistical-model
+standard-statistics
+null-hypothesis-testing
+population-central-values
+neyman-pearson
+two-population-inference
 intake-vs-bw-relationship
 anovas
 general-linear-models

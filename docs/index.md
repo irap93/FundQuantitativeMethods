@@ -1,7 +1,7 @@
 ---
 title: "An introduction to Quantitative Thinking"
 author: "Yihui Xie"
-date: "2025-09-15"
+date: "2025-09-17"
 knit: "bookdown::render_book"
 documentclass: krantz
 bibliography: [Quantitative Thinking.bib, packages.bib]
