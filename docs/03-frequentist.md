@@ -1,6 +1,120 @@
 # Standard Statistics
 
-This is the section that most of you will find more familiar as we cover concepts typically considered "classical" statistics. Studying complex systems with high levels of natural variability requires utilization of statistics to infer pattern and causation from data. 
+This is the section that most of you will find more familiar as we cover concepts typically considered "classical" statistics. Studying complex systems with high levels of natural variability requires utilization of statistics to infer pattern and causation from data.  
+
+## Fisher  
+
+1. Select an appropriate test
+2. Set up a null hypothesis $H_o$
+3. Calculate the theoretical probability of the results under $H_o$
+4. Assess the statistical significance of the results
+5. Interpret the statistical significance of the results.
+
+
+1. The appropriate test 
+
+After selecting an appropriate test, it is important to define the null hypothesis and select the appropriate tests [@fisherInverseProbabilityUse1932]. 
+
+2. Set up the null hypothesis $H_o$. The $H_o$ derives naturally from the test selected. An example would be the comparison of two population central values (e.g. $M_1 - M_2 = 0$) or more comparatively $M_1 ≠ 0$. 
+
+Some parameters of the distribution are calculated from the sample i.e. variance and degress of freedom
+The rest of the parameters are estimated according to the theoretical distribution.
+
+3. Calculate theoretical probability of results under the $H_o$ hypothesis
+Here is an example of the frequency distribution for data operating under the assumption that $H_o$ is true
+
+
+``` r
+x = rnorm(10000, mean = 0, sd = 1)
+x.den = density(x)
+
+{
+  plot(x.den, main = expression("Theoretical data frequency distribution under H"[o]))
+  abline(v = mean(x), col = 'red')
+  legend("topright", 
+       legend = expression(H[o]),
+       col = c("red"), 
+       border = NA,
+       lty = 1, 
+       lwd = 2,
+       seg.len = 3,
+       bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+4. Assess significance of results
+
+Fisher proposed tests of significance that were based on identifying results with low probability of occuring under the null hypothesis [@perezgonzalezFisherNeymanPearsonNHST2015]. A research result with a low p-value, i.e. a low probability of occuring under the theoretrical distribution of the null hypothesis, may be taken as evidence against the null hypothesis. [@perezgonzalezFisherNeymanPearsonNHST2015]. How small of a result may be considered significant is the pervue of the researcher [@fisherDesignExperiments1960; @perezgonzalezFisherNeymanPearsonNHST2015] or the reader, which is why reporting test statistics and p-values are important. If the p-value is equal to or smaller than the chosen significance level, the results are taken as evidence against the null hypothesis and deemed significant.
+
+5. Interpretation of the results
+
+A significant result is representative of a dual statement. Either a rare result that occurs only with a probability of p, or lower, just happened, or the null hypothesis failed to explain the datum collected by the research. A literal intrepretation of the results is that the null hypothesis did not explain our data, thus we infered other processes.
+
+
+``` r
+x = rnorm(10000, mean = 0, sd = 1)
+x.den = density(x)
+# Compute the 95th percentile
+q95 = quantile(x, 0.95)
+# Identify the portion of the density curve above the 95th percentile
+x.shade = x.den$x[x.den$x >= q95]
+y.shade = x.den$y[x.den$x >= q95]
+
+{
+  plot(x.den, main = expression("Theoretical data frequency distribution under H"[o]))
+  abline(v = mean(x), col = 'red')
+  # Add shaded polygon for upper 5%
+  polygon(c(q95, x.shade, max(x.shade)), 
+        c(0, y.shade, 0), 
+        col = 'pink', 
+        border = NA)
+    legend("topright", 
+       legend = c(expression(H[o]), '5% rejection region'),
+       col = c("red", 'pink'), 
+       border = NA,
+       lty = 1, 
+       lwd = 2,
+       seg.len = 3,
+       bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+
+## Neyman-Pearson
+
+
+``` r
+set.seed(3)
+d = 0.75
+
+par(mfrow = c(1,2))
+p1 = rnorm(1000, mean = 0, sd = 1)
+p2 = rnorm(1000, mean = d, sd = 1)
+
+p1.den = density(p1)
+p2.den = density(p2)
+
+xo = rnorm(100, mean=0, sd=0.5)
+xa = rnorm(100, mean = d, sd = 0.5)
+
+xo.den = density(xo)
+xa.den = density(xa)
+
+{
+  plot(p1.den, col = 'blue', lty = 1, main = 'population')
+  lines(p2.den, col = 'red', lty = 2)
+  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
+  
+  plot(xo.den, col = 'blue', lty = 1, main = 'sample')
+  lines(xa.den, col = 'red', lty = 2)
+  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ## Null Hypothesis Testing   
 
@@ -36,21 +150,34 @@ q0.975 = quantile(x, 0.975)
 # Identify x-values within the 95% CI
 x.ci <- x.den$x[x.den$x >= q0.025 & x.den$x <= q0.975]
 y.ci <- x.den$y[x.den$x >= q0.025 & x.den$x <= q0.975]
+# Identify the portion of the density curve above the 97.5th percentile
+x.upper = x.den$x[x.den$x >= q0.975]
+y.upper = x.den$y[x.den$x >= q0.975]
+# Identify the portion of the density curve below the 0.025th percentile
+x.lower = x.den$x[x.den$x <= q0.025]
+y.lower = x.den$y[x.den$x <= q0.025]
 
 {
-  plot(x.den)
+  plot(x.den, main = 'Distribution and rejection regions for normal distribution')
   # Add shaded polygon for 95% CI
   polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
         c(0, y.ci, 0),
         col = 'lightblue', border = NA)
+  polygon(c(x.upper[1], x.upper, x.upper[length(x.upper)]),
+        c(0, y.upper, 0),
+        col = 'pink', border = NA)
+  polygon(c(x.lower[1], x.lower, x.lower[length(x.lower)]),
+        c(0, y.lower, 0),
+        col = 'pink', border = NA)
   abline(v = c(mean(x)-sd(x),mean(x), mean(x)+sd(x)), col = c('blue','red','blue'))
+  
 legend("topright", 
-       legend = c('mean','standard deviation', '95% CI'),
+       legend = c('mean','standard deviation', '95% CI','Critical regions'),
        col = c("red",'blue',NA), 
-       fill = c(NA,NA,'lightblue'),
+       fill = c(NA,NA,'lightblue','pink'),
        border = NA,
-       lty = c(1,1,NA), 
-       lwd = c(2,2,NA),
+       lty = c(1,1,NA,NA), 
+       lwd = c(2,2,NA,NA),
        seg.len = 3,
        bty = "n")
 }
@@ -74,6 +201,12 @@ q0.975 = quantile(x, 0.975)
 # Identify x-values within the 95% CI
 x.ci <- x.den$x[x.den$x >= q0.025 & x.den$x <= q0.975]
 y.ci <- x.den$y[x.den$x >= q0.025 & x.den$x <= q0.975]
+# Identify the portion of the density curve above the 97.5th percentile
+x.upper = x.den$x[x.den$x >= q0.975]
+y.upper = x.den$y[x.den$x >= q0.975]
+# Identify the portion of the density curve below the 0.025th percentile
+x.lower = x.den$x[x.den$x <= q0.025]
+y.lower = x.den$y[x.den$x <= q0.025]
 
 par(mfrow = c(1,2))
 
@@ -84,6 +217,12 @@ par(mfrow = c(1,2))
   polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
         c(0, y.ci, 0),
         col = 'lightblue', border = NA)
+    polygon(c(x.upper[1], x.upper, x.upper[length(x.upper)]),
+        c(0, y.upper, 0),
+        col = 'pink', border = NA)
+  polygon(c(x.lower[1], x.lower, x.lower[length(x.lower)]),
+        c(0, y.lower, 0),
+        col = 'pink', border = NA)
   abline(v = c(mean(x)-sd(x),mean(x), mean(x)+sd(x)), col = c('blue','red','blue'))
 # legend("topright", 
 #        legend = c('mean','standard deviation', '95% CI'),
@@ -97,9 +236,124 @@ par(mfrow = c(1,2))
 }
 ```
 
-<img src="03-frequentist_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="03-frequentist_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Here we see a the same values of our population of bodyweights on day 0 from our heifers. Note how they do not follow the neat normal distribution, but do approximate it closely enough, at least visually. Here arises one of the first critiques of NHST that all tests assume that the population distribution follows a normal bell curve if enough samples are taken. 
+
+#### Statistical test for u {-}
+
+Lets suppose that we have another sample of heifers, perhaps the next years. (keep in mind that at this point we are not considering any treatment options, the only comparison is a made up central value, mean, compared to the current central mean of the current population). See below for the code if you're not following.
+
+
+``` r
+n = length(unique(bodyweight$VID))
+uo = mean(bodyweight$BW0) # Mean from previous measurements
+u = 490 # Our new made up mean
+sd = sd(bodyweight$BW0) # our estimation of bodyweight based upon previous data
+```
+
+We choose a critical value of 0.05 to serve as our indicator of significance, i.e. a p value of <= 0.05 is considered significant. This translates to a any value greater than 1.96 standard deviations from the $H_o$ mean is considered significant. This can be mathematically calculated using the equation $z = (\bar{y} - u_o)/ (\sigma / \sqrt n)$ and takes on the following calculation in code.
+
+
+``` r
+z = (u - uo)/(sd/sqrt(n))
+z
+```
+
+```
+## [1] 2.911734
+```
+
+So here we see that our new (made up) test statistic is 2.9117336 above the central value of the population of heifers on day zero in the current dataset. This can be graphically described, demonstrated as follows.
+
+
+``` r
+xo = rnorm(n = n, mean = uo, sd = sd)
+xo.den = density(xo)
+
+# Critical quantile
+q95 = 1.96*(sd/sqrt(n)) + uo
+
+# Identify x-values within the 95% CI
+x.ci = xo.den$x[xo.den$x <= q95]
+y.ci = xo.den$y[xo.den$x <= q95]
+
+# Right tail: x > q975
+x.upper = xo.den$x[xo.den$x >= q95]
+y.upper = xo.den$y[xo.den$x >= q95]
+
+{
+  plot(xo.den)
+  # Add shaded polygon for 95% CI
+  polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
+        c(0, y.ci, 0),
+        col = 'lightblue', border = NA)
+
+  # Shade right rejection region
+  polygon(c(x.upper[1], x.upper, x.upper[length(x.upper)]),
+          c(0, y.upper, 0),
+          col = 'salmon', border = NA)
+  abline(v = c(uo, u), col = c('black', 'blue'), lty = c(1,2), lwd = c(2,2))
+  
+legend("topright",
+       legend = c(expression('H'[o]), expression('H'[a])),
+       col = c("black",'blue'),
+       border = NA,
+       lty = c(1,2),
+       lwd = c(2,2),
+       seg.len = 3,
+       bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+Here we calculated the rejection region for the distribution constructed under $H_o$ and then observed where our new mean fell. Since it fell in the rejection region, we can assume that it was not constructed under the same theoretical process used to construct the $H_o$ distribution, and thus we can reject it. However, those processes may look similar, and we can see that by sampling observations from each of the $H_o$ and $H_a$ theoretical processes we just compared above and plotting them graphically.
+
+
+``` r
+set.seed(1)
+x = rnorm(100, mean = uo, sd = sd)
+xo = rnorm(100, mean = u, sd = sd)
+t.test(x)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  x
+## t = 119.85, df = 99, p-value < 2.2e-16
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  472.2023 488.1008
+## sample estimates:
+## mean of x 
+##  480.1516
+```
+
+``` r
+x.den = density(x)
+x0.den = density(xo)
+f = ecdf(xo)
+f(0)
+```
+
+```
+## [1] 0
+```
+
+``` r
+{
+  plot(x0.den, main = '', col = 'lightblue')
+  lines(x.den, col = 'red')
+  abline(v = c(uo,u), col = c('lightblue','red'), lty = 1)
+  legend("topright", legend = c(expression(H[0]), expression(H[a])), col = c('lightblue','red'), lty = 1, lwd = 2, bty = "n")
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
 
 #### Sample size {-}
 
@@ -109,7 +363,7 @@ The formula is as follows:
 $n = (z_σ/2)^2^ σ^2^ / E^2^$
 
 and in code for the heifer bodyweight on day 0
-Because the heifers range from 364, 638, the typical assumption to approximate the population $σ$ is to take 68.5, and we might arbritrarily choose our accuracy to be 25 lbs.
+Because the heifers range from 376.5125186, 582.4143309, the typical assumption to approximate the population $σ$ is to take 51.4754531, and we might arbritrarily choose our accuracy to be 25 lbs.
 
 ``` r
 x = bodyweight$BW0
@@ -145,7 +399,7 @@ for (i in E) {
 }
 ```
 
-<img src="03-frequentist_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="03-frequentist_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take. 
 The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?
@@ -166,161 +420,10 @@ for (i in 1:length(sigma)) {
 }
 ```
 
-<img src="03-frequentist_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="03-frequentist_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.
 
-#### Statistical test for u {-}
-
-The statistical test takes on the concept of proof by contradiction, aka, NHST and is comprised of 5 parts.
-
-1. Null hypothesis $H_o$
-2. Research hypothesis $H_a$
-3. Test statistics
-4. Rejection region
-5. Check assumptions and draw conclusions
-
-The question is if our current measured value is greater than previously measured values. Suppose that 
-
-$u_o$ = 520 representing the combined mean from previous years of measurements
-$u$ = 550 representing the mean from the current year
-
-We are testing the following if $H_a: u > 320 $ negates the $H_o: u<= 320$.
-
-We then have to define the rejection region, and determine if $u$ falls in the rejection region assuming that $H_o$ is true.
-
-
-``` r
-n = 36
-uo = 520 # Mean from previous measurements
-u = 550 # Current mean from this year
-sd = 124
-sigma = sd/sqrt(n)
-x0 = rnorm(n, mean = uo, sd = sd) 
-
-q025 = quantile(x0, 0.025)
-q975 = quantile(x0, 0.975)
-
-x0.den = density(x0)
-
-# Identify x-values within the 95% CI
-x.ci <- x0.den$x[x0.den$x >= q025 & x0.den$x <= q975]
-y.ci <- x0.den$y[x0.den$x >= q025 & x0.den$x <= q975]
-
-# Left tail: x < q025
-x.left <- x0.den$x[x0.den$x <= q025]
-y.left <- x0.den$y[x0.den$x <= q025]
-
-# Right tail: x > q975
-x.right <- x0.den$x[x0.den$x >= q975]
-y.right <- x0.den$y[x0.den$x >= q975]
-
-{
-  plot(x0.den)
-  # Add shaded polygon for 95% CI
-  polygon(c(x.ci[1], x.ci, x.ci[length(x.ci)]),
-        c(0, y.ci, 0),
-        col = 'lightblue', border = NA)
-  # Shade left rejection region
-  polygon(c(x.left[1], x.left, x.left[length(x.left)]),
-          c(0, y.left, 0),
-          col = 'salmon', border = NA)
-
-  # Shade right rejection region
-  polygon(c(x.right[1], x.right, x.right[length(x.right)]),
-          c(0, y.right, 0),
-          col = 'salmon', border = NA)
-  abline(v = u)
-  
-# legend("topright", 
-#        legend = c('mean','standard deviation', '95% CI'),
-#        col = c("red",'blue',NA), 
-#        fill = c(NA,NA,'lightblue'),
-#        border = NA,
-#        lty = c(1,1,NA), 
-#        lwd = c(2,2,NA),
-#        seg.len = 3,
-#        bty = "n")
-}
-```
-
-<img src="03-frequentist_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-
-
-``` r
-x = rnorm(100, mean = 1, sd = 1)
-xo = rnorm(100, mean = 0, sd = 1)
-t.test(x)
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  x
-## t = 11.13, df = 99, p-value < 2.2e-16
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  0.8484379 1.2165656
-## sample estimates:
-## mean of x 
-##  1.032502
-```
-
-``` r
-x.den = density(x)
-x0.den = density(xo)
-f = ecdf(xo)
-f(0)
-```
-
-```
-## [1] 0.44
-```
-
-``` r
-{
-  plot(x.den, main = '', col = 'red')
-  lines(x0.den, col = 'lightblue')
-  abline(v = c(0,quantile(x, probs = c(0.5))), col = c('lightblue','red'), lty = 1)
-  legend("topright", legend = c(expression(H[0]), expression(H[a])), col = c('lightblue','red'), lty = 1, lwd = 2, bty = "n")
-}
-```
-
-<img src="03-frequentist_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-
-### Neyman-Pearson
-
-
-``` r
-set.seed(3)
-d = 0.75
-
-par(mfrow = c(1,2))
-p1 = rnorm(1000, mean = 0, sd = 1)
-p2 = rnorm(1000, mean = d, sd = 1)
-
-p1.den = density(p1)
-p2.den = density(p2)
-
-xo = rnorm(100, mean=0, sd=0.5)
-xa = rnorm(100, mean = d, sd = 0.5)
-
-xo.den = density(xo)
-xa.den = density(xa)
-
-{
-  plot(p1.den, col = 'blue', lty = 1, main = 'population')
-  lines(p2.den, col = 'red', lty = 2)
-  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
-  
-  plot(xo.den, col = 'blue', lty = 1, main = 'sample')
-  lines(xa.den, col = 'red', lty = 2)
-  abline(v = c(mean(xo), mean(xa)), col = c('blue','red'))
-}
-```
-
-<img src="03-frequentist_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 ### Two population inference  
 
@@ -346,13 +449,13 @@ t.test(xo, xa, var.equal = T)
 ## 	Two Sample t-test
 ## 
 ## data:  xo and xa
-## t = -21.315, df = 198, p-value < 2.2e-16
+## t = -21.09, df = 198, p-value < 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -33.24634 -27.61560
+##  -33.04493 -27.39363
 ## sample estimates:
 ## mean of x mean of y 
-##  320.2175  350.6484
+##  320.2967  350.5160
 ```
 
 ``` r
@@ -379,7 +482,7 @@ lines(xa.den, col = 'red')
 }
 ```
 
-<img src="03-frequentist_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="03-frequentist_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ``` r
 # Add a vertical line at the 95th percentile
@@ -387,7 +490,7 @@ lines(xa.den, col = 'red')
 ```
 
 
-## Intake vs BW Relationship
+## Linear Models
 
 
 ``` r

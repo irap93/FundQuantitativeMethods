@@ -24,14 +24,15 @@ probability-distributions
 stoichastity-in-functions
 homework-and-review-questions
 standard-statistics
+neyman-pearson
 null-hypothesis-testing
 population-central-values
-neyman-pearson
 two-population-inference
-intake-vs-bw-relationship
+linear-models
 anovas
 general-linear-models
 example-one
 example-two
 liklihood-vs.-probability
 demonstrating-equivalence
+fisher
