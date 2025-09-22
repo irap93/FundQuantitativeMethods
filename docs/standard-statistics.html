@@ -23,7 +23,7 @@
 <meta name="author" content="Yihui Xie" />
 
 
-<meta name="date" content="2025-09-19" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="applying-the-scientific-method.html"/>
-<link rel="next" href="demonstrating-equivalence.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,16 +221,16 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="standard-statistics.html"><a href="standard-statistics.html#null-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Null Hypothesis Testing</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="standard-statistics.html"><a href="standard-statistics.html#population-central-values"><i class="fa fa-check"></i><b>3.3.1</b> Population central values</a></li>
-<li class="chapter" data-level="3.3.2" data-path="standard-statistics.html"><a href="standard-statistics.html#two-population-inference"><i class="fa fa-check"></i><b>3.3.2</b> Two population inference</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="standard-statistics.html"><a href="standard-statistics.html#linear-models"><i class="fa fa-check"></i><b>3.4</b> Linear Models</a></li>
-<li class="chapter" data-level="3.5" data-path="standard-statistics.html"><a href="standard-statistics.html#anovas"><i class="fa fa-check"></i><b>3.5</b> Anovas</a></li>
-<li class="chapter" data-level="3.6" data-path="standard-statistics.html"><a href="standard-statistics.html#general-linear-models"><i class="fa fa-check"></i><b>3.6</b> General Linear Models</a></li>
-<li class="chapter" data-level="3.7" data-path="standard-statistics.html"><a href="standard-statistics.html#example-one"><i class="fa fa-check"></i><b>3.7</b> Example one</a></li>
-<li class="chapter" data-level="3.8" data-path="standard-statistics.html"><a href="standard-statistics.html#example-two"><i class="fa fa-check"></i><b>3.8</b> Example two</a></li>
-<li class="chapter" data-level="3.9" data-path="standard-statistics.html"><a href="standard-statistics.html#liklihood-vs.-probability"><i class="fa fa-check"></i><b>3.9</b> Liklihood vs. Probability</a></li>
+<li class="chapter" data-level="3.4" data-path="standard-statistics.html"><a href="standard-statistics.html#linear-models"><i class="fa fa-check"></i><b>3.4</b> Linear Models</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="standard-statistics.html"><a href="standard-statistics.html#prediction-vs.-explanation"><i class="fa fa-check"></i><b>3.4.1</b> Prediction vs. explanation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="standard-statistics.html"><a href="standard-statistics.html#simple-linear-models"><i class="fa fa-check"></i><b>3.4.2</b> Simple Linear Models</a></li>
+<li class="chapter" data-level="3.4.3" data-path="standard-statistics.html"><a href="standard-statistics.html#simple-anovas"><i class="fa fa-check"></i><b>3.4.3</b> Simple Anovas</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="demonstrating-equivalence.html"><a href="demonstrating-equivalence.html"><i class="fa fa-check"></i><b>4</b> Demonstrating Equivalence</a></li>
+<li class="chapter" data-level="3.5" data-path="standard-statistics.html"><a href="standard-statistics.html#demonstrating-equivalence"><i class="fa fa-check"></i><b>3.5</b> Demonstrating Equivalence</a></li>
+<li class="chapter" data-level="3.6" data-path="standard-statistics.html"><a href="standard-statistics.html#liklihood-vs.-probability"><i class="fa fa-check"></i><b>3.6</b> Liklihood vs. Probability</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -537,57 +537,8 @@ standard deviation of 1</p>
 <span id="cb14-6"><a href="standard-statistics.html#cb14-6" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="sample-size" class="section level4 unnumbered hasAnchor">
-<h4>Sample size<a href="standard-statistics.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>This begs the question, how many samples are necessary to make inference of a populations central value? Here lies one of the first critiques of NHST, as we must assume that the overall greater population follows some known distribution, in this case, a normal distribution, and that we are sampling from that population. However, the greater population is actually unknowable outside of simply measuring the entire population. Samples are expensive, so at some point we have to simply accept that we have sampled <em>enough</em>, which is to say done our due diligence to collect an adequate representation of the greater population so we can make inference from it. Below we can show mathematically how many samples are required. The goal of sampling is to create a credible interval which has a given chance of containing <span class="math inline">\(u\)</span>, or the population mean. This reasonable level of certainty is typically set at 90-95% due to tradition. However, this runs two risks. 1) 95% levels of confidence means you run a 1 in 20 chance of not capturing the population mean. Equate this to having a 20 round magazine clip loaded into a gun that you are taking on a camping trip to the Little Bighorns in Wyoming for protection against Grizzly bears, in which 1 of the 20 bullets is a blank. Is this a risk you ar willing to take? The second risk is the inverse of the first, which is that this may be an unreasonble and arbritarily high level of confidence that would reduce the percieved validity of aquired data, particularly if the data is novel, but funds or circumstances meant obtaining enough samples to obtain this level of confidence was not possible, and thus the research was not conducted or the findings not reported.</p>
-<p>The formula is as follows:<br />
-<span class="math inline">\(n = (z_σ/2)^2^ σ^2^ / E^2^\)</span></p>
-<p>and in code for the heifer bodyweight on day 0
-Because the heifers range from 376.5125186, 582.4143309, the typical assumption to approximate the population <span class="math inline">\(σ\)</span> is to take 51.4754531, and we might arbritrarily choose our accuracy to be 25 lbs.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="standard-statistics.html#cb15-1" tabindex="-1"></a>x <span class="ot">=</span> bodyweight<span class="sc">$</span>BW0</span>
-<span id="cb15-2"><a href="standard-statistics.html#cb15-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">diff</span>(<span class="fu">range</span>(x))<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb15-3"><a href="standard-statistics.html#cb15-3" tabindex="-1"></a>E <span class="ot">=</span> <span class="dv">25</span></span>
-<span id="cb15-4"><a href="standard-statistics.html#cb15-4" tabindex="-1"></a>n <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb15-5"><a href="standard-statistics.html#cb15-5" tabindex="-1"></a>n</span></code></pre></div>
-<pre><code>## [1] 28.8412</code></pre>
-<p>So, from this we can interpret that in order to quantify the central limit (<span class="math inline">\(u\)</span>), of the population of heifers within 25 lbs with 95% confidence, we need 28 heifers. Now note how this changes as we tighten our accuracy levels.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="standard-statistics.html#cb17-1" tabindex="-1"></a>E <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb17-2"><a href="standard-statistics.html#cb17-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">diff</span>(<span class="fu">range</span>(x))<span class="sc">/</span><span class="dv">4</span></span>
-<span id="cb17-3"><a href="standard-statistics.html#cb17-3" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">c</span>()</span>
-<span id="cb17-4"><a href="standard-statistics.html#cb17-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> E) {</span>
-<span id="cb17-5"><a href="standard-statistics.html#cb17-5" tabindex="-1"></a> n[i] <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E[i]<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb17-6"><a href="standard-statistics.html#cb17-6" tabindex="-1"></a>}</span>
-<span id="cb17-7"><a href="standard-statistics.html#cb17-7" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="standard-statistics.html#cb17-8" tabindex="-1"></a>{</span>
-<span id="cb17-9"><a href="standard-statistics.html#cb17-9" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb17-10"><a href="standard-statistics.html#cb17-10" tabindex="-1"></a>  <span class="fu">plot</span>(E,n, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>)</span>
-<span id="cb17-11"><a href="standard-statistics.html#cb17-11" tabindex="-1"></a>  <span class="fu">points</span>(E,n)</span>
-<span id="cb17-12"><a href="standard-statistics.html#cb17-12" tabindex="-1"></a>  <span class="fu">lines</span>(E,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb17-13"><a href="standard-statistics.html#cb17-13" tabindex="-1"></a>  </span>
-<span id="cb17-14"><a href="standard-statistics.html#cb17-14" tabindex="-1"></a>  <span class="fu">plot</span>(E,n, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="fu">length</span>(E)), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">500</span>))</span>
-<span id="cb17-15"><a href="standard-statistics.html#cb17-15" tabindex="-1"></a>  <span class="fu">lines</span>(E,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
-<span id="cb17-16"><a href="standard-statistics.html#cb17-16" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="03-frequentist_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take.
-The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="standard-statistics.html#cb18-1" tabindex="-1"></a>E <span class="ot">=</span> <span class="dv">25</span> <span class="co"># accuracy level</span></span>
-<span id="cb18-2"><a href="standard-statistics.html#cb18-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">1</span>)</span>
-<span id="cb18-3"><a href="standard-statistics.html#cb18-3" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">c</span>()</span>
-<span id="cb18-4"><a href="standard-statistics.html#cb18-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sigma)) {</span>
-<span id="cb18-5"><a href="standard-statistics.html#cb18-5" tabindex="-1"></a> n[i] <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma[i]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb18-6"><a href="standard-statistics.html#cb18-6" tabindex="-1"></a>}</span>
-<span id="cb18-7"><a href="standard-statistics.html#cb18-7" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="standard-statistics.html#cb18-8" tabindex="-1"></a>{</span>
-<span id="cb18-9"><a href="standard-statistics.html#cb18-9" tabindex="-1"></a>  <span class="fu">plot</span>(sigma,n, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>)</span>
-<span id="cb18-10"><a href="standard-statistics.html#cb18-10" tabindex="-1"></a>  <span class="fu">points</span>(sigma,n)</span>
-<span id="cb18-11"><a href="standard-statistics.html#cb18-11" tabindex="-1"></a>  <span class="fu">lines</span>(sigma,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb18-12"><a href="standard-statistics.html#cb18-12" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="03-frequentist_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.</p>
-</div>
-</div>
-<div id="two-population-inference" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Two population inference<a href="standard-statistics.html#two-population-inference" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="two-population-inference" class="section level4 hasAnchor" number="3.3.1.1">
+<h4><span class="header-section-number">3.3.1.1</span> Two population inference<a href="standard-statistics.html#two-population-inference" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A statistical test is based upon the concept of the following five parts <span class="citation">(<a href="#ref-ottStatisticalMethodsData2016">Ott and Longnecker 2016</a>)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>Resaerch hypothesis <span class="math inline">\(H_a\)</span></li>
@@ -596,11 +547,11 @@ The other parameter, which I would remind you we are making using prior assumpti
 <li>Rejection region</li>
 <li>Check assumptions, draw conclusions</li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="standard-statistics.html#cb19-1" tabindex="-1"></a><span class="co"># Sample data</span></span>
-<span id="cb19-2"><a href="standard-statistics.html#cb19-2" tabindex="-1"></a>xo <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">320</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb19-3"><a href="standard-statistics.html#cb19-3" tabindex="-1"></a>xa <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">350</span>, <span class="at">sd =</span> <span class="dv">10</span>) </span>
-<span id="cb19-4"><a href="standard-statistics.html#cb19-4" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="standard-statistics.html#cb19-5" tabindex="-1"></a><span class="fu">t.test</span>(xo, xa, <span class="at">var.equal =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="standard-statistics.html#cb15-1" tabindex="-1"></a><span class="co"># Sample data</span></span>
+<span id="cb15-2"><a href="standard-statistics.html#cb15-2" tabindex="-1"></a>xo <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">320</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb15-3"><a href="standard-statistics.html#cb15-3" tabindex="-1"></a>xa <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">350</span>, <span class="at">sd =</span> <span class="dv">10</span>) </span>
+<span id="cb15-4"><a href="standard-statistics.html#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="standard-statistics.html#cb15-5" tabindex="-1"></a><span class="fu">t.test</span>(xo, xa, <span class="at">var.equal =</span> T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -612,36 +563,239 @@ The other parameter, which I would remind you we are making using prior assumpti
 ## sample estimates:
 ## mean of x mean of y 
 ##  320.2967  350.5160</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="standard-statistics.html#cb21-1" tabindex="-1"></a><span class="co"># Compute density</span></span>
-<span id="cb21-2"><a href="standard-statistics.html#cb21-2" tabindex="-1"></a>xo.den <span class="ot">=</span> <span class="fu">density</span>(xo)</span>
-<span id="cb21-3"><a href="standard-statistics.html#cb21-3" tabindex="-1"></a>xa.den <span class="ot">=</span> <span class="fu">density</span>(xa) </span>
-<span id="cb21-4"><a href="standard-statistics.html#cb21-4" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="standard-statistics.html#cb21-5" tabindex="-1"></a>{</span>
-<span id="cb21-6"><a href="standard-statistics.html#cb21-6" tabindex="-1"></a><span class="co"># Plot density</span></span>
-<span id="cb21-7"><a href="standard-statistics.html#cb21-7" tabindex="-1"></a><span class="fu">plot</span>(xo.den,</span>
-<span id="cb21-8"><a href="standard-statistics.html#cb21-8" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fu">min</span>(xo), <span class="fu">max</span>(xa)),</span>
-<span id="cb21-9"><a href="standard-statistics.html#cb21-9" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="fu">max</span>(xo.den<span class="sc">$</span>y), <span class="fu">max</span>(xa.den<span class="sc">$</span>y))),</span>
-<span id="cb21-10"><a href="standard-statistics.html#cb21-10" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">f</span>(x)))</span>
-<span id="cb21-11"><a href="standard-statistics.html#cb21-11" tabindex="-1"></a><span class="fu">lines</span>(xa.den, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span>
-<span id="cb21-12"><a href="standard-statistics.html#cb21-12" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="standard-statistics.html#cb21-13" tabindex="-1"></a><span class="co"># # Shade upper 5%</span></span>
-<span id="cb21-14"><a href="standard-statistics.html#cb21-14" tabindex="-1"></a><span class="co"># xo.vals &lt;- xo.den$x[xo.den$x &gt;= q95]</span></span>
-<span id="cb21-15"><a href="standard-statistics.html#cb21-15" tabindex="-1"></a><span class="co"># yo.vals &lt;- xo.den$y[xo.den$x &gt;= q95]</span></span>
-<span id="cb21-16"><a href="standard-statistics.html#cb21-16" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb21-17"><a href="standard-statistics.html#cb21-17" tabindex="-1"></a><span class="co"># polygon(c(q95, xo.vals, max(xo.vals)), </span></span>
-<span id="cb21-18"><a href="standard-statistics.html#cb21-18" tabindex="-1"></a><span class="co">#         c(0, yo.vals, 0), </span></span>
-<span id="cb21-19"><a href="standard-statistics.html#cb21-19" tabindex="-1"></a><span class="co">#         col = &quot;pink&quot;, </span></span>
-<span id="cb21-20"><a href="standard-statistics.html#cb21-20" tabindex="-1"></a><span class="co">#         border = NA)</span></span>
-<span id="cb21-21"><a href="standard-statistics.html#cb21-21" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="standard-statistics.html#cb17-1" tabindex="-1"></a><span class="co"># Compute density</span></span>
+<span id="cb17-2"><a href="standard-statistics.html#cb17-2" tabindex="-1"></a>xo.den <span class="ot">=</span> <span class="fu">density</span>(xo)</span>
+<span id="cb17-3"><a href="standard-statistics.html#cb17-3" tabindex="-1"></a>xa.den <span class="ot">=</span> <span class="fu">density</span>(xa) </span>
+<span id="cb17-4"><a href="standard-statistics.html#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="standard-statistics.html#cb17-5" tabindex="-1"></a>{</span>
+<span id="cb17-6"><a href="standard-statistics.html#cb17-6" tabindex="-1"></a><span class="co"># Plot density</span></span>
+<span id="cb17-7"><a href="standard-statistics.html#cb17-7" tabindex="-1"></a><span class="fu">plot</span>(xo.den,</span>
+<span id="cb17-8"><a href="standard-statistics.html#cb17-8" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fu">min</span>(xo), <span class="fu">max</span>(xa)),</span>
+<span id="cb17-9"><a href="standard-statistics.html#cb17-9" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="fu">max</span>(xo.den<span class="sc">$</span>y), <span class="fu">max</span>(xa.den<span class="sc">$</span>y))),</span>
+<span id="cb17-10"><a href="standard-statistics.html#cb17-10" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">f</span>(x)))</span>
+<span id="cb17-11"><a href="standard-statistics.html#cb17-11" tabindex="-1"></a><span class="fu">lines</span>(xa.den, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span>
+<span id="cb17-12"><a href="standard-statistics.html#cb17-12" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="standard-statistics.html#cb17-13" tabindex="-1"></a><span class="co"># # Shade upper 5%</span></span>
+<span id="cb17-14"><a href="standard-statistics.html#cb17-14" tabindex="-1"></a><span class="co"># xo.vals &lt;- xo.den$x[xo.den$x &gt;= q95]</span></span>
+<span id="cb17-15"><a href="standard-statistics.html#cb17-15" tabindex="-1"></a><span class="co"># yo.vals &lt;- xo.den$y[xo.den$x &gt;= q95]</span></span>
+<span id="cb17-16"><a href="standard-statistics.html#cb17-16" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-17"><a href="standard-statistics.html#cb17-17" tabindex="-1"></a><span class="co"># polygon(c(q95, xo.vals, max(xo.vals)), </span></span>
+<span id="cb17-18"><a href="standard-statistics.html#cb17-18" tabindex="-1"></a><span class="co">#         c(0, yo.vals, 0), </span></span>
+<span id="cb17-19"><a href="standard-statistics.html#cb17-19" tabindex="-1"></a><span class="co">#         col = &quot;pink&quot;, </span></span>
+<span id="cb17-20"><a href="standard-statistics.html#cb17-20" tabindex="-1"></a><span class="co">#         border = NA)</span></span>
+<span id="cb17-21"><a href="standard-statistics.html#cb17-21" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="standard-statistics.html#cb18-1" tabindex="-1"></a><span class="co"># Add a vertical line at the 95th percentile</span></span>
+<span id="cb18-2"><a href="standard-statistics.html#cb18-2" tabindex="-1"></a><span class="co"># abline(v = q95, col = &quot;red&quot;, lty = 2)</span></span></code></pre></div>
+</div>
+<div id="sample-size" class="section level4 unnumbered hasAnchor">
+<h4>Sample size<a href="standard-statistics.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This begs the question, how many samples are necessary to make inference of a populations central value? Here lies one of the first critiques of NHST, as we must assume that the overall greater population follows some known distribution, in this case, a normal distribution, and that we are sampling from that population. However, the greater population is actually unknowable outside of simply measuring the entire population. Samples are expensive, so at some point we have to simply accept that we have sampled <em>enough</em>, which is to say done our due diligence to collect an adequate representation of the greater population so we can make inference from it. Below we can show mathematically how many samples are required. The goal of sampling is to create a credible interval which has a given chance of containing <span class="math inline">\(u\)</span>, or the population mean. This reasonable level of certainty is typically set at 90-95% due to tradition. However, this runs two risks. 1) 95% levels of confidence means you run a 1 in 20 chance of not capturing the population mean. Equate this to having a 20 round magazine clip loaded into a gun that you are taking on a camping trip to the Little Bighorns in Wyoming for protection against Grizzly bears, in which 1 of the 20 bullets is a blank. Is this a risk you ar willing to take? The second risk is the inverse of the first, which is that this may be an unreasonble and arbritarily high level of confidence that would reduce the percieved validity of aquired data, particularly if the data is novel, but funds or circumstances meant obtaining enough samples to obtain this level of confidence was not possible, and thus the research was not conducted or the findings not reported.</p>
+<p>The formula is as follows:<br />
+<span class="math inline">\(n = (z_σ/2)^2^ σ^2^ / E^2^\)</span></p>
+<p>and in code for the heifer bodyweight on day 0
+Because the heifers range from 376.5125186, 582.4143309, the typical assumption to approximate the population <span class="math inline">\(σ\)</span> is to take 51.4754531, and we might arbritrarily choose our accuracy to be 25 lbs.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="standard-statistics.html#cb19-1" tabindex="-1"></a>x <span class="ot">=</span> bodyweight<span class="sc">$</span>BW0</span>
+<span id="cb19-2"><a href="standard-statistics.html#cb19-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">diff</span>(<span class="fu">range</span>(x))<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb19-3"><a href="standard-statistics.html#cb19-3" tabindex="-1"></a>E <span class="ot">=</span> <span class="dv">25</span></span>
+<span id="cb19-4"><a href="standard-statistics.html#cb19-4" tabindex="-1"></a>n <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb19-5"><a href="standard-statistics.html#cb19-5" tabindex="-1"></a>n</span></code></pre></div>
+<pre><code>## [1] 28.8412</code></pre>
+<p>So, from this we can interpret that in order to quantify the central limit (<span class="math inline">\(u\)</span>), of the population of heifers within 25 lbs with 95% confidence, we need 28 heifers. Now note how this changes as we tighten our accuracy levels.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="standard-statistics.html#cb21-1" tabindex="-1"></a>E <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb21-2"><a href="standard-statistics.html#cb21-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">diff</span>(<span class="fu">range</span>(x))<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb21-3"><a href="standard-statistics.html#cb21-3" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb21-4"><a href="standard-statistics.html#cb21-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> E) {</span>
+<span id="cb21-5"><a href="standard-statistics.html#cb21-5" tabindex="-1"></a> n[i] <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E[i]<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb21-6"><a href="standard-statistics.html#cb21-6" tabindex="-1"></a>}</span>
+<span id="cb21-7"><a href="standard-statistics.html#cb21-7" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="standard-statistics.html#cb21-8" tabindex="-1"></a>{</span>
+<span id="cb21-9"><a href="standard-statistics.html#cb21-9" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-10"><a href="standard-statistics.html#cb21-10" tabindex="-1"></a>  <span class="fu">plot</span>(E,n, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>)</span>
+<span id="cb21-11"><a href="standard-statistics.html#cb21-11" tabindex="-1"></a>  <span class="fu">points</span>(E,n)</span>
+<span id="cb21-12"><a href="standard-statistics.html#cb21-12" tabindex="-1"></a>  <span class="fu">lines</span>(E,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-13"><a href="standard-statistics.html#cb21-13" tabindex="-1"></a>  </span>
+<span id="cb21-14"><a href="standard-statistics.html#cb21-14" tabindex="-1"></a>  <span class="fu">plot</span>(E,n, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="fu">length</span>(E)), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">500</span>))</span>
+<span id="cb21-15"><a href="standard-statistics.html#cb21-15" tabindex="-1"></a>  <span class="fu">lines</span>(E,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb21-16"><a href="standard-statistics.html#cb21-16" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take.
+The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="standard-statistics.html#cb22-1" tabindex="-1"></a>E <span class="ot">=</span> <span class="dv">25</span> <span class="co"># accuracy level</span></span>
+<span id="cb22-2"><a href="standard-statistics.html#cb22-2" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">1</span>)</span>
+<span id="cb22-3"><a href="standard-statistics.html#cb22-3" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb22-4"><a href="standard-statistics.html#cb22-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sigma)) {</span>
+<span id="cb22-5"><a href="standard-statistics.html#cb22-5" tabindex="-1"></a> n[i] <span class="ot">=</span> (<span class="fl">1.96</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> sigma[i]<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>E<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb22-6"><a href="standard-statistics.html#cb22-6" tabindex="-1"></a>}</span>
+<span id="cb22-7"><a href="standard-statistics.html#cb22-7" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="standard-statistics.html#cb22-8" tabindex="-1"></a>{</span>
+<span id="cb22-9"><a href="standard-statistics.html#cb22-9" tabindex="-1"></a>  <span class="fu">plot</span>(sigma,n, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>)</span>
+<span id="cb22-10"><a href="standard-statistics.html#cb22-10" tabindex="-1"></a>  <span class="fu">points</span>(sigma,n)</span>
+<span id="cb22-11"><a href="standard-statistics.html#cb22-11" tabindex="-1"></a>  <span class="fu">lines</span>(sigma,n, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb22-12"><a href="standard-statistics.html#cb22-12" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="standard-statistics.html#cb22-1" tabindex="-1"></a><span class="co"># Add a vertical line at the 95th percentile</span></span>
-<span id="cb22-2"><a href="standard-statistics.html#cb22-2" tabindex="-1"></a><span class="co"># abline(v = q95, col = &quot;red&quot;, lty = 2)</span></span></code></pre></div>
+<p>So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.</p>
+</div>
 </div>
 </div>
 <div id="linear-models" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Linear Models<a href="standard-statistics.html#linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="standard-statistics.html#cb23-1" tabindex="-1"></a><span class="co"># Libraries ----</span></span>
-<span id="cb23-2"><a href="standard-statistics.html#cb23-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Graphing </span></span></code></pre></div>
+<p>Next we embark into linear models, our first cause and effect models. These are extremely powerful statistical tools that are frequently used in science, as they provide information regarding the functional relationship between the response (dependent) and explanatory (independent variables) <span class="citation">(<a href="#ref-ottStatisticalMethodsData2016">Ott and Longnecker 2016</a>)</span>.</p>
+<p>Regression models have a number of applications:</p>
+<ol style="list-style-type: decimal">
+<li>Provides a major description of features within the dataset.</li>
+<li>Provides estimates of the response of values not tested that are intermediary to values tested</li>
+<li>Provides a mathematical tool to predict the future</li>
+<li>Shows relationship between cheap to measure variables and expensive to measure variables</li>
+</ol>
+<div id="prediction-vs.-explanation" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Prediction vs. explanation<a href="standard-statistics.html#prediction-vs.-explanation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It is important to note the difference between explaining the difference between <strong>Prediction</strong> vs. <strong>Explanation</strong>. Prediction makes reference to predicting future values, while explanation focuses on understanding relationships within the current dataset. While the architecture of the models are identical, the thought and process of building them is different. Building explanatory models is easier, as the model is built with the same data it is designed to predict. Prediction is by nature more difficult.</p>
+<p><strong>It is important to note that the term “prediction” is used in both instances.</strong></p>
+</div>
+<div id="simple-linear-models" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Simple Linear Models<a href="standard-statistics.html#simple-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A simple causal linear model takes the form of <span class="math inline">\(y = \beta_0 + \beta_1x_1\)</span>, where <span class="math inline">\(y\)</span> represents the dependent variable, <span class="math inline">\(\beta_0\)</span> is the y intercept of the value of y when x = 0, and <span class="math inline">\(\beta_1\)</span> is the slope of the line.</p>
+<p>The <strong>assumption of linearity</strong> means that we assume the <em>slope of the line doesn’t change as x changes</em>.</p>
+<p>This is demonstrated below.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="standard-statistics.html#cb23-1" tabindex="-1"></a>{</span>
+<span id="cb23-2"><a href="standard-statistics.html#cb23-2" tabindex="-1"></a>fun1 <span class="ot">=</span> <span class="cf">function</span>(x,b0,b1){y <span class="ot">=</span> b0 <span class="sc">+</span> x<span class="sc">*</span>b1}</span>
+<span id="cb23-3"><a href="standard-statistics.html#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="standard-statistics.html#cb23-4" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">45</span>,<span class="dv">1</span>) <span class="co"># Days in a feeding trial</span></span>
+<span id="cb23-5"><a href="standard-statistics.html#cb23-5" tabindex="-1"></a>initialweight <span class="ot">=</span> <span class="dv">300</span> <span class="co"># Initial bodyweight</span></span>
+<span id="cb23-6"><a href="standard-statistics.html#cb23-6" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fl">0.75</span> <span class="co"># Average Daily Gain, Kgs per day</span></span>
+<span id="cb23-7"><a href="standard-statistics.html#cb23-7" tabindex="-1"></a>weight <span class="ot">=</span> <span class="fu">fun1</span>(days, <span class="at">b0 =</span> initialweight, <span class="at">b1 =</span> gain) <span class="co"># Equation for what the animal weighs on each day through the trial</span></span>
+<span id="cb23-8"><a href="standard-statistics.html#cb23-8" tabindex="-1"></a><span class="fu">plot</span>(days,weight, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">275</span>,<span class="dv">375</span>), <span class="at">main =</span> <span class="fu">expression</span>(y <span class="sc">==</span> beta[<span class="dv">0</span>] <span class="sc">+</span> beta[<span class="dv">1</span>]<span class="sc">*</span>x))</span>
+<span id="cb23-9"><a href="standard-statistics.html#cb23-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(weight<span class="sc">~</span>days), <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb23-10"><a href="standard-statistics.html#cb23-10" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>However, this leaves no room for variation, or stoichasticity, in the relationship. And as we will recall from class, one of the <em>Fundamental principles of statistics is to handle variation</em> in data and causal relationship models. Below is an example of a projected linear growth in BW model with simulated normal varation added into the relationship.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="standard-statistics.html#cb24-1" tabindex="-1"></a>fun1 <span class="ot">=</span> <span class="cf">function</span>(x,b0,b1,e){y <span class="ot">=</span> b0 <span class="sc">+</span> x<span class="sc">*</span>b1 <span class="sc">+</span> e}</span>
+<span id="cb24-2"><a href="standard-statistics.html#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="standard-statistics.html#cb24-3" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">45</span>,<span class="dv">1</span>) <span class="co"># Days in a feeding trial</span></span>
+<span id="cb24-4"><a href="standard-statistics.html#cb24-4" tabindex="-1"></a>initialweight <span class="ot">=</span> <span class="dv">300</span> <span class="co"># Initial bodyweight</span></span>
+<span id="cb24-5"><a href="standard-statistics.html#cb24-5" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fl">0.75</span> <span class="co"># Average Daily Gain, Kgs per day</span></span>
+<span id="cb24-6"><a href="standard-statistics.html#cb24-6" tabindex="-1"></a>variance <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(days), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb24-7"><a href="standard-statistics.html#cb24-7" tabindex="-1"></a>weight <span class="ot">=</span> <span class="fu">fun1</span>(<span class="at">x =</span> days,<span class="at">b0 =</span> initialweight, <span class="at">b1 =</span> gain, <span class="at">e =</span> variance) <span class="co"># Equation for what the animal weighs on each day through the trial</span></span>
+<span id="cb24-8"><a href="standard-statistics.html#cb24-8" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb24-9"><a href="standard-statistics.html#cb24-9" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="standard-statistics.html#cb24-10" tabindex="-1"></a>{</span>
+<span id="cb24-11"><a href="standard-statistics.html#cb24-11" tabindex="-1"></a><span class="fu">plot</span>(days,weight, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">275</span>,<span class="dv">375</span>), <span class="at">main =</span> <span class="fu">expression</span>(y <span class="sc">==</span> beta[<span class="dv">0</span>] <span class="sc">+</span> beta[<span class="dv">1</span>]<span class="sc">*</span>x <span class="sc">+</span> epsilon))</span>
+<span id="cb24-12"><a href="standard-statistics.html#cb24-12" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(weight<span class="sc">~</span>days), <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb24-13"><a href="standard-statistics.html#cb24-13" tabindex="-1"></a>}</span>
+<span id="cb24-14"><a href="standard-statistics.html#cb24-14" tabindex="-1"></a>{</span>
+<span id="cb24-15"><a href="standard-statistics.html#cb24-15" tabindex="-1"></a><span class="fu">hist</span>(variance)</span>
+<span id="cb24-16"><a href="standard-statistics.html#cb24-16" tabindex="-1"></a><span class="fu">rug</span>(variance, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb24-17"><a href="standard-statistics.html#cb24-17" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>The above data is an example of relationships with regularly spaced data collected on the x interval. However, this is not always necessary. Consider the same simulated growth plot below, where the only difference is adding another opportunity for variation along the x axis.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="standard-statistics.html#cb25-1" tabindex="-1"></a>fun1 <span class="ot">=</span> <span class="cf">function</span>(x,b0,b1,e){y <span class="ot">=</span> b0 <span class="sc">+</span> x<span class="sc">*</span>b1 <span class="sc">+</span> e}</span>
+<span id="cb25-2"><a href="standard-statistics.html#cb25-2" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>,<span class="at">max =</span> <span class="dv">45</span>))</span>
+<span id="cb25-3"><a href="standard-statistics.html#cb25-3" tabindex="-1"></a><span class="fu">hist</span>(days)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="standard-statistics.html#cb26-1" tabindex="-1"></a>initialweight <span class="ot">=</span> <span class="dv">300</span> <span class="co"># Initial bodyweight</span></span>
+<span id="cb26-2"><a href="standard-statistics.html#cb26-2" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fl">0.75</span> <span class="co"># Average Daily Gain, Kgs per day</span></span>
+<span id="cb26-3"><a href="standard-statistics.html#cb26-3" tabindex="-1"></a>variance <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(days), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb26-4"><a href="standard-statistics.html#cb26-4" tabindex="-1"></a>weight <span class="ot">=</span> <span class="fu">fun1</span>(<span class="at">x =</span> days,<span class="at">b0 =</span> initialweight, <span class="at">b1 =</span> gain, <span class="at">e =</span> variance) <span class="co"># Equation for what the animal weighs on each day through the trial</span></span>
+<span id="cb26-5"><a href="standard-statistics.html#cb26-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb26-6"><a href="standard-statistics.html#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="standard-statistics.html#cb26-7" tabindex="-1"></a>{</span>
+<span id="cb26-8"><a href="standard-statistics.html#cb26-8" tabindex="-1"></a><span class="fu">plot</span>(days,weight, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">275</span>,<span class="dv">375</span>), <span class="at">main =</span> <span class="fu">expression</span>(y <span class="sc">==</span> beta[<span class="dv">0</span>] <span class="sc">+</span> beta[<span class="dv">1</span>]<span class="sc">*</span>x <span class="sc">+</span> epsilon))</span>
+<span id="cb26-9"><a href="standard-statistics.html#cb26-9" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(weight<span class="sc">~</span>days), <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb26-10"><a href="standard-statistics.html#cb26-10" tabindex="-1"></a>}</span>
+<span id="cb26-11"><a href="standard-statistics.html#cb26-11" tabindex="-1"></a>{</span>
+<span id="cb26-12"><a href="standard-statistics.html#cb26-12" tabindex="-1"></a><span class="fu">hist</span>(variance)</span>
+<span id="cb26-13"><a href="standard-statistics.html#cb26-13" tabindex="-1"></a><span class="fu">rug</span>(variance, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb26-14"><a href="standard-statistics.html#cb26-14" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p>This simulation represents the type of data we might see when using precision livestock technology such as smartscales. We have randomly created a sequence of days ranging from day 1 to day 45, where the animal may visit between 1 to an <em>infinite</em> number of times. Note how if you copy and paste this code, that the number of visits per day, the length of bodyweights recorded, changes each time you run it. Yet, we are still able to fit the same linear regression model? This is perfectly acceptable.</p>
+<p>Next lets use base R functions to fit a linear regression model to the data. The software will identify the line of best fit by minimizing the prediction error of the residuals, the distance between each observed data point and the regression line, using a method called the <strong>least squares prediction method</strong>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="standard-statistics.html#cb27-1" tabindex="-1"></a>weight.lm <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>days) <span class="co"># Create linear regression model and assign it to object weight.lm</span></span>
+<span id="cb27-2"><a href="standard-statistics.html#cb27-2" tabindex="-1"></a>weight.lm</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Coefficients:
+## (Intercept)         days  
+##    297.9039       0.8194</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="standard-statistics.html#cb29-1" tabindex="-1"></a><span class="fu">summary</span>(weight.lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -23.397  -6.246  -0.173   7.296  20.956 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 297.90390    1.70490  174.73   &lt;2e-16 ***
+## days          0.81945    0.06761   12.12   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.678 on 98 degrees of freedom
+## Multiple R-squared:  0.5998, Adjusted R-squared:  0.5957 
+## F-statistic: 146.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="standard-statistics.html#cb31-1" tabindex="-1"></a><span class="fu">plot</span>(weight.lm)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-16-1.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-4.png" width="672" /></p>
+<p>Because the simulated data was constructed to satisfy all the assumptions of simple linear models, i.e. linearity, normality of the residuals etc, the resulting plots from the simple linear model are ideal. But what would they look like if we introduce non-normal variance to the residuals? Lets plot it and find out.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="standard-statistics.html#cb32-1" tabindex="-1"></a>fun1 <span class="ot">=</span> <span class="cf">function</span>(x,b0,b1,e){y <span class="ot">=</span> b0 <span class="sc">+</span> x<span class="sc">*</span>b1 <span class="sc">+</span> e}</span>
+<span id="cb32-2"><a href="standard-statistics.html#cb32-2" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min =</span> <span class="dv">0</span>,<span class="at">max =</span> <span class="dv">45</span>))</span>
+<span id="cb32-3"><a href="standard-statistics.html#cb32-3" tabindex="-1"></a><span class="fu">hist</span>(days)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="standard-statistics.html#cb33-1" tabindex="-1"></a>initialweight <span class="ot">=</span> <span class="dv">300</span> <span class="co"># Initial bodyweight</span></span>
+<span id="cb33-2"><a href="standard-statistics.html#cb33-2" tabindex="-1"></a>gain <span class="ot">=</span> <span class="fl">0.75</span> <span class="co"># Average Daily Gain, Kgs per day</span></span>
+<span id="cb33-3"><a href="standard-statistics.html#cb33-3" tabindex="-1"></a>variance <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">length</span>(days), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="co"># normal variance</span></span>
+<span id="cb33-4"><a href="standard-statistics.html#cb33-4" tabindex="-1"></a>variance <span class="ot">=</span> <span class="fu">exp</span>(variance) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(variance))  <span class="co"># apply a skewing scalar to the variance</span></span>
+<span id="cb33-5"><a href="standard-statistics.html#cb33-5" tabindex="-1"></a>variance <span class="ot">=</span> variance<span class="sc">/</span><span class="fu">sd</span>(variance) <span class="sc">*</span> <span class="dv">10</span> <span class="co"># Standardize and multiply to achieve desired SD</span></span>
+<span id="cb33-6"><a href="standard-statistics.html#cb33-6" tabindex="-1"></a>weight <span class="ot">=</span> <span class="fu">fun1</span>(<span class="at">x =</span> days,<span class="at">b0 =</span> initialweight, <span class="at">b1 =</span> gain, <span class="at">e =</span> variance) <span class="co"># Equation for what the animal weighs on each day through the trial</span></span>
+<span id="cb33-7"><a href="standard-statistics.html#cb33-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb33-8"><a href="standard-statistics.html#cb33-8" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="standard-statistics.html#cb33-9" tabindex="-1"></a>{</span>
+<span id="cb33-10"><a href="standard-statistics.html#cb33-10" tabindex="-1"></a><span class="fu">plot</span>(days,weight, <span class="at">main =</span> <span class="fu">expression</span>(y <span class="sc">==</span> beta[<span class="dv">0</span>] <span class="sc">+</span> beta[<span class="dv">1</span>]<span class="sc">*</span>x <span class="sc">+</span> epsilon))</span>
+<span id="cb33-11"><a href="standard-statistics.html#cb33-11" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(weight<span class="sc">~</span>days), <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb33-12"><a href="standard-statistics.html#cb33-12" tabindex="-1"></a><span class="fu">hist</span>(variance)</span>
+<span id="cb33-13"><a href="standard-statistics.html#cb33-13" tabindex="-1"></a><span class="fu">rug</span>(variance, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb33-14"><a href="standard-statistics.html#cb33-14" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="standard-statistics.html#cb34-1" tabindex="-1"></a>weight.lm <span class="ot">=</span> <span class="fu">lm</span>(weight<span class="sc">~</span>days) <span class="co"># Create linear regression model and assign it to object weight.lm</span></span>
+<span id="cb34-2"><a href="standard-statistics.html#cb34-2" tabindex="-1"></a>weight.lm</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Coefficients:
+## (Intercept)         days  
+##     300.136        0.744</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="standard-statistics.html#cb36-1" tabindex="-1"></a><span class="fu">summary</span>(weight.lm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -1.304 -1.226 -1.151 -1.088 98.307 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 300.13618    1.96989 152.362   &lt;2e-16 ***
+## days          0.74401    0.07457   9.977   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 10.05 on 98 degrees of freedom
+## Multiple R-squared:  0.5039, Adjusted R-squared:  0.4989 
+## F-statistic: 99.55 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="standard-statistics.html#cb38-1" tabindex="-1"></a><span class="fu">plot</span>(weight.lm)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-17-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-17-4.png" width="672" /></p>
+<p>Here I have used the exponential of the variation to create a residual structure artificaially skewed to the right. Note the changes in the QQ plots and the structure of the residuals.</p>
+<div id="example-simple-linear-model" class="section level4 unnumbered hasAnchor">
+<h4>Example Simple Linear Model<a href="standard-statistics.html#example-simple-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Finally, lets apply this to our toy datasets.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="standard-statistics.html#cb39-1" tabindex="-1"></a><span class="co"># Libraries ----</span></span>
+<span id="cb39-2"><a href="standard-statistics.html#cb39-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Graphing </span></span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
@@ -652,7 +806,7 @@ The other parameter, which I would remind you we are making using prior assumpti
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="standard-statistics.html#cb25-1" tabindex="-1"></a><span class="fu">library</span>(data.table) <span class="co"># Reading data and manipulating data</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="standard-statistics.html#cb41-1" tabindex="-1"></a><span class="fu">library</span>(data.table) <span class="co"># Reading data and manipulating data</span></span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;data.table&#39;
 ## 
@@ -668,188 +822,191 @@ The other parameter, which I would remind you we are making using prior assumpti
 ## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     transpose</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="standard-statistics.html#cb27-1" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># Reading excel</span></span>
-<span id="cb27-2"><a href="standard-statistics.html#cb27-2" tabindex="-1"></a><span class="fu">library</span>(qthink)</span>
-<span id="cb27-3"><a href="standard-statistics.html#cb27-3" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="standard-statistics.html#cb27-4" tabindex="-1"></a><span class="co"># Data</span></span>
-<span id="cb27-5"><a href="standard-statistics.html#cb27-5" tabindex="-1"></a>?bodyweight</span>
-<span id="cb27-6"><a href="standard-statistics.html#cb27-6" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;bodyweight&quot;</span>)</span>
-<span id="cb27-7"><a href="standard-statistics.html#cb27-7" tabindex="-1"></a><span class="fu">head</span>(bodyweight)</span></code></pre></div>
-<pre><code>##    Ref ID   VID          EID   Pen BW-42  BW-1   BW0   BW7  BW14  BW21  BW28
-##     &lt;num&gt; &lt;num&gt;        &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;
-## 1:      1   248 9.820004e+14     8   574   650   638   636   670   716   698
-## 2:      2   249 9.820004e+14     8   463   514   504   496   512   544   544
-## 3:      3   276 9.820004e+14     6   389   453   445   450   477   508   499
-## 4:      4   298 9.820004e+14     6   436   504   489   487   522   530   530
-## 5:      5   322 9.820004e+14     8   436   512   504   532   562   592   592
-## 6:      6   346 9.820004e+14     6   416   446   441   398   418   443   447
-##     BW35  BW42  BW49  BW56  BW70 Shipping Loss Creep_Gain Pre-Wean_ADG CreepTrt
-##    &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;         &lt;num&gt;      &lt;num&gt;        &lt;num&gt;   &lt;char&gt;
-## 1:   732   732   768   786   806           -12         76    1.8095238        A
-## 2:   564   576   600   608   670           -10         51    1.2142857        A
-## 3:   534   550   548   594   636            -8         64    1.5238095        B
-## 4:   566   590   578   624   650           -15         68    1.6190476        B
-## 5:   600   628   654   678   702            -8         76    1.8095238        A
-## 6:   464   480   468   518   560            -5         30    0.7142857        B
-##    WeanTrt
-##     &lt;char&gt;
-## 1:       A
-## 2:       A
-## 3:       A
-## 4:       A
-## 5:       A
-## 6:       A</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="standard-statistics.html#cb29-1" tabindex="-1"></a>d.bw <span class="ot">=</span> <span class="fu">melt.data.table</span>(<span class="at">data =</span> bodyweight, <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">16</span>), <span class="at">value.name =</span> <span class="st">&#39;BW&#39;</span>, <span class="at">variable.name =</span> <span class="st">&#39;name&#39;</span>)</span>
-<span id="cb29-2"><a href="standard-statistics.html#cb29-2" tabindex="-1"></a>d.bw<span class="sc">$</span>Day <span class="ot">=</span> <span class="fu">parse_number</span>(<span class="fu">as.character</span>(d.bw<span class="sc">$</span>name))</span>
-<span id="cb29-3"><a href="standard-statistics.html#cb29-3" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="standard-statistics.html#cb29-4" tabindex="-1"></a><span class="do">### Assign day</span></span>
-<span id="cb29-5"><a href="standard-statistics.html#cb29-5" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">seq</span>(<span class="fu">min</span>(d.bw<span class="sc">$</span>Day), <span class="fu">max</span>(d.bw<span class="sc">$</span>Day), <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb29-6"><a href="standard-statistics.html#cb29-6" tabindex="-1"></a>days <span class="ot">=</span> days[days <span class="sc">&gt;=</span> <span class="dv">0</span>]</span>
-<span id="cb29-7"><a href="standard-statistics.html#cb29-7" tabindex="-1"></a>days</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="standard-statistics.html#cb43-1" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># Reading excel</span></span>
+<span id="cb43-2"><a href="standard-statistics.html#cb43-2" tabindex="-1"></a><span class="fu">library</span>(qthink)</span>
+<span id="cb43-3"><a href="standard-statistics.html#cb43-3" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="standard-statistics.html#cb43-4" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb43-5"><a href="standard-statistics.html#cb43-5" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;bodyweight&quot;</span>)</span>
+<span id="cb43-6"><a href="standard-statistics.html#cb43-6" tabindex="-1"></a><span class="co"># head(bodyweight)</span></span>
+<span id="cb43-7"><a href="standard-statistics.html#cb43-7" tabindex="-1"></a>d.bw <span class="ot">=</span> <span class="fu">melt.data.table</span>(<span class="at">data =</span> bodyweight, <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">16</span>), <span class="at">value.name =</span> <span class="st">&#39;BW&#39;</span>, <span class="at">variable.name =</span> <span class="st">&#39;name&#39;</span>)</span>
+<span id="cb43-8"><a href="standard-statistics.html#cb43-8" tabindex="-1"></a>d.bw<span class="sc">$</span>Day <span class="ot">=</span> <span class="fu">parse_number</span>(<span class="fu">as.character</span>(d.bw<span class="sc">$</span>name))</span>
+<span id="cb43-9"><a href="standard-statistics.html#cb43-9" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="standard-statistics.html#cb43-10" tabindex="-1"></a><span class="co"># Data wrangling</span></span>
+<span id="cb43-11"><a href="standard-statistics.html#cb43-11" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="standard-statistics.html#cb43-12" tabindex="-1"></a>days <span class="ot">=</span> <span class="fu">seq</span>(<span class="fu">min</span>(d.bw<span class="sc">$</span>Day), <span class="fu">max</span>(d.bw<span class="sc">$</span>Day), <span class="at">by =</span> <span class="dv">1</span>)<span class="do">### Assign day </span></span>
+<span id="cb43-13"><a href="standard-statistics.html#cb43-13" tabindex="-1"></a>days <span class="ot">=</span> days[days <span class="sc">&gt;=</span> <span class="dv">0</span>]</span>
+<span id="cb43-14"><a href="standard-statistics.html#cb43-14" tabindex="-1"></a>days</span></code></pre></div>
 <pre><code>##  [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 ## [26] 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49
 ## [51] 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="standard-statistics.html#cb31-1" tabindex="-1"></a>d.days <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">Day =</span> days)</span>
-<span id="cb31-2"><a href="standard-statistics.html#cb31-2" tabindex="-1"></a>VIDs <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">VID =</span> <span class="fu">unique</span>(d.bw<span class="sc">$</span>VID))</span>
-<span id="cb31-3"><a href="standard-statistics.html#cb31-3" tabindex="-1"></a>d.daysvid <span class="ot">=</span> <span class="fu">merge</span>(days, VIDs, <span class="at">by =</span> <span class="cn">NULL</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-4"><a href="standard-statistics.html#cb31-4" tabindex="-1"></a>  as.data.table</span>
-<span id="cb31-5"><a href="standard-statistics.html#cb31-5" tabindex="-1"></a><span class="fu">names</span>(d.daysvid) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Day&#39;</span>,<span class="st">&#39;VID&#39;</span>)</span>
-<span id="cb31-6"><a href="standard-statistics.html#cb31-6" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="standard-statistics.html#cb31-7" tabindex="-1"></a><span class="fu">names</span>(d.days)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="standard-statistics.html#cb45-1" tabindex="-1"></a>d.days <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">Day =</span> days)</span>
+<span id="cb45-2"><a href="standard-statistics.html#cb45-2" tabindex="-1"></a>VIDs <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">VID =</span> <span class="fu">unique</span>(d.bw<span class="sc">$</span>VID)) <span class="co"># Get list of unique animals</span></span>
+<span id="cb45-3"><a href="standard-statistics.html#cb45-3" tabindex="-1"></a>d.daysvid <span class="ot">=</span> <span class="fu">merge</span>(days, VIDs, <span class="at">by =</span> <span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co"># Create a table with one animal per day observation</span></span>
+<span id="cb45-4"><a href="standard-statistics.html#cb45-4" tabindex="-1"></a>  as.data.table</span>
+<span id="cb45-5"><a href="standard-statistics.html#cb45-5" tabindex="-1"></a><span class="fu">names</span>(d.daysvid) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Day&#39;</span>,<span class="st">&#39;VID&#39;</span>) <span class="co"># Assign names to the table</span></span>
+<span id="cb45-6"><a href="standard-statistics.html#cb45-6" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="standard-statistics.html#cb45-7" tabindex="-1"></a><span class="fu">names</span>(d.days)</span></code></pre></div>
 <pre><code>## [1] &quot;Day&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="standard-statistics.html#cb33-1" tabindex="-1"></a>d.bw2 <span class="ot">=</span> <span class="fu">merge.data.table</span>(d.daysvid, d.bw, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;VID&#39;</span>,<span class="st">&#39;Day&#39;</span>), <span class="at">all =</span> T)</span></code></pre></div>
-</div>
-<div id="anovas" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Anovas<a href="standard-statistics.html#anovas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="standard-statistics.html#cb34-1" tabindex="-1"></a>heifer</span></code></pre></div>
-<pre><code>## # A tibble: 77 × 21
-##      VID   Pen CreepTrt WeanTrt D_42_BW Creep_Gain Shipping_Loss Day56_InitialBW
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
-##  1   248     8 A        A          261.       34.5         -5.44            287.
-##  2   249     8 A        A          210.       23.1         -4.54            223.
-##  3   276     6 B        A          177.       29.0         -3.63            200.
-##  4   298     6 B        A          198.       30.8         -6.80            218.
-##  5   322     8 A        A          198.       34.5         -3.63            233.
-##  6   346     6 B        A          189.       13.6         -2.27            185.
-##  7   364     5 A        B          191.       40.8        -14.1             217.
-##  8   367     7 B        B          160        17.2         -8.16            164.
-##  9   453     6 B        A          195        35.8        -12.2             218.
-## 10   472     5 A        B          183.       37.6         -4.99            211.
-## # ℹ 67 more rows
-## # ℹ 13 more variables: Day56_ADG &lt;dbl&gt;, Day56_MMBW &lt;dbl&gt;, Day56_DMI &lt;dbl&gt;,
-## #   Day56_Residual &lt;dbl&gt;, D_1_EV &lt;dbl&gt;, AVE_TTB &lt;dbl&gt;, BVFREQ &lt;dbl&gt;,
-## #   BVDUR &lt;dbl&gt;, BVFREQsd &lt;dbl&gt;, BVDURsd &lt;dbl&gt;, uDMI &lt;dbl&gt;, sdDMI &lt;dbl&gt;,
-## #   cvDMI &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="standard-statistics.html#cb36-1" tabindex="-1"></a>m.anova <span class="ot">=</span> <span class="fu">lm</span>(Day56_ADG <span class="sc">~</span> CreepTrt<span class="sc">*</span>WeanTrt, <span class="at">data =</span> heifer)</span>
-<span id="cb36-2"><a href="standard-statistics.html#cb36-2" tabindex="-1"></a><span class="fu">summary</span>(m.anova)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="standard-statistics.html#cb47-1" tabindex="-1"></a>d.bw2 <span class="ot">=</span> <span class="fu">merge.data.table</span>(d.daysvid, d.bw, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;VID&#39;</span>,<span class="st">&#39;Day&#39;</span>), <span class="at">all =</span> T) <span class="co"># merge bodyweight with our days vid table.</span></span>
+<span id="cb47-2"><a href="standard-statistics.html#cb47-2" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="standard-statistics.html#cb47-3" tabindex="-1"></a><span class="co"># Run Linear Regression model</span></span>
+<span id="cb47-4"><a href="standard-statistics.html#cb47-4" tabindex="-1"></a>lm.bw <span class="ot">=</span> <span class="fu">lm</span>(BW <span class="sc">~</span> Day, <span class="at">data =</span> d.bw2)</span>
+<span id="cb47-5"><a href="standard-statistics.html#cb47-5" tabindex="-1"></a><span class="fu">summary</span>(lm.bw)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = Day56_ADG ~ CreepTrt * WeanTrt, data = heifer)
+## lm(formula = BW ~ Day, data = d.bw2)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.78650 -0.10719 -0.00284  0.18654  0.44387 
+## -179.964  -34.337    0.374   36.372  216.971 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)         0.94891    0.05939  15.977   &lt;2e-16 ***
-## CreepTrtB          -0.01040    0.08294  -0.125    0.901    
-## WeanTrtB            0.05038    0.08515   0.592    0.556    
-## CreepTrtB:WeanTrtB -0.14515    0.11812  -1.229    0.223    
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 477.28860    2.43741  195.82   &lt;2e-16 ***
+## Day           1.63822    0.06541   25.04   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.2589 on 73 degrees of freedom
-## Multiple R-squared:  0.0474, Adjusted R-squared:  0.008249 
-## F-statistic: 1.211 on 3 and 73 DF,  p-value: 0.312</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="standard-statistics.html#cb38-1" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code></pre></div>
-<pre><code>## Welcome to emmeans.
-## Caution: You lose important information if you filter this package&#39;s results.
-## See &#39;? untidy&#39;</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="standard-statistics.html#cb40-1" tabindex="-1"></a><span class="fu">emmeans</span>(m.anova, <span class="at">specs =</span> <span class="st">&#39;CreepTrt&#39;</span>,<span class="st">&#39;WeanTrt&#39;</span>)</span></code></pre></div>
-<pre><code>## WeanTrt = A:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.949 0.0594 73    0.831    1.067
-##  B         0.939 0.0579 73    0.823    1.054
-## 
-## WeanTrt = B:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.999 0.0610 73    0.878    1.121
-##  B         0.844 0.0579 73    0.728    0.959
-## 
-## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="standard-statistics.html#cb42-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
-<pre><code>## Loading required package: Matrix</code></pre>
+## Residual standard error: 58.27 on 934 degrees of freedom
+##   (4758 observations deleted due to missingness)
+## Multiple R-squared:  0.4017, Adjusted R-squared:  0.4011 
+## F-statistic: 627.2 on 1 and 934 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div id="simple-anovas" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Simple Anovas<a href="standard-statistics.html#simple-anovas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>At their core, Analysis of Variance Analysises are linear models which use categorical independent variables. Some books teach ANOVAs separately from linear models, preferring instead to refer to them as “describing differences amongst populations” <span class="citation">(<a href="#ref-ottStatisticalMethodsData2016">Ott and Longnecker 2016</a>)</span>. However, I do not find this method useful as ANOVAs are ran automatically when the lm function is called with categorical independent variables. Thus, I am going to include them here in the discussion on linear models, with the understanding that the math does change somewhat. This also allows me the opportunity to demonstrate that it is sometimes possible to run independent variables as either categorical or continuous, and doing so can be a product component of the exploratory data process.</p>
+<p>Here I simulate a series of datum demonstrative of data which may be analyzed using an ANOVA.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="standard-statistics.html#cb49-1" tabindex="-1"></a><span class="co"># Create a data table with multiple variables</span></span>
+<span id="cb49-2"><a href="standard-statistics.html#cb49-2" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">data.table</span>(<span class="at">t1 =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">150</span>, <span class="at">sd =</span> <span class="dv">50</span>),</span>
+<span id="cb49-3"><a href="standard-statistics.html#cb49-3" tabindex="-1"></a>               <span class="at">t2 =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">30</span>),</span>
+<span id="cb49-4"><a href="standard-statistics.html#cb49-4" tabindex="-1"></a>               <span class="at">t3 =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">250</span>, <span class="at">sd =</span> <span class="dv">75</span>))</span>
+<span id="cb49-5"><a href="standard-statistics.html#cb49-5" tabindex="-1"></a>d2 <span class="ot">=</span> <span class="fu">melt.data.table</span>(<span class="at">data =</span> d, <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)) <span class="co"># Melt the data into long format</span></span>
+<span id="cb49-6"><a href="standard-statistics.html#cb49-6" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="standard-statistics.html#cb49-7" tabindex="-1"></a>d2 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-8"><a href="standard-statistics.html#cb49-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> variable, <span class="at">y =</span> value, <span class="at">fill =</span> variable))<span class="sc">+</span></span>
+<span id="cb49-9"><a href="standard-statistics.html#cb49-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="standard-statistics.html#cb50-1" tabindex="-1"></a>aov.mod <span class="ot">=</span> <span class="fu">aov</span>(value <span class="sc">~</span> variable, <span class="at">data =</span> d2)</span>
+<span id="cb50-2"><a href="standard-statistics.html#cb50-2" tabindex="-1"></a><span class="fu">summary</span>(aov.mod)</span></code></pre></div>
+<pre><code>##              Df  Sum Sq Mean Sq F value Pr(&gt;F)    
+## variable      2  443650  221825   63.98 &lt;2e-16 ***
+## Residuals   297 1029792    3467                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="standard-statistics.html#cb52-1" tabindex="-1"></a><span class="fu">coef</span>(aov.mod)</span></code></pre></div>
+<pre><code>## (Intercept)  variablet2  variablet3 
+##   151.81016    48.28339    94.18654</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="standard-statistics.html#cb54-1" tabindex="-1"></a><span class="fu">plot</span>(aov.mod)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-18-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-4.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-5.png" width="672" /></p>
+<p>Just to prove my point, look at the values collected from the ANOVA analysis ran above, and compare to the lm model ran below.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="standard-statistics.html#cb55-1" tabindex="-1"></a>lm.mod <span class="ot">=</span> <span class="fu">lm</span>(value <span class="sc">~</span> variable, <span class="at">data =</span> d2)</span>
+<span id="cb55-2"><a href="standard-statistics.html#cb55-2" tabindex="-1"></a><span class="fu">summary</span>(lm.mod)</span></code></pre></div>
 <pre><code>## 
-## Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## Call:
+## lm(formula = value ~ variable, data = d2)
 ## 
-##     expand, pack, unpack</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="standard-statistics.html#cb46-1" tabindex="-1"></a>m.lmer <span class="ot">=</span> <span class="fu">lmer</span>(Day56_ADG <span class="sc">~</span> CreepTrt<span class="sc">*</span>WeanTrt <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Pen), <span class="at">data =</span> heifer)</span></code></pre></div>
-<pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
-## unable to evaluate scaled gradient</code></pre>
-<pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
-## Model failed to converge: degenerate Hessian with 1 negative eigenvalues</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="standard-statistics.html#cb49-1" tabindex="-1"></a><span class="fu">summary</span>(m.lmer)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: Day56_ADG ~ CreepTrt * WeanTrt + (1 | Pen)
-##    Data: heifer
-## 
-## REML criterion at convergence: 21.7
-## 
-## Scaled residuals: 
+## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -3.03800 -0.41404 -0.01098  0.72053  1.71454 
+## -220.768  -31.893    3.146   36.768  172.895 
 ## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  Pen      (Intercept) 0.003385 0.05818 
-##  Residual             0.067022 0.25889 
-## Number of obs: 77, groups:  Pen, 4
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  151.810      5.888  25.781  &lt; 2e-16 ***
+## variablet2    48.283      8.327   5.798 1.71e-08 ***
+## variablet3    94.187      8.327  11.310  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Fixed effects:
-##                    Estimate Std. Error t value
-## (Intercept)         0.94891    0.08314  11.413
-## CreepTrtB          -0.01040    0.11683  -0.089
-## WeanTrtB            0.05038    0.11841   0.425
-## CreepTrtB:WeanTrtB -0.14515    0.16581  -0.875
+## Residual standard error: 58.88 on 297 degrees of freedom
+## Multiple R-squared:  0.3011, Adjusted R-squared:  0.2964 
+## F-statistic: 63.98 on 2 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="standard-statistics.html#cb57-1" tabindex="-1"></a><span class="fu">anova</span>(lm.mod)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
 ## 
-## Correlation of Fixed Effects:
-##             (Intr) CrpTrB WnTrtB
-## CreepTrtB   -0.712              
-## WeanTrtB    -0.702  0.500       
-## CrpTrtB:WTB  0.501 -0.705 -0.714
-## optimizer (nloptwrap) convergence code: 0 (OK)
-## unable to evaluate scaled gradient
-## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="standard-statistics.html#cb51-1" tabindex="-1"></a><span class="fu">emmeans</span>(m.lmer, <span class="at">specs =</span> <span class="st">&#39;CreepTrt&#39;</span>, <span class="st">&#39;WeanTrt&#39;</span>)</span></code></pre></div>
-<pre><code>## Warning in .qf.non0(object@V, x): Negative variance estimate obtained!</code></pre>
-<pre><code>## Warning in .qf.non0(object@V, x): Negative variance estimate obtained!</code></pre>
-<pre><code>## WeanTrt = A:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.949 0.1430  0     -Inf      Inf
-##  B         0.939    NaN  0      NaN      NaN
-## 
-## WeanTrt = B:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.999    NaN  0      NaN      NaN
-##  B         0.844 0.0931  0     -Inf      Inf
-## 
-## Degrees-of-freedom method: kenward-roger 
-## Confidence level used: 0.95</code></pre>
+## Response: value
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## variable    2  443650  221825  63.976 &lt; 2.2e-16 ***
+## Residuals 297 1029792    3467                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<ul>
+<li>What do you notice about the results from the outputs of both methods?</li>
+<li>How do the central population estimates compare to the estimates we simulated in our datasets?</li>
+<li>What can we conclude about the differences in our population level (categorical or treatment) means?</li>
+</ul>
+<p>The most important statistic in an ANOVA table is the **F Statistic<em>. The F statistic informs us if the </em>within sample* variation is greater than the <em>between sample</em> variation. if the variability among the sample means is large compared to the <em>within sample</em> means, we are more apt to conclude that there is a difference. Alternatively, if the <em>between sample</em> variation is small compared to the <em>within sample</em> varation, we are less likely to conclude that there is a difference.</p>
+<p>Use the code above to create an example with and without a significant F value.</p>
+<div id="example-anova" class="section level4 unnumbered hasAnchor">
+<h4>Example ANOVA<a href="standard-statistics.html#example-anova" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Lets use the above body-weight data to demonstrate how we might use an ANOVA to analys the same data in a categorical format that we just analysed in a linear model format by changing the type of data in the “day” column to characher.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="standard-statistics.html#cb59-1" tabindex="-1"></a>d.bw<span class="sc">$</span>Day <span class="ot">=</span> <span class="fu">as.character</span>(d.bw<span class="sc">$</span>Day)</span>
+<span id="cb59-2"><a href="standard-statistics.html#cb59-2" tabindex="-1"></a>d.bw <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="standard-statistics.html#cb59-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Day, <span class="at">y =</span> BW, <span class="at">fill =</span> Day))<span class="sc">+</span></span>
+<span id="cb59-4"><a href="standard-statistics.html#cb59-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="standard-statistics.html#cb60-1" tabindex="-1"></a>aov.bw <span class="ot">=</span> <span class="fu">aov</span>(BW <span class="sc">~</span> Day, <span class="at">data =</span> d.bw)</span>
+<span id="cb60-2"><a href="standard-statistics.html#cb60-2" tabindex="-1"></a><span class="fu">summary</span>(aov.bw)</span></code></pre></div>
+<pre><code>##              Df  Sum Sq Mean Sq F value Pr(&gt;F)    
+## Day          11 2344205  213110   66.59 &lt;2e-16 ***
+## Residuals   924 2957213    3200                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="standard-statistics.html#cb62-1" tabindex="-1"></a><span class="fu">coef</span>(aov.bw)</span></code></pre></div>
+<pre><code>## (Intercept)      Day-42        Day0       Day14       Day21       Day28 
+##   495.57692   -66.26923   -20.28205   -16.67949    12.01282    11.65385 
+##       Day35       Day42       Day49       Day56        Day7       Day70 
+##    36.87179    46.88462    61.73077    83.78205   -30.70513   118.60256</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="standard-statistics.html#cb64-1" tabindex="-1"></a><span class="fu">plot</span>(aov.bw)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-20-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-4.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-5.png" width="672" /></p>
+<p>How do these results look compared to the results from the linear model? How are they similar? How are they different? What assumption is being made about the independent variable here that is not being accounted for that is be accounted for in the linear regression model above using time as a continuous value?</p>
 </div>
-<div id="general-linear-models" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> General Linear Models<a href="standard-statistics.html#general-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="example-one" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Example one<a href="standard-statistics.html#example-one" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="example-two" class="section level2 hasAnchor" number="3.8">
-<h2><span class="header-section-number">3.8</span> Example two<a href="standard-statistics.html#example-two" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="demonstrating-equivalence" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Demonstrating Equivalence<a href="standard-statistics.html#demonstrating-equivalence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I do have some concerns with the message that is conveyed by the title and approach taken in the statistical methods. Specifically, remember the definition of a p-value is “the probability of obtaining a value of the test statistic that is as likely or more likely to reject the null hypothesis (H0) as the actual observed value of the test statistic, assuming the null hypothesis is true.” The null hypothesis tested by a general linear mixed effects model for your study is generally “Newly weaned calves limit fed a high concentrate diet perform does not alter growth, performance, and efficiency compared to calves fed an ad libitum forage based diet”, with H0: ALF = LFC and HA: ALF ≠ LFC. A high p-value in this instance indicates a failure to reject the null hypothesis. No matter how large the p-value may be, it does not provide support for the null hypothesis. Failure to reject the null hypothesis means one must now become concerned with the power, or n, of the study, and then move forward to show sufficient effort was made to demonstrate equivalence, or conversely find differences, between treatments. This is typically illustrated by determining an acceptable delta, (difference between treatment) and then conducting a power analysis to show how many animals would be required to obtain a significant p-value at that acceptable delta given the variation in the system.</p>
+<p>If this is unnecessarily restrictive or feels difficult to communicate, more studies are moving towards a more Bayesian type of approach, which allows you to specify the prior distribution of the effect size (informed by what is biologically or economically relevant) and then calculate the likelihood of observing no meaningful effect.</p>
 </div>
-<div id="liklihood-vs.-probability" class="section level2 hasAnchor" number="3.9">
-<h2><span class="header-section-number">3.9</span> Liklihood vs. Probability<a href="standard-statistics.html#liklihood-vs.-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="liklihood-vs.-probability" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Liklihood vs. Probability<a href="standard-statistics.html#liklihood-vs.-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>(inspired by the following <a href="https://medium.com/@wl8380/probability-vs-likelihood-the-most-misunderstood-duo-in-data-science-759fc4dcb730">medium article</a>)</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div class="csl-entry">
+Fisher, R. A. 1932. <span>“Inverse Probability and the Use of <span>Likelihood</span>.”</span> <em>Mathematical Proceedings of the Cambridge Philosophical Society</em> 28 (3): 257–61. <a href="https://doi.org/10.1017/S0305004100010094">https://doi.org/10.1017/S0305004100010094</a>.
+</div>
+<div class="csl-entry">
+———. 1960. <em>The Design of Experiments</em>. 6th ed. London; Edinburgh: Oliver; Boyd.
+</div>
+<div class="csl-entry">
+Hagen, Richard L. n.d. <span>“In <span>Praise</span> of the <span>Null</span> <span>Hypothesis</span> <span>Statistical</span> <span>Test</span>.”</span>
+</div>
+<div class="csl-entry">
+Ioannidis, John P. A. 2005. <span>“Why <span>Most</span> <span>Published</span> <span>Research</span> <span>Findings</span> <span>Are</span> <span>False</span>.”</span> <em>PLoS Medicine</em> 2 (8): e124. <a href="https://doi.org/10.1371/journal.pmed.0020124">https://doi.org/10.1371/journal.pmed.0020124</a>.
+</div>
+<div class="csl-entry">
+Mayo, Deborah G. 2018. <em>Statistical <span>Inference</span> as <span>Severe</span> <span>Testing</span>: <span>How</span> to Get Beyond the <span>Statistics</span> <span>Wars</span></em>. New York: Cambridge University Press.
+</div>
+<div class="csl-entry">
+Ott, R. Lymann, and Michael Longnecker. 2016. <em>Statistical <span>Methods</span> and <span>Data</span> <span>Analysis</span></em>. 2nd ed. Boston, MA: Cengage Learning.
+</div>
+<div class="csl-entry">
+Perezgonzalez, Jose D. 2015. <span>“Fisher, <span>Neyman</span>-<span>Pearson</span> or <span>NHST</span>? <span>A</span> Tutorial for Teaching Data Testing.”</span> <em>Frontiers in Psychology</em> 6 (March). <a href="https://doi.org/10.3389/fpsyg.2015.00223">https://doi.org/10.3389/fpsyg.2015.00223</a>.
+</div>
+<div class="csl-entry">
+Sedgwick, Philip M. n.d. <span>“Trials and <span>Tribulations</span> of <span>Teaching</span> <span>NHST</span> in the <span>Health</span> <span>Sciences</span>.”</span>
+</div>
+<div class="csl-entry">
+Stephens, Philip A., Steven W. Buskirk, and Carlos Martínez Del Rio. 2007. <span>“Inference in Ecology and Evolution.”</span> <em>Trends in Ecology &amp; Evolution</em> 22 (4): 192–97. <a href="https://doi.org/10.1016/j.tree.2006.12.003">https://doi.org/10.1016/j.tree.2006.12.003</a>.
+</div>
+<div class="csl-entry">
+Wasserstein, Ronald L., and Nicole A. Lazar. 2016. <span>“The <span>ASA</span> <span>Statement</span> on <em>p</em> -<span>Values</span>: <span>Context</span>, <span>Process</span>, and <span>Purpose</span>.”</span> <em>The American Statistician</em> 70 (2): 129–33. <a href="https://doi.org/10.1080/00031305.2016.1154108">https://doi.org/10.1080/00031305.2016.1154108</a>.
+</div>
+<div class="csl-entry">
+Wu, Jinshan. 2018. <span>“Is There an Intrinsic Logical Error in Null Hypothesis Significance Tests? <span>Commentary</span> on: <span>‘<span>Null</span> Hypothesis Significance Tests. <span>A</span> Mix-up of Two Different Theories: The Basis for Widespread Confusion and Numerous Misinterpretations’</span>.”</span> <em>Scientometrics</em> 115 (1): 621–25. <a href="https://doi.org/10.1007/s11192-018-2656-3">https://doi.org/10.1007/s11192-018-2656-3</a>.
+</div>
+</div>
 </div>
 </div>
 <h3>References</h3>
@@ -893,8 +1050,8 @@ Wu, Jinshan. 2018. <span>“Is There an Intrinsic Logical Error in Null Hypothes
           </div>
         </div>
       </div>
-<a href="applying-the-scientific-method.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="demonstrating-equivalence.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="applying-the-scientific-method.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

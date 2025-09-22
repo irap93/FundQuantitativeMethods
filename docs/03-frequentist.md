@@ -354,78 +354,7 @@ f(0)
 
 <img src="03-frequentist_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
-
-#### Sample size {-}
-
-This begs the question, how many samples are necessary to make inference of a populations central value? Here lies one of the first critiques of NHST, as we must assume that the overall greater population follows some known distribution, in this case, a normal distribution, and that we are sampling from that population. However, the greater population is actually unknowable outside of simply measuring the entire population. Samples are expensive, so at some point we have to simply accept that we have sampled *enough*, which is to say done our due diligence to collect an adequate representation of the greater population so we can make inference from it. Below we can show mathematically how many samples are required. The goal of sampling is to create a credible interval which has a given chance of containing $u$, or the population mean. This reasonable level of certainty is typically set at 90-95% due to tradition. However, this runs two risks. 1) 95% levels of confidence means you run a 1 in 20 chance of not capturing the population mean. Equate this to having a 20 round magazine clip loaded into a gun that you are taking on a camping trip to the Little Bighorns in Wyoming for protection against Grizzly bears, in which 1 of the 20 bullets is a blank. Is this a risk you ar willing to take? The second risk is the inverse of the first, which is that this may be an unreasonble and arbritarily high level of confidence that would reduce the percieved validity of aquired data, particularly if the data is novel, but funds or circumstances meant obtaining enough samples to obtain this level of confidence was not possible, and thus the research was not conducted or the findings not reported.
-
-The formula is as follows:  
-$n = (z_σ/2)^2^ σ^2^ / E^2^$
-
-and in code for the heifer bodyweight on day 0
-Because the heifers range from 376.5125186, 582.4143309, the typical assumption to approximate the population $σ$ is to take 51.4754531, and we might arbritrarily choose our accuracy to be 25 lbs.
-
-``` r
-x = bodyweight$BW0
-sigma = diff(range(x))/4
-E = 25
-n = (1.96^2 * sigma^2)/E^2
-n
-```
-
-```
-## [1] 28.8412
-```
-
-So, from this we can interpret that in order to quantify the central limit ($u$), of the population of heifers within 25 lbs with 95% confidence, we need 28 heifers. Now note how this changes as we tighten our accuracy levels.
-
-
-``` r
-E = seq(50,1,-1)
-sigma = diff(range(x))/4
-n = c()
-for (i in E) {
- n[i] = (1.96^2 * sigma^2)/E[i]^2
-}
-
-{
-  par(mfrow = c(1,2))
-  plot(E,n, type = 'n')
-  points(E,n)
-  lines(E,n, col = 'blue', lwd = 2)
-  
-  plot(E,n, xlim = c(5,length(E)), ylim = c(0,500))
-  lines(E,n, col = 'blue')
-}
-```
-
-<img src="03-frequentist_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-
-So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take. 
-The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?
-
-
-``` r
-E = 25 # accuracy level
-sigma = seq(1,100,1)
-n = c()
-for (i in 1:length(sigma)) {
- n[i] = (1.96^2 * sigma[i]^2)/E^2
-}
-
-{
-  plot(sigma,n, type = 'n')
-  points(sigma,n)
-  lines(sigma,n, col = 'blue', lwd = 2)
-}
-```
-
-<img src="03-frequentist_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-
-So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.
-
-
-### Two population inference  
+#### Two population inference  
 
 A statistical test is based upon the concept of the following five parts [@ottStatisticalMethodsData2016]:
 
@@ -482,15 +411,310 @@ lines(xa.den, col = 'red')
 }
 ```
 
-<img src="03-frequentist_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="03-frequentist_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ``` r
 # Add a vertical line at the 95th percentile
 # abline(v = q95, col = "red", lty = 2)
 ```
 
+#### Sample size {-}
 
-## Linear Models
+This begs the question, how many samples are necessary to make inference of a populations central value? Here lies one of the first critiques of NHST, as we must assume that the overall greater population follows some known distribution, in this case, a normal distribution, and that we are sampling from that population. However, the greater population is actually unknowable outside of simply measuring the entire population. Samples are expensive, so at some point we have to simply accept that we have sampled *enough*, which is to say done our due diligence to collect an adequate representation of the greater population so we can make inference from it. Below we can show mathematically how many samples are required. The goal of sampling is to create a credible interval which has a given chance of containing $u$, or the population mean. This reasonable level of certainty is typically set at 90-95% due to tradition. However, this runs two risks. 1) 95% levels of confidence means you run a 1 in 20 chance of not capturing the population mean. Equate this to having a 20 round magazine clip loaded into a gun that you are taking on a camping trip to the Little Bighorns in Wyoming for protection against Grizzly bears, in which 1 of the 20 bullets is a blank. Is this a risk you ar willing to take? The second risk is the inverse of the first, which is that this may be an unreasonble and arbritarily high level of confidence that would reduce the percieved validity of aquired data, particularly if the data is novel, but funds or circumstances meant obtaining enough samples to obtain this level of confidence was not possible, and thus the research was not conducted or the findings not reported.
+
+The formula is as follows:  
+$n = (z_σ/2)^2^ σ^2^ / E^2^$
+
+and in code for the heifer bodyweight on day 0
+Because the heifers range from 376.5125186, 582.4143309, the typical assumption to approximate the population $σ$ is to take 51.4754531, and we might arbritrarily choose our accuracy to be 25 lbs.
+
+``` r
+x = bodyweight$BW0
+sigma = diff(range(x))/4
+E = 25
+n = (1.96^2 * sigma^2)/E^2
+n
+```
+
+```
+## [1] 28.8412
+```
+
+So, from this we can interpret that in order to quantify the central limit ($u$), of the population of heifers within 25 lbs with 95% confidence, we need 28 heifers. Now note how this changes as we tighten our accuracy levels.
+
+
+``` r
+E = seq(50,1,-1)
+sigma = diff(range(x))/4
+n = c()
+for (i in E) {
+ n[i] = (1.96^2 * sigma^2)/E[i]^2
+}
+
+{
+  par(mfrow = c(1,2))
+  plot(E,n, type = 'n')
+  points(E,n)
+  lines(E,n, col = 'blue', lwd = 2)
+  
+  plot(E,n, xlim = c(5,length(E)), ylim = c(0,500))
+  lines(E,n, col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
+So we see that the desired level of accuracy of our measurement is directly related to the number of samples we have to take. 
+The other parameter, which I would remind you we are making using prior assumptions, is the natural variation which exists in the greater population. How does that vary our sample size at a given level of accuracy?
+
+
+``` r
+E = 25 # accuracy level
+sigma = seq(1,100,1)
+n = c()
+for (i in 1:length(sigma)) {
+ n[i] = (1.96^2 * sigma[i]^2)/E^2
+}
+
+{
+  plot(sigma,n, type = 'n')
+  points(sigma,n)
+  lines(sigma,n, col = 'blue', lwd = 2)
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+So here we see that holding accuracy constant and varying the theorized population variance, we dramatically impact the required number of samples we have to take.
+
+## Linear Models  
+
+Next we embark into linear models, our first cause and effect models. These are extremely powerful statistical tools that are frequently used in science, as they provide information regarding the functional relationship between the response (dependent) and explanatory (independent variables) [@ottStatisticalMethodsData2016]. 
+
+Regression models have a number of applications:
+
+1. Provides a major description of features within the dataset.
+2. Provides estimates of the response of values not tested that are intermediary to values tested
+3. Provides a mathematical tool to predict the future
+4. Shows relationship between cheap to measure variables and expensive to measure variables
+
+### Prediction vs. explanation  
+
+It is important to note the difference between explaining the difference between **Prediction** vs. **Explanation**. Prediction makes reference to predicting future values, while explanation focuses on understanding relationships within the current dataset. While the architecture of the models are identical, the thought and process of building them is different. Building explanatory models is easier, as the model is built with the same data it is designed to predict. Prediction is by nature more difficult.
+
+**It is important to note that the term "prediction" is used in both instances.**
+
+### Simple Linear Models
+
+A simple causal linear model takes the form of $y = \beta_0 + \beta_1x_1$, where $y$ represents the dependent variable, $\beta_0$ is the y intercept of the value of y when x = 0, and $\beta_1$ is the slope of the line. 
+
+The **assumption of linearity** means that we assume the *slope of the line doesn't change as x changes*.
+
+This is demonstrated below.
+
+
+``` r
+{
+fun1 = function(x,b0,b1){y = b0 + x*b1}
+
+days = seq(1,45,1) # Days in a feeding trial
+initialweight = 300 # Initial bodyweight
+gain = 0.75 # Average Daily Gain, Kgs per day
+weight = fun1(days, b0 = initialweight, b1 = gain) # Equation for what the animal weighs on each day through the trial
+plot(days,weight, ylim = c(275,375), main = expression(y == beta[0] + beta[1]*x))
+abline(lm(weight~days), col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+However, this leaves no room for variation, or stoichasticity, in the relationship. And as we will recall from class, one of the *Fundamental principles of statistics is to handle variation* in data and causal relationship models. Below is an example of a projected linear growth in BW model with simulated normal varation added into the relationship.
+
+
+``` r
+fun1 = function(x,b0,b1,e){y = b0 + x*b1 + e}
+
+days = seq(1,45,1) # Days in a feeding trial
+initialweight = 300 # Initial bodyweight
+gain = 0.75 # Average Daily Gain, Kgs per day
+variance = rnorm(n = length(days), mean = 0, sd = 10)
+weight = fun1(x = days,b0 = initialweight, b1 = gain, e = variance) # Equation for what the animal weighs on each day through the trial
+par(mfrow = c(1,2))
+
+{
+plot(days,weight, ylim = c(275,375), main = expression(y == beta[0] + beta[1]*x + epsilon))
+abline(lm(weight~days), col = 'blue')
+}
+{
+hist(variance)
+rug(variance, col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+The above data is an example of relationships with regularly spaced data collected on the x interval. However, this is not always necessary. Consider the same simulated growth plot below, where the only difference is adding another opportunity for variation along the x axis. 
+
+
+``` r
+fun1 = function(x,b0,b1,e){y = b0 + x*b1 + e}
+days = round(runif(100, min = 0,max = 45))
+hist(days)
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+``` r
+initialweight = 300 # Initial bodyweight
+gain = 0.75 # Average Daily Gain, Kgs per day
+variance = rnorm(n = length(days), mean = 0, sd = 10)
+weight = fun1(x = days,b0 = initialweight, b1 = gain, e = variance) # Equation for what the animal weighs on each day through the trial
+par(mfrow = c(1,2))
+
+{
+plot(days,weight, ylim = c(275,375), main = expression(y == beta[0] + beta[1]*x + epsilon))
+abline(lm(weight~days), col = 'blue')
+}
+{
+hist(variance)
+rug(variance, col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+
+This simulation represents the type of data we might see when using precision livestock technology such as smartscales. We have randomly created a sequence of days ranging from day 1 to day 45, where the animal may visit between 1 to an *infinite* number of times. Note how if you copy and paste this code, that the number of visits per day, the length of bodyweights recorded, changes each time you run it. Yet, we are still able to fit the same linear regression model? This is perfectly acceptable.
+
+Next lets use base R functions to fit a linear regression model to the data. The software will identify the line of best fit by minimizing the prediction error of the residuals, the distance between each observed data point and the regression line, using a method called the **least squares prediction method**.
+
+
+``` r
+weight.lm = lm(weight~days) # Create linear regression model and assign it to object weight.lm
+weight.lm
+```
+
+```
+## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Coefficients:
+## (Intercept)         days  
+##    297.9039       0.8194
+```
+
+``` r
+summary(weight.lm)
+```
+
+```
+## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -23.397  -6.246  -0.173   7.296  20.956 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 297.90390    1.70490  174.73   <2e-16 ***
+## days          0.81945    0.06761   12.12   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 9.678 on 98 degrees of freedom
+## Multiple R-squared:  0.5998,	Adjusted R-squared:  0.5957 
+## F-statistic: 146.9 on 1 and 98 DF,  p-value: < 2.2e-16
+```
+
+``` r
+plot(weight.lm)
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-16-1.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-16-4.png" width="672" />
+
+Because the simulated data was constructed to satisfy all the assumptions of simple linear models, i.e. linearity, normality of the residuals etc, the resulting plots from the simple linear model are ideal. But what would they look like if we introduce non-normal variance to the residuals? Lets plot it and find out. 
+
+
+``` r
+fun1 = function(x,b0,b1,e){y = b0 + x*b1 + e}
+days = round(runif(100, min = 0,max = 45))
+hist(days)
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+``` r
+initialweight = 300 # Initial bodyweight
+gain = 0.75 # Average Daily Gain, Kgs per day
+variance = rnorm(n = length(days), mean = 0, sd = 10) # normal variance
+variance = exp(variance) - mean(exp(variance))  # apply a skewing scalar to the variance
+variance = variance/sd(variance) * 10 # Standardize and multiply to achieve desired SD
+weight = fun1(x = days,b0 = initialweight, b1 = gain, e = variance) # Equation for what the animal weighs on each day through the trial
+par(mfrow = c(1,2))
+
+{
+plot(days,weight, main = expression(y == beta[0] + beta[1]*x + epsilon))
+abline(lm(weight~days), col = 'blue')
+hist(variance)
+rug(variance, col = 'blue')
+}
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-17-2.png" width="672" />
+
+``` r
+weight.lm = lm(weight~days) # Create linear regression model and assign it to object weight.lm
+weight.lm
+```
+
+```
+## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Coefficients:
+## (Intercept)         days  
+##     300.136        0.744
+```
+
+``` r
+summary(weight.lm)
+```
+
+```
+## 
+## Call:
+## lm(formula = weight ~ days)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -1.304 -1.226 -1.151 -1.088 98.307 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 300.13618    1.96989 152.362   <2e-16 ***
+## days          0.74401    0.07457   9.977   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 10.05 on 98 degrees of freedom
+## Multiple R-squared:  0.5039,	Adjusted R-squared:  0.4989 
+## F-statistic: 99.55 on 1 and 98 DF,  p-value: < 2.2e-16
+```
+
+``` r
+plot(weight.lm)
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-17-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-17-4.png" width="672" />
+
+Here I have used the exponential of the variation to create a residual structure artificaially skewed to the right. Note the changes in the QQ plots and the structure of the residuals.
+
+
+#### Example Simple Linear Model {-}
+Finally, lets apply this to our toy datasets. 
 
 
 ``` r
@@ -538,44 +762,14 @@ library(readxl) # Reading excel
 library(qthink)
 
 # Data
-?bodyweight
 data("bodyweight")
-head(bodyweight)
-```
-
-```
-##    Ref ID   VID          EID   Pen BW-42  BW-1   BW0   BW7  BW14  BW21  BW28
-##     <num> <num>        <num> <num> <num> <num> <num> <num> <num> <num> <num>
-## 1:      1   248 9.820004e+14     8   574   650   638   636   670   716   698
-## 2:      2   249 9.820004e+14     8   463   514   504   496   512   544   544
-## 3:      3   276 9.820004e+14     6   389   453   445   450   477   508   499
-## 4:      4   298 9.820004e+14     6   436   504   489   487   522   530   530
-## 5:      5   322 9.820004e+14     8   436   512   504   532   562   592   592
-## 6:      6   346 9.820004e+14     6   416   446   441   398   418   443   447
-##     BW35  BW42  BW49  BW56  BW70 Shipping Loss Creep_Gain Pre-Wean_ADG CreepTrt
-##    <num> <num> <num> <num> <num>         <num>      <num>        <num>   <char>
-## 1:   732   732   768   786   806           -12         76    1.8095238        A
-## 2:   564   576   600   608   670           -10         51    1.2142857        A
-## 3:   534   550   548   594   636            -8         64    1.5238095        B
-## 4:   566   590   578   624   650           -15         68    1.6190476        B
-## 5:   600   628   654   678   702            -8         76    1.8095238        A
-## 6:   464   480   468   518   560            -5         30    0.7142857        B
-##    WeanTrt
-##     <char>
-## 1:       A
-## 2:       A
-## 3:       A
-## 4:       A
-## 5:       A
-## 6:       A
-```
-
-``` r
+# head(bodyweight)
 d.bw = melt.data.table(data = bodyweight, measure.vars = c(5:16), value.name = 'BW', variable.name = 'name')
 d.bw$Day = parse_number(as.character(d.bw$name))
 
-### Assign day
-days = seq(min(d.bw$Day), max(d.bw$Day), by = 1)
+# Data wrangling
+
+days = seq(min(d.bw$Day), max(d.bw$Day), by = 1)### Assign day 
 days = days[days >= 0]
 days
 ```
@@ -588,10 +782,10 @@ days
 
 ``` r
 d.days = data.table(Day = days)
-VIDs = data.table(VID = unique(d.bw$VID))
-d.daysvid = merge(days, VIDs, by = NULL) %>% 
+VIDs = data.table(VID = unique(d.bw$VID)) # Get list of unique animals
+d.daysvid = merge(days, VIDs, by = NULL) %>%  # Create a table with one animal per day observation
   as.data.table
-names(d.daysvid) = c('Day','VID')
+names(d.daysvid) = c('Day','VID') # Assign names to the table
 
 names(d.days)
 ```
@@ -601,204 +795,192 @@ names(d.days)
 ```
 
 ``` r
-d.bw2 = merge.data.table(d.daysvid, d.bw, by = c('VID','Day'), all = T)
-```
-## Anovas
+d.bw2 = merge.data.table(d.daysvid, d.bw, by = c('VID','Day'), all = T) # merge bodyweight with our days vid table.
 
-
-``` r
-heifer
-```
-
-```
-## # A tibble: 77 × 21
-##      VID   Pen CreepTrt WeanTrt D_42_BW Creep_Gain Shipping_Loss Day56_InitialBW
-##    <dbl> <dbl> <chr>    <chr>     <dbl>      <dbl>         <dbl>           <dbl>
-##  1   248     8 A        A          261.       34.5         -5.44            287.
-##  2   249     8 A        A          210.       23.1         -4.54            223.
-##  3   276     6 B        A          177.       29.0         -3.63            200.
-##  4   298     6 B        A          198.       30.8         -6.80            218.
-##  5   322     8 A        A          198.       34.5         -3.63            233.
-##  6   346     6 B        A          189.       13.6         -2.27            185.
-##  7   364     5 A        B          191.       40.8        -14.1             217.
-##  8   367     7 B        B          160        17.2         -8.16            164.
-##  9   453     6 B        A          195        35.8        -12.2             218.
-## 10   472     5 A        B          183.       37.6         -4.99            211.
-## # ℹ 67 more rows
-## # ℹ 13 more variables: Day56_ADG <dbl>, Day56_MMBW <dbl>, Day56_DMI <dbl>,
-## #   Day56_Residual <dbl>, D_1_EV <dbl>, AVE_TTB <dbl>, BVFREQ <dbl>,
-## #   BVDUR <dbl>, BVFREQsd <dbl>, BVDURsd <dbl>, uDMI <dbl>, sdDMI <dbl>,
-## #   cvDMI <dbl>
-```
-
-``` r
-m.anova = lm(Day56_ADG ~ CreepTrt*WeanTrt, data = heifer)
-summary(m.anova)
+# Run Linear Regression model
+lm.bw = lm(BW ~ Day, data = d.bw2)
+summary(lm.bw)
 ```
 
 ```
 ## 
 ## Call:
-## lm(formula = Day56_ADG ~ CreepTrt * WeanTrt, data = heifer)
+## lm(formula = BW ~ Day, data = d.bw2)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.78650 -0.10719 -0.00284  0.18654  0.44387 
+## -179.964  -34.337    0.374   36.372  216.971 
 ## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)         0.94891    0.05939  15.977   <2e-16 ***
-## CreepTrtB          -0.01040    0.08294  -0.125    0.901    
-## WeanTrtB            0.05038    0.08515   0.592    0.556    
-## CreepTrtB:WeanTrtB -0.14515    0.11812  -1.229    0.223    
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 477.28860    2.43741  195.82   <2e-16 ***
+## Day           1.63822    0.06541   25.04   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.2589 on 73 degrees of freedom
-## Multiple R-squared:  0.0474,	Adjusted R-squared:  0.008249 
-## F-statistic: 1.211 on 3 and 73 DF,  p-value: 0.312
+## Residual standard error: 58.27 on 934 degrees of freedom
+##   (4758 observations deleted due to missingness)
+## Multiple R-squared:  0.4017,	Adjusted R-squared:  0.4011 
+## F-statistic: 627.2 on 1 and 934 DF,  p-value: < 2.2e-16
+```
+
+### Simple Anovas
+
+At their core, Analysis of Variance Analysises are linear models which use categorical independent variables. Some books teach ANOVAs separately from linear models, preferring instead to refer to them as "describing differences amongst populations" [@ottStatisticalMethodsData2016]. However, I do not find this method useful as ANOVAs are ran automatically when the lm function is called with categorical independent variables. Thus, I am going to include them here in the discussion on linear models, with the understanding that the math does change somewhat. This also allows me the opportunity to demonstrate that it is sometimes possible to run independent variables as either categorical or continuous, and doing so can be a product component of the exploratory data process.
+
+
+Here I simulate a series of datum demonstrative of data which may be analyzed using an ANOVA.
+
+``` r
+# Create a data table with multiple variables
+d = data.table(t1 = rnorm(100, mean = 150, sd = 50),
+               t2 = rnorm(100, mean = 200, sd = 30),
+               t3 = rnorm(100, mean = 250, sd = 75))
+d2 = melt.data.table(data = d, measure.vars = c(1:3)) # Melt the data into long format
+
+d2 %>% 
+  ggplot(aes(x = variable, y = value, fill = variable))+
+  geom_boxplot()
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+``` r
+aov.mod = aov(value ~ variable, data = d2)
+summary(aov.mod)
+```
+
+```
+##              Df  Sum Sq Mean Sq F value Pr(>F)    
+## variable      2  443650  221825   63.98 <2e-16 ***
+## Residuals   297 1029792    3467                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ``` r
-library(emmeans)
+coef(aov.mod)
 ```
 
 ```
-## Welcome to emmeans.
-## Caution: You lose important information if you filter this package's results.
-## See '? untidy'
-```
-
-``` r
-emmeans(m.anova, specs = 'CreepTrt','WeanTrt')
-```
-
-```
-## WeanTrt = A:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.949 0.0594 73    0.831    1.067
-##  B         0.939 0.0579 73    0.823    1.054
-## 
-## WeanTrt = B:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.999 0.0610 73    0.878    1.121
-##  B         0.844 0.0579 73    0.728    0.959
-## 
-## Confidence level used: 0.95
+## (Intercept)  variablet2  variablet3 
+##   151.81016    48.28339    94.18654
 ```
 
 ``` r
-library(lme4)
+plot(aov.mod)
 ```
 
-```
-## Loading required package: Matrix
-```
+<img src="03-frequentist_files/figure-html/unnamed-chunk-18-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-4.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-18-5.png" width="672" />
 
-```
-## 
-## Attaching package: 'Matrix'
-```
+Just to prove my point, look at the values collected from the ANOVA analysis ran above, and compare to the lm model ran below.
 
-```
-## The following objects are masked from 'package:tidyr':
-## 
-##     expand, pack, unpack
-```
 
 ``` r
-m.lmer = lmer(Day56_ADG ~ CreepTrt*WeanTrt + (1|Pen), data = heifer)
+lm.mod = lm(value ~ variable, data = d2)
+summary(lm.mod)
 ```
 
 ```
-## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
-## unable to evaluate scaled gradient
-```
-
-```
-## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
-## Model failed to converge: degenerate Hessian with 1 negative eigenvalues
-```
-
-``` r
-summary(m.lmer)
-```
-
-```
-## Linear mixed model fit by REML ['lmerMod']
-## Formula: Day56_ADG ~ CreepTrt * WeanTrt + (1 | Pen)
-##    Data: heifer
 ## 
-## REML criterion at convergence: 21.7
+## Call:
+## lm(formula = value ~ variable, data = d2)
 ## 
-## Scaled residuals: 
+## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -3.03800 -0.41404 -0.01098  0.72053  1.71454 
+## -220.768  -31.893    3.146   36.768  172.895 
 ## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  Pen      (Intercept) 0.003385 0.05818 
-##  Residual             0.067022 0.25889 
-## Number of obs: 77, groups:  Pen, 4
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  151.810      5.888  25.781  < 2e-16 ***
+## variablet2    48.283      8.327   5.798 1.71e-08 ***
+## variablet3    94.187      8.327  11.310  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Fixed effects:
-##                    Estimate Std. Error t value
-## (Intercept)         0.94891    0.08314  11.413
-## CreepTrtB          -0.01040    0.11683  -0.089
-## WeanTrtB            0.05038    0.11841   0.425
-## CreepTrtB:WeanTrtB -0.14515    0.16581  -0.875
-## 
-## Correlation of Fixed Effects:
-##             (Intr) CrpTrB WnTrtB
-## CreepTrtB   -0.712              
-## WeanTrtB    -0.702  0.500       
-## CrpTrtB:WTB  0.501 -0.705 -0.714
-## optimizer (nloptwrap) convergence code: 0 (OK)
-## unable to evaluate scaled gradient
-## Model failed to converge: degenerate  Hessian with 1 negative eigenvalues
+## Residual standard error: 58.88 on 297 degrees of freedom
+## Multiple R-squared:  0.3011,	Adjusted R-squared:  0.2964 
+## F-statistic: 63.98 on 2 and 297 DF,  p-value: < 2.2e-16
 ```
 
 ``` r
-emmeans(m.lmer, specs = 'CreepTrt', 'WeanTrt')
+anova(lm.mod)
 ```
 
 ```
-## Warning in .qf.non0(object@V, x): Negative variance estimate obtained!
-```
-
-```
-## Warning in .qf.non0(object@V, x): Negative variance estimate obtained!
-```
-
-```
-## WeanTrt = A:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.949 0.1430  0     -Inf      Inf
-##  B         0.939    NaN  0      NaN      NaN
+## Analysis of Variance Table
 ## 
-## WeanTrt = B:
-##  CreepTrt emmean     SE df lower.CL upper.CL
-##  A         0.999    NaN  0      NaN      NaN
-##  B         0.844 0.0931  0     -Inf      Inf
-## 
-## Degrees-of-freedom method: kenward-roger 
-## Confidence level used: 0.95
+## Response: value
+##            Df  Sum Sq Mean Sq F value    Pr(>F)    
+## variable    2  443650  221825  63.976 < 2.2e-16 ***
+## Residuals 297 1029792    3467                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
+* What do you notice about the results from the outputs of both methods? 
+* How do the central population estimates compare to the estimates we simulated in our datasets?
+* What can we conclude about the differences in our population level (categorical or treatment) means?
+
+The most important statistic in an ANOVA table is the **F Statistic*. The F statistic informs us if the *within sample* variation is greater than the *between sample* variation. if the variability among the sample means is large compared to the *within sample* means, we are more apt to conclude that there is a difference. Alternatively, if the *between sample* variation is small compared to the *within sample* varation, we are less likely to conclude that there is a difference.
+
+Use the code above to create an example with and without a significant F value.
+
+#### Example ANOVA {-}
+
+Lets use the above body-weight data to demonstrate how we might use an ANOVA to analys the same data in a categorical format that we just analysed in a linear model format by changing the type of data in the "day" column to characher.
 
 
-## General Linear Models
+``` r
+d.bw$Day = as.character(d.bw$Day)
+d.bw %>% 
+  ggplot(aes(x=Day, y = BW, fill = Day))+
+  geom_boxplot()
+```
 
-## Example one
+<img src="03-frequentist_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
-## Example two
+``` r
+aov.bw = aov(BW ~ Day, data = d.bw)
+summary(aov.bw)
+```
+
+```
+##              Df  Sum Sq Mean Sq F value Pr(>F)    
+## Day          11 2344205  213110   66.59 <2e-16 ***
+## Residuals   924 2957213    3200                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+``` r
+coef(aov.bw)
+```
+
+```
+## (Intercept)      Day-42        Day0       Day14       Day21       Day28 
+##   495.57692   -66.26923   -20.28205   -16.67949    12.01282    11.65385 
+##       Day35       Day42       Day49       Day56        Day7       Day70 
+##    36.87179    46.88462    61.73077    83.78205   -30.70513   118.60256
+```
+
+``` r
+plot(aov.bw)
+```
+
+<img src="03-frequentist_files/figure-html/unnamed-chunk-20-2.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-3.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-4.png" width="672" /><img src="03-frequentist_files/figure-html/unnamed-chunk-20-5.png" width="672" />
+
+How do these results look compared to the results from the linear model? How are they similar? How are they different? What assumption is being made about the independent variable here that is not being accounted for that is be accounted for in the linear regression model above using time as a continuous value?
+
+## Demonstrating Equivalence
+
+ I do have some concerns with the message that is conveyed by the title and approach taken in the statistical methods. Specifically, remember the definition of a p-value is “the probability of obtaining a value of the test statistic that is as likely or more likely to reject the null hypothesis (H0) as the actual observed value of the test statistic, assuming the null hypothesis is true.” The null hypothesis tested by a general linear mixed effects model for your study is generally “Newly weaned calves limit fed a high concentrate diet perform does not alter growth, performance, and efficiency compared to calves fed an ad libitum forage based diet”,  with H0: ALF = LFC and HA: ALF ≠ LFC. A high p-value in this instance indicates a failure to reject the null hypothesis. No matter how large the p-value may be, it does not provide support for the null hypothesis. Failure to reject the null hypothesis means one must now become concerned with the power, or n, of the study, and then move forward to show sufficient effort was made to demonstrate equivalence, or conversely find differences, between treatments.  This is typically illustrated by determining an acceptable delta, (difference between treatment) and then conducting a power analysis to show how many animals would be required to obtain a significant p-value at that acceptable delta given the variation in the system.
+ 
+If this is unnecessarily restrictive or feels difficult to communicate, more studies are moving towards a more Bayesian type of approach, which allows you to specify the prior distribution of the effect size (informed by what is biologically or economically relevant) and then calculate the likelihood of observing no meaningful effect. 
+
 
 ## Liklihood vs. Probability
 (inspired by the following [medium article](https://medium.com/@wl8380/probability-vs-likelihood-the-most-misunderstood-duo-in-data-science-759fc4dcb730))
 
 
-# Demonstrating Equivalence
 
- I do have some concerns with the message that is conveyed by the title and approach taken in the statistical methods. Specifically, remember the definition of a p-value is “the probability of obtaining a value of the test statistic that is as likely or more likely to reject the null hypothesis (H0) as the actual observed value of the test statistic, assuming the null hypothesis is true.” The null hypothesis tested by a general linear mixed effects model for your study is generally “Newly weaned calves limit fed a high concentrate diet perform does not alter growth, performance, and efficiency compared to calves fed an ad libitum forage based diet”,  with H0: ALF = LFC and HA: ALF ≠ LFC. A high p-value in this instance indicates a failure to reject the null hypothesis. No matter how large the p-value may be, it does not provide support for the null hypothesis. Failure to reject the null hypothesis means one must now become concerned with the power, or n, of the study, and then move forward to show sufficient effort was made to demonstrate equivalence, or conversely find differences, between treatments.  This is typically illustrated by determining an acceptable delta, (difference between treatment) and then conducting a power analysis to show how many animals would be required to obtain a significant p-value at that acceptable delta given the variation in the system.
- 
-If this is unnecessarily restrictive or feels difficult to communicate, more studies are moving towards a more Bayesian type of approach, which allows you to specify the prior distribution of the effect size (informed by what is biologically or economically relevant) and then calculate the likelihood of observing no meaningful effect. 
