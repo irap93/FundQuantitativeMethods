@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Experimental Design | An introduction to Quantitative Thinking</title>
+  <meta name="description" content="A workbook to accompany Quantitative Thinking in Range and Animal Sciences." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Experimental Design | An introduction to Quantitative Thinking" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://iraparsons.com/FundQuantitativeMethods/images/BookCover.jpg" />
+  <meta property="og:description" content="A workbook to accompany Quantitative Thinking in Range and Animal Sciences." />
+  <meta name="github-repo" content="FundQuantitativeMethods" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Experimental Design | An introduction to Quantitative Thinking" />
+  
+  <meta name="twitter:description" content="A workbook to accompany Quantitative Thinking in Range and Animal Sciences." />
+  <meta name="twitter:image" content="https://iraparsons.com/FundQuantitativeMethods/images/BookCover.jpg" />
+
+<meta name="author" content="Yihui Xie" />
+
+
+<meta name="date" content="2025-10-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="standard-statistics.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Quantitative Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>The Nature of Knowledge</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="1" data-path="science.html"><a href="science.html"><i class="fa fa-check"></i><b>1</b> Science</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="science.html"><a href="science.html#how-you-know-what-you-know-and-is-what-you-know-really-so"><i class="fa fa-check"></i><b>1.1</b> How you know what you know, and is what you know really so?</a></li>
+<li class="chapter" data-level="1.2" data-path="science.html"><a href="science.html#history-of-scientific-inquiry"><i class="fa fa-check"></i><b>1.2</b> History of scientific inquiry</a></li>
+<li class="chapter" data-level="1.3" data-path="science.html"><a href="science.html#paradigms-of-statistical-inference"><i class="fa fa-check"></i><b>1.3</b> Paradigms of Statistical Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html"><i class="fa fa-check"></i><b>2</b> Applying the Scientific Method</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#program-r"><i class="fa fa-check"></i><b>2.1</b> Program R</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#introduction-to-r"><i class="fa fa-check"></i><b>2.1.1</b> Introduction to R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#why-not-use-r"><i class="fa fa-check"></i><b>2.1.2</b> Why not use R?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#using-r"><i class="fa fa-check"></i><b>2.2</b> Using R</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#installing-r"><i class="fa fa-check"></i><b>2.2.1</b> Installing R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#navigating-r-studio"><i class="fa fa-check"></i><b>2.2.2</b> Navigating R Studio</a></li>
+<li class="chapter" data-level="2.2.3" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#installing-packages"><i class="fa fa-check"></i><b>2.2.3</b> Installing packages</a></li>
+<li class="chapter" data-level="2.2.4" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#loading-data-into-the-r-environment"><i class="fa fa-check"></i><b>2.2.4</b> Loading data into the R environment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#exploratory-data-analysis-and-graphics"><i class="fa fa-check"></i><b>2.3</b> Exploratory Data Analysis and Graphics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#summary-statistics"><i class="fa fa-check"></i><b>2.3.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="2.3.2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#exploratory-graphics"><i class="fa fa-check"></i><b>2.3.2</b> Exploratory Graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#relationships-among-covariates"><i class="fa fa-check"></i><b>2.4</b> Relationships among covariates</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#scatter-plots"><i class="fa fa-check"></i><b>2.4.1</b> Scatter plots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#deterministic-functions"><i class="fa fa-check"></i><b>2.5</b> Deterministic functions</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#why-deterministic-functions"><i class="fa fa-check"></i><b>2.5.1</b> Why deterministic functions</a></li>
+<li class="chapter" data-level="" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#first-order-quadratic-model"><i class="fa fa-check"></i>First order quadratic model</a></li>
+<li class="chapter" data-level="" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#first-order-exponential"><i class="fa fa-check"></i>First order exponential</a></li>
+<li class="chapter" data-level="" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#ricker-function"><i class="fa fa-check"></i>Ricker Function</a></li>
+<li class="chapter" data-level="" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#michaelis-menton-equation"><i class="fa fa-check"></i>Michaelis-Menton Equation</a></li>
+<li class="chapter" data-level="" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#logistic-function"><i class="fa fa-check"></i>Logistic Function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#stoichasticity"><i class="fa fa-check"></i><b>2.6</b> Stoichasticity</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#probability-distributions"><i class="fa fa-check"></i><b>2.6.1</b> Probability Distributions</a></li>
+<li class="chapter" data-level="2.6.2" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#stoichastity-in-functions"><i class="fa fa-check"></i><b>2.6.2</b> Stoichastity in functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="applying-the-scientific-method.html"><a href="applying-the-scientific-method.html#homework-and-review-questions"><i class="fa fa-check"></i><b>2.7</b> Homework and Review Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="standard-statistics.html"><a href="standard-statistics.html"><i class="fa fa-check"></i><b>3</b> Standard Statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="standard-statistics.html"><a href="standard-statistics.html#fisher"><i class="fa fa-check"></i><b>3.1</b> Fisher</a></li>
+<li class="chapter" data-level="3.2" data-path="standard-statistics.html"><a href="standard-statistics.html#neyman-pearson"><i class="fa fa-check"></i><b>3.2</b> Neyman-Pearson</a></li>
+<li class="chapter" data-level="3.3" data-path="standard-statistics.html"><a href="standard-statistics.html#null-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Null Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="standard-statistics.html"><a href="standard-statistics.html#population-central-values"><i class="fa fa-check"></i><b>3.3.1</b> Population central values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="standard-statistics.html"><a href="standard-statistics.html#linear-models"><i class="fa fa-check"></i><b>3.4</b> Linear Models</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="standard-statistics.html"><a href="standard-statistics.html#prediction-vs.-explanation"><i class="fa fa-check"></i><b>3.4.1</b> Prediction vs. explanation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="standard-statistics.html"><a href="standard-statistics.html#simple-linear-models"><i class="fa fa-check"></i><b>3.4.2</b> Simple Linear Models</a></li>
+<li class="chapter" data-level="3.4.3" data-path="standard-statistics.html"><a href="standard-statistics.html#simple-anovas"><i class="fa fa-check"></i><b>3.4.3</b> Simple Anovas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="standard-statistics.html"><a href="standard-statistics.html#demonstrating-equivalence"><i class="fa fa-check"></i><b>3.5</b> Demonstrating Equivalence</a></li>
+<li class="chapter" data-level="3.6" data-path="standard-statistics.html"><a href="standard-statistics.html#liklihood-vs.-probability"><i class="fa fa-check"></i><b>3.6</b> Liklihood vs. Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="experimental-design.html"><a href="experimental-design.html"><i class="fa fa-check"></i><b>4</b> Experimental Design</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="experimental-design.html"><a href="experimental-design.html#why-is-sound-experimental-design-important"><i class="fa fa-check"></i><b>4.1</b> Why is sound experimental design important?</a></li>
+<li class="chapter" data-level="4.2" data-path="experimental-design.html"><a href="experimental-design.html#completely-randomized"><i class="fa fa-check"></i><b>4.2</b> Completely Randomized</a></li>
+<li class="chapter" data-level="4.3" data-path="experimental-design.html"><a href="experimental-design.html#randomized-complete-block-design"><i class="fa fa-check"></i><b>4.3</b> Randomized Complete Block Design</a></li>
+<li class="chapter" data-level="4.4" data-path="experimental-design.html"><a href="experimental-design.html#latin-squares"><i class="fa fa-check"></i><b>4.4</b> Latin Squares</a></li>
+<li class="chapter" data-level="4.5" data-path="experimental-design.html"><a href="experimental-design.html#split-plot-design"><i class="fa fa-check"></i><b>4.5</b> Split plot design</a></li>
+<li class="chapter" data-level="4.6" data-path="experimental-design.html"><a href="experimental-design.html#strip-plot-design"><i class="fa fa-check"></i><b>4.6</b> Strip Plot design</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An introduction to Quantitative Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="experimental-design" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Experimental Design<a href="experimental-design.html#experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="why-is-sound-experimental-design-important" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Why is sound experimental design important?<a href="experimental-design.html#why-is-sound-experimental-design-important" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Experimental design involves steps taken at the beginning of a study to control for variation and protect the validity of statistical results. Good experimental design paired with proper statistical methods ensures robust findings while minimizing animal suffering and resource expenditure <span class="citation">(<a href="#ref-festingReductionAnimalUse1994"><strong>festingReductionAnimalUse1994?</strong></a>; <a href="#ref-johnsonPracticalAspectsExperimental2002"><strong>johnsonPracticalAspectsExperimental2002?</strong></a>; <a href="#ref-lehnerDESIGNEXECUTIONANIMAL"><strong>lehnerDESIGNEXECUTIONANIMAL?</strong></a>)</span>. Experiments deal with field variability and animal diversity. Designs seek to control the variation to allow for treatment effects to show themselves in a repeatable manner.</p>
+</div>
+<div id="completely-randomized" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Completely Randomized<a href="experimental-design.html#completely-randomized" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Completely randomized designs are used when comparing more than one treatment. Each experimental unit is assumed to be a random selection from the population.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="experimental-design.html#cb65-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb65-2"><a href="experimental-design.html#cb65-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb65-3"><a href="experimental-design.html#cb65-3" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="experimental-design.html#cb65-4" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb65-5"><a href="experimental-design.html#cb65-5" tabindex="-1"></a>n_per_treatment <span class="ot">=</span> <span class="dv">10</span>  <span class="co"># number of replicates per treatment</span></span>
+<span id="cb65-6"><a href="experimental-design.html#cb65-6" tabindex="-1"></a>treatments <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb65-7"><a href="experimental-design.html#cb65-7" tabindex="-1"></a>n_total <span class="ot">=</span> n_per_treatment <span class="sc">*</span> <span class="fu">length</span>(treatments)</span>
+<span id="cb65-8"><a href="experimental-design.html#cb65-8" tabindex="-1"></a></span>
+<span id="cb65-9"><a href="experimental-design.html#cb65-9" tabindex="-1"></a><span class="co"># Create treatment vector (randomized)</span></span>
+<span id="cb65-10"><a href="experimental-design.html#cb65-10" tabindex="-1"></a>treatment <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each =</span> n_per_treatment))</span>
+<span id="cb65-11"><a href="experimental-design.html#cb65-11" tabindex="-1"></a></span>
+<span id="cb65-12"><a href="experimental-design.html#cb65-12" tabindex="-1"></a><span class="co"># Simulate response variable (e.g., plant height)</span></span>
+<span id="cb65-13"><a href="experimental-design.html#cb65-13" tabindex="-1"></a><span class="co"># Assume different means for each treatment</span></span>
+<span id="cb65-14"><a href="experimental-design.html#cb65-14" tabindex="-1"></a>response <span class="ot">=</span> <span class="fu">rnorm</span>(n_total,</span>
+<span id="cb65-15"><a href="experimental-design.html#cb65-15" tabindex="-1"></a>                  <span class="at">mean =</span> <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">20</span>,</span>
+<span id="cb65-16"><a href="experimental-design.html#cb65-16" tabindex="-1"></a>                          <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">25</span>, <span class="dv">30</span>)),</span>
+<span id="cb65-17"><a href="experimental-design.html#cb65-17" tabindex="-1"></a>                  <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb65-18"><a href="experimental-design.html#cb65-18" tabindex="-1"></a></span>
+<span id="cb65-19"><a href="experimental-design.html#cb65-19" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb65-20"><a href="experimental-design.html#cb65-20" tabindex="-1"></a>crd_data <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb65-21"><a href="experimental-design.html#cb65-21" tabindex="-1"></a>  <span class="at">PlantID =</span> <span class="dv">1</span><span class="sc">:</span>n_total,</span>
+<span id="cb65-22"><a href="experimental-design.html#cb65-22" tabindex="-1"></a>  <span class="at">Treatment =</span> treatment,</span>
+<span id="cb65-23"><a href="experimental-design.html#cb65-23" tabindex="-1"></a>  <span class="at">Height =</span> response</span>
+<span id="cb65-24"><a href="experimental-design.html#cb65-24" tabindex="-1"></a>)</span>
+<span id="cb65-25"><a href="experimental-design.html#cb65-25" tabindex="-1"></a></span>
+<span id="cb65-26"><a href="experimental-design.html#cb65-26" tabindex="-1"></a><span class="co"># View first few rows</span></span>
+<span id="cb65-27"><a href="experimental-design.html#cb65-27" tabindex="-1"></a><span class="fu">head</span>(crd_data)</span></code></pre></div>
+<pre><code>##   PlantID Treatment   Height
+## 1       1         B 21.74290
+## 2       2         B 24.74373
+## 3       3         B 28.21183
+## 4       4         A 19.56382
+## 5       5         A 16.50337
+## 6       6         B 22.54445</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="experimental-design.html#cb67-1" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb67-2"><a href="experimental-design.html#cb67-2" tabindex="-1"></a><span class="fu">aggregate</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data, mean)</span></code></pre></div>
+<pre><code>##   Treatment   Height
+## 1         A 19.12492
+## 2         B 23.89719
+## 3         C 30.02318</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="experimental-design.html#cb69-1" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb69-2"><a href="experimental-design.html#cb69-2" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data)</span>
+<span id="cb69-3"><a href="experimental-design.html#cb69-3" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+## Treatment    2  596.9  298.46   32.55 6.4e-08 ***
+## Residuals   27  247.6    9.17                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="experimental-design.html#cb71-1" tabindex="-1"></a><span class="co"># Basic scatter plot</span></span>
+<span id="cb71-2"><a href="experimental-design.html#cb71-2" tabindex="-1"></a><span class="fu">ggplot</span>(crd_data, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="experimental-design.html#cb71-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb71-4"><a href="experimental-design.html#cb71-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
+<span id="cb71-5"><a href="experimental-design.html#cb71-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
+<span id="cb71-6"><a href="experimental-design.html#cb71-6" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-7"><a href="experimental-design.html#cb71-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="experimental-design.html#cb72-1" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb72-2"><a href="experimental-design.html#cb72-2" tabindex="-1"></a><span class="fu">boxplot</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data,</span>
+<span id="cb72-3"><a href="experimental-design.html#cb72-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
+<span id="cb72-4"><a href="experimental-design.html#cb72-4" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Height (cm)&quot;</span>,</span>
+<span id="cb72-5"><a href="experimental-design.html#cb72-5" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightpink&quot;</span>))</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="experimental-design.html#cb73-1" tabindex="-1"></a><span class="co"># Assume crd_data is already created from previous simulation</span></span>
+<span id="cb73-2"><a href="experimental-design.html#cb73-2" tabindex="-1"></a><span class="co"># If not, run the CRD simulation code first</span></span></code></pre></div>
+</div>
+<div id="randomized-complete-block-design" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Randomized Complete Block Design<a href="experimental-design.html#randomized-complete-block-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The randomized complete block is useful for blocking across some known source of variation. It allows for more precise comparison between treatments when their is known varation within the experimental units. It has the added advantage of providing a comparison across the blocks if desired.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="experimental-design.html#cb74-1" tabindex="-1"></a><span class="co"># Randomized Complete Block -----</span></span>
+<span id="cb74-2"><a href="experimental-design.html#cb74-2" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb74-3"><a href="experimental-design.html#cb74-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb74-4"><a href="experimental-design.html#cb74-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb74-5"><a href="experimental-design.html#cb74-5" tabindex="-1"></a></span>
+<span id="cb74-6"><a href="experimental-design.html#cb74-6" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb74-7"><a href="experimental-design.html#cb74-7" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb74-8"><a href="experimental-design.html#cb74-8" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb74-9"><a href="experimental-design.html#cb74-9" tabindex="-1"></a></span>
+<span id="cb74-10"><a href="experimental-design.html#cb74-10" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
+<span id="cb74-11"><a href="experimental-design.html#cb74-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb74-12"><a href="experimental-design.html#cb74-12" tabindex="-1"></a></span>
+<span id="cb74-13"><a href="experimental-design.html#cb74-13" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb74-14"><a href="experimental-design.html#cb74-14" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb74-15"><a href="experimental-design.html#cb74-15" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Block&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb74-16"><a href="experimental-design.html#cb74-16" tabindex="-1"></a></span>
+<span id="cb74-17"><a href="experimental-design.html#cb74-17" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
+<span id="cb74-18"><a href="experimental-design.html#cb74-18" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks, <span class="at">Treatment =</span> treatments) <span class="sc">%&gt;%</span></span>
+<span id="cb74-19"><a href="experimental-design.html#cb74-19" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
+<span id="cb74-20"><a href="experimental-design.html#cb74-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">sample</span>(Treatment)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-21"><a href="experimental-design.html#cb74-21" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb74-22"><a href="experimental-design.html#cb74-22" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb74-23"><a href="experimental-design.html#cb74-23" tabindex="-1"></a>    <span class="co"># Simulate subplot-level variation within each block</span></span>
+<span id="cb74-24"><a href="experimental-design.html#cb74-24" tabindex="-1"></a>    <span class="at">SubplotNoise =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">4</span>),  <span class="co"># Increased SD for within-field variation</span></span>
+<span id="cb74-25"><a href="experimental-design.html#cb74-25" tabindex="-1"></a>    </span>
+<span id="cb74-26"><a href="experimental-design.html#cb74-26" tabindex="-1"></a>    <span class="co"># Simulate yield: treatment + block + subplot noise + residual error</span></span>
+<span id="cb74-27"><a href="experimental-design.html#cb74-27" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span></span>
+<span id="cb74-28"><a href="experimental-design.html#cb74-28" tabindex="-1"></a>      <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
+<span id="cb74-29"><a href="experimental-design.html#cb74-29" tabindex="-1"></a>             <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
+<span id="cb74-30"><a href="experimental-design.html#cb74-30" tabindex="-1"></a>                    <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
+<span id="cb74-31"><a href="experimental-design.html#cb74-31" tabindex="-1"></a>      <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Block&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb74-32"><a href="experimental-design.html#cb74-32" tabindex="-1"></a>      SubplotNoise <span class="sc">+</span></span>
+<span id="cb74-33"><a href="experimental-design.html#cb74-33" tabindex="-1"></a>      <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb74-34"><a href="experimental-design.html#cb74-34" tabindex="-1"></a>  )</span>
+<span id="cb74-35"><a href="experimental-design.html#cb74-35" tabindex="-1"></a></span>
+<span id="cb74-36"><a href="experimental-design.html#cb74-36" tabindex="-1"></a><span class="co"># Add numeric position for plotting</span></span>
+<span id="cb74-37"><a href="experimental-design.html#cb74-37" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> rcbd <span class="sc">%&gt;%</span></span>
+<span id="cb74-38"><a href="experimental-design.html#cb74-38" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
+<span id="cb74-39"><a href="experimental-design.html#cb74-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb74-40"><a href="experimental-design.html#cb74-40" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb74-41"><a href="experimental-design.html#cb74-41" tabindex="-1"></a></span>
+<span id="cb74-42"><a href="experimental-design.html#cb74-42" tabindex="-1"></a><span class="co"># Plot layout</span></span>
+<span id="cb74-43"><a href="experimental-design.html#cb74-43" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb74-44"><a href="experimental-design.html#cb74-44" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-45"><a href="experimental-design.html#cb74-45" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb74-46"><a href="experimental-design.html#cb74-46" tabindex="-1"></a>  <span class="co"># scale_y_reverse(breaks = rcbd$Block, labels = rcbd$Block) +</span></span>
+<span id="cb74-47"><a href="experimental-design.html#cb74-47" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-48"><a href="experimental-design.html#cb74-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD Treatment Layout&quot;</span>,</span>
+<span id="cb74-49"><a href="experimental-design.html#cb74-49" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Plot within Block&quot;</span>,</span>
+<span id="cb74-50"><a href="experimental-design.html#cb74-50" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-51"><a href="experimental-design.html#cb74-51" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="experimental-design.html#cb75-1" tabindex="-1"></a><span class="fu">head</span>(rcbd)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   Block  Treatment SubplotNoise Yield  Plot
+##   &lt;fct&gt;  &lt;fct&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 Block1 A               -4.34   57.9     1
+## 2 Block2 B                6.45   72.8     1
+## 3 Block3 D                0.143  77.4     1
+## 4 Block4 D                5.26   89.2     1
+## 5 Block5 D                3.91   87.5     1
+## 6 Block1 D                3.53   74.4     2</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="experimental-design.html#cb77-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">fill =</span> Block)) <span class="sc">+</span></span>
+<span id="cb77-2"><a href="experimental-design.html#cb77-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb77-3"><a href="experimental-design.html#cb77-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb77-4"><a href="experimental-design.html#cb77-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD: Treatment Effects Across Blocks&quot;</span>)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="experimental-design.html#cb78-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">color =</span> Block)) <span class="sc">+</span></span>
+<span id="cb78-2"><a href="experimental-design.html#cb78-2" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb78-3"><a href="experimental-design.html#cb78-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb78-4"><a href="experimental-design.html#cb78-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD with Increased Within-Block Variation&quot;</span>)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="experimental-design.html#cb79-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb79-2"><a href="experimental-design.html#cb79-2" tabindex="-1"></a>model_rcbd <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> Block, <span class="at">data =</span> rcbd)</span>
+<span id="cb79-3"><a href="experimental-design.html#cb79-3" tabindex="-1"></a><span class="fu">summary</span>(model_rcbd)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Treatment    3  780.3  260.09  14.911 0.000238 ***
+## Block        4  497.1  124.28   7.125 0.003534 ** 
+## Residuals   12  209.3   17.44                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="experimental-design.html#cb81-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="experimental-design.html#cb85-1" tabindex="-1"></a>model_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> rcbd)</span>
+<span id="cb85-2"><a href="experimental-design.html#cb85-2" tabindex="-1"></a><span class="fu">summary</span>(model_mixed)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Yield ~ Treatment + (1 | Block)
+##    Data: rcbd
+## 
+## REML criterion at convergence: 105.4
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.4188 -0.4879  0.1124  0.4139  1.6189 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Block    (Intercept) 26.71    5.168   
+##  Residual             17.44    4.177   
+## Number of obs: 20, groups:  Block, 5
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)   65.366      2.972  21.997
+## TreatmentB     3.024      2.641   1.145
+## TreatmentC    10.595      2.641   4.011
+## TreatmentD    15.882      2.641   6.012
+## 
+## Correlation of Fixed Effects:
+##            (Intr) TrtmnB TrtmnC
+## TreatmentB -0.444              
+## TreatmentC -0.444  0.500       
+## TreatmentD -0.444  0.500  0.500</code></pre>
+</div>
+<div id="latin-squares" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Latin Squares<a href="experimental-design.html#latin-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Latin Square is an extension of the randomized complete block design, but rather than the treatments being randomly assigned within each block, they are strategically allocated such that each treatment occurs once between each row and each column.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="experimental-design.html#cb87-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb87-2"><a href="experimental-design.html#cb87-2" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb87-3"><a href="experimental-design.html#cb87-3" tabindex="-1"></a>latin_square <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb87-4"><a href="experimental-design.html#cb87-4" tabindex="-1"></a>                         <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb87-5"><a href="experimental-design.html#cb87-5" tabindex="-1"></a>                         <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb87-6"><a href="experimental-design.html#cb87-6" tabindex="-1"></a>                         <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), </span>
+<span id="cb87-7"><a href="experimental-design.html#cb87-7" tabindex="-1"></a>                       <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb87-8"><a href="experimental-design.html#cb87-8" tabindex="-1"></a></span>
+<span id="cb87-9"><a href="experimental-design.html#cb87-9" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb87-10"><a href="experimental-design.html#cb87-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Row =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb87-11"><a href="experimental-design.html#cb87-11" tabindex="-1"></a>                  <span class="at">Column =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb87-12"><a href="experimental-design.html#cb87-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">as.vector</span>(<span class="fu">t</span>(latin_square)),</span>
+<span id="cb87-13"><a href="experimental-design.html#cb87-13" tabindex="-1"></a>         <span class="co"># Simulate yield with treatment effect + row/column noise</span></span>
+<span id="cb87-14"><a href="experimental-design.html#cb87-14" tabindex="-1"></a>         <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> </span>
+<span id="cb87-15"><a href="experimental-design.html#cb87-15" tabindex="-1"></a>           <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
+<span id="cb87-16"><a href="experimental-design.html#cb87-16" tabindex="-1"></a>                  <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
+<span id="cb87-17"><a href="experimental-design.html#cb87-17" tabindex="-1"></a>                         <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
+<span id="cb87-18"><a href="experimental-design.html#cb87-18" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Row)<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> </span>
+<span id="cb87-19"><a href="experimental-design.html#cb87-19" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Column)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span></span>
+<span id="cb87-20"><a href="experimental-design.html#cb87-20" tabindex="-1"></a>           <span class="fu">rnorm</span>(<span class="dv">16</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb87-21"><a href="experimental-design.html#cb87-21" tabindex="-1"></a></span>
+<span id="cb87-22"><a href="experimental-design.html#cb87-22" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre><code>##   Row Column Treatment    Yield
+## 1   1      1         A 57.93586
+## 2   2      1         B 69.06357
+## 3   3      1         C 73.74532
+## 4   4      1         D 73.82487
+## 5   1      2         B 66.96279
+## 6   2      2         C 71.76247</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="experimental-design.html#cb89-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> Row, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb89-2"><a href="experimental-design.html#cb89-2" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-3"><a href="experimental-design.html#cb89-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb89-4"><a href="experimental-design.html#cb89-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-5"><a href="experimental-design.html#cb89-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb89-6"><a href="experimental-design.html#cb89-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Latin Square Design Layout&quot;</span>)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="experimental-design.html#cb90-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb90-2"><a href="experimental-design.html#cb90-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Row <span class="sc">+</span> Column <span class="sc">+</span> Treatment, <span class="at">data =</span> df)</span>
+<span id="cb90-3"><a href="experimental-design.html#cb90-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Row          3   27.8    9.25   1.698 0.265817    
+## Column       3  102.4   34.15   6.264 0.028037 *  
+## Treatment    3  473.9  157.96  28.980 0.000574 ***
+## Residuals    6   32.7    5.45                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="split-plot-design" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Split plot design<a href="experimental-design.html#split-plot-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="experimental-design.html#cb92-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb92-2"><a href="experimental-design.html#cb92-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb92-3"><a href="experimental-design.html#cb92-3" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb92-4"><a href="experimental-design.html#cb92-4" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="experimental-design.html#cb92-5" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb92-6"><a href="experimental-design.html#cb92-6" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb92-7"><a href="experimental-design.html#cb92-7" tabindex="-1"></a>irrigation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>)</span>
+<span id="cb92-8"><a href="experimental-design.html#cb92-8" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb92-9"><a href="experimental-design.html#cb92-9" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="experimental-design.html#cb92-10" tabindex="-1"></a><span class="co"># Create layout</span></span>
+<span id="cb92-11"><a href="experimental-design.html#cb92-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb92-12"><a href="experimental-design.html#cb92-12" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
+<span id="cb92-13"><a href="experimental-design.html#cb92-13" tabindex="-1"></a>                         <span class="at">Irrigation =</span> irrigation,</span>
+<span id="cb92-14"><a href="experimental-design.html#cb92-14" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
+<span id="cb92-15"><a href="experimental-design.html#cb92-15" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb92-16"><a href="experimental-design.html#cb92-16" tabindex="-1"></a>    <span class="co"># Simulate effects</span></span>
+<span id="cb92-17"><a href="experimental-design.html#cb92-17" tabindex="-1"></a>    <span class="at">IrrigationEff =</span> <span class="fu">ifelse</span>(Irrigation <span class="sc">==</span> <span class="st">&quot;High&quot;</span>, <span class="dv">10</span>, <span class="dv">0</span>),</span>
+<span id="cb92-18"><a href="experimental-design.html#cb92-18" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
+<span id="cb92-19"><a href="experimental-design.html#cb92-19" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb92-20"><a href="experimental-design.html#cb92-20" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
+<span id="cb92-21"><a href="experimental-design.html#cb92-21" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
+<span id="cb92-22"><a href="experimental-design.html#cb92-22" tabindex="-1"></a>    ),</span>
+<span id="cb92-23"><a href="experimental-design.html#cb92-23" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb92-24"><a href="experimental-design.html#cb92-24" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb92-25"><a href="experimental-design.html#cb92-25" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> IrrigationEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
+<span id="cb92-26"><a href="experimental-design.html#cb92-26" tabindex="-1"></a>  )</span>
+<span id="cb92-27"><a href="experimental-design.html#cb92-27" tabindex="-1"></a></span>
+<span id="cb92-28"><a href="experimental-design.html#cb92-28" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
+<span id="cb92-29"><a href="experimental-design.html#cb92-29" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> splitplot <span class="sc">%&gt;%</span></span>
+<span id="cb92-30"><a href="experimental-design.html#cb92-30" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Irrigation) <span class="sc">%&gt;%</span></span>
+<span id="cb92-31"><a href="experimental-design.html#cb92-31" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb92-32"><a href="experimental-design.html#cb92-32" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb92-33"><a href="experimental-design.html#cb92-33" tabindex="-1"></a></span>
+<span id="cb92-34"><a href="experimental-design.html#cb92-34" tabindex="-1"></a><span class="fu">ggplot</span>(splitplot, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
+<span id="cb92-35"><a href="experimental-design.html#cb92-35" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-36"><a href="experimental-design.html#cb92-36" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Irrigation) <span class="sc">+</span></span>
+<span id="cb92-37"><a href="experimental-design.html#cb92-37" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Fertilizer), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb92-38"><a href="experimental-design.html#cb92-38" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-39"><a href="experimental-design.html#cb92-39" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb92-40"><a href="experimental-design.html#cb92-40" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Split-Plot Layout: Irrigation × Fertilizer&quot;</span>,</span>
+<span id="cb92-41"><a href="experimental-design.html#cb92-41" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Subplot within Irrigation&quot;</span>,</span>
+<span id="cb92-42"><a href="experimental-design.html#cb92-42" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="experimental-design.html#cb93-1" tabindex="-1"></a><span class="co"># Mixed model: Irrigation as main plot, Fertilizer as subplot</span></span>
+<span id="cb93-2"><a href="experimental-design.html#cb93-2" tabindex="-1"></a>model_split <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Irrigation <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block<span class="sc">/</span>Irrigation), <span class="at">data =</span> splitplot)</span>
+<span id="cb93-3"><a href="experimental-design.html#cb93-3" tabindex="-1"></a><span class="fu">summary</span>(model_split)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Yield ~ Irrigation * Fertilizer + (1 | Block/Irrigation)
+##    Data: splitplot
+## 
+## REML criterion at convergence: 103.6
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -1.37592 -0.43900  0.08326  0.29437  1.68979 
+## 
+## Random effects:
+##  Groups           Name        Variance Std.Dev.
+##  Irrigation:Block (Intercept)  2.374   1.541   
+##  Block            (Intercept) 16.151   4.019   
+##  Residual                      6.420   2.534   
+## Number of obs: 24, groups:  Irrigation:Block, 8; Block, 4
+## 
+## Fixed effects:
+##                            Estimate Std. Error t value
+## (Intercept)                  61.352      2.497  24.568
+## IrrigationHigh                9.935      2.097   4.738
+## FertilizerB                   7.809      1.792   4.358
+## FertilizerC                   5.603      1.792   3.127
+## IrrigationHigh:FertilizerB   -4.969      2.534  -1.961
+## IrrigationHigh:FertilizerC    2.327      2.534   0.919
+## 
+## Correlation of Fixed Effects:
+##             (Intr) IrrgtH FrtlzB FrtlzC IrH:FB
+## IrrigatnHgh -0.420                            
+## FertilizerB -0.359  0.427                     
+## FertilizerC -0.359  0.427  0.500              
+## IrrgtnHg:FB  0.254 -0.604 -0.707 -0.354       
+## IrrgtnHg:FC  0.254 -0.604 -0.354 -0.707  0.500</code></pre>
+</div>
+<div id="strip-plot-design" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Strip Plot design<a href="experimental-design.html#strip-plot-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="experimental-design.html#cb95-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb95-2"><a href="experimental-design.html#cb95-2" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb95-3"><a href="experimental-design.html#cb95-3" tabindex="-1"></a>tillage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Conventional&quot;</span>, <span class="st">&quot;No-Till&quot;</span>)</span>
+<span id="cb95-4"><a href="experimental-design.html#cb95-4" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb95-5"><a href="experimental-design.html#cb95-5" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="experimental-design.html#cb95-6" tabindex="-1"></a><span class="co"># Create layout</span></span>
+<span id="cb95-7"><a href="experimental-design.html#cb95-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb95-8"><a href="experimental-design.html#cb95-8" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
+<span id="cb95-9"><a href="experimental-design.html#cb95-9" tabindex="-1"></a>                         <span class="at">Tillage =</span> tillage,</span>
+<span id="cb95-10"><a href="experimental-design.html#cb95-10" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
+<span id="cb95-11"><a href="experimental-design.html#cb95-11" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb95-12"><a href="experimental-design.html#cb95-12" tabindex="-1"></a>    <span class="at">TillageEff =</span> <span class="fu">ifelse</span>(Tillage <span class="sc">==</span> <span class="st">&quot;No-Till&quot;</span>, <span class="dv">8</span>, <span class="dv">0</span>),</span>
+<span id="cb95-13"><a href="experimental-design.html#cb95-13" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
+<span id="cb95-14"><a href="experimental-design.html#cb95-14" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb95-15"><a href="experimental-design.html#cb95-15" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
+<span id="cb95-16"><a href="experimental-design.html#cb95-16" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
+<span id="cb95-17"><a href="experimental-design.html#cb95-17" tabindex="-1"></a>    ),</span>
+<span id="cb95-18"><a href="experimental-design.html#cb95-18" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span>,</span>
+<span id="cb95-19"><a href="experimental-design.html#cb95-19" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb95-20"><a href="experimental-design.html#cb95-20" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> TillageEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
+<span id="cb95-21"><a href="experimental-design.html#cb95-21" tabindex="-1"></a>  )</span>
+<span id="cb95-22"><a href="experimental-design.html#cb95-22" tabindex="-1"></a></span>
+<span id="cb95-23"><a href="experimental-design.html#cb95-23" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
+<span id="cb95-24"><a href="experimental-design.html#cb95-24" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> stripplot <span class="sc">%&gt;%</span></span>
+<span id="cb95-25"><a href="experimental-design.html#cb95-25" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Tillage) <span class="sc">%&gt;%</span></span>
+<span id="cb95-26"><a href="experimental-design.html#cb95-26" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb95-27"><a href="experimental-design.html#cb95-27" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb95-28"><a href="experimental-design.html#cb95-28" tabindex="-1"></a></span>
+<span id="cb95-29"><a href="experimental-design.html#cb95-29" tabindex="-1"></a><span class="fu">ggplot</span>(stripplot, <span class="fu">aes</span>(<span class="at">x =</span> Fertilizer, <span class="at">y =</span> Tillage, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
+<span id="cb95-30"><a href="experimental-design.html#cb95-30" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-31"><a href="experimental-design.html#cb95-31" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Block) <span class="sc">+</span></span>
+<span id="cb95-32"><a href="experimental-design.html#cb95-32" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Yield, <span class="dv">1</span>)), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb95-33"><a href="experimental-design.html#cb95-33" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb95-34"><a href="experimental-design.html#cb95-34" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb95-35"><a href="experimental-design.html#cb95-35" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Strip Plot Layout: Tillage × Fertilizer&quot;</span>,</span>
+<span id="cb95-36"><a href="experimental-design.html#cb95-36" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Vertical Strip (Fertilizer)&quot;</span>,</span>
+<span id="cb95-37"><a href="experimental-design.html#cb95-37" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Horizontal Strip (Tillage)&quot;</span>)</span></code></pre></div>
+<p><img src="03-frequentist_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="experimental-design.html#cb96-1" tabindex="-1"></a><span class="co"># Mixed model: Tillage and Fertilizer as fixed, Block as random</span></span>
+<span id="cb96-2"><a href="experimental-design.html#cb96-2" tabindex="-1"></a>model_strip <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Tillage <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> stripplot)</span>
+<span id="cb96-3"><a href="experimental-design.html#cb96-3" tabindex="-1"></a><span class="fu">summary</span>(model_strip)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Yield ~ Tillage * Fertilizer + (1 | Block)
+##    Data: stripplot
+## 
+## REML criterion at convergence: 73.5
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.4053 -0.5565  0.1948  0.5293  1.1583 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Block    (Intercept)  5.865   2.422   
+##  Residual             12.314   3.509   
+## Number of obs: 18, groups:  Block, 3
+## 
+## Fixed effects:
+##                            Estimate Std. Error t value
+## (Intercept)                 62.1694     2.4617  25.255
+## TillageNo-Till               7.7616     2.8652   2.709
+## FertilizerB                  7.2659     2.8652   2.536
+## FertilizerC                  7.0296     2.8652   2.453
+## TillageNo-Till:FertilizerB   0.3319     4.0520   0.082
+## TillageNo-Till:FertilizerC  -0.2654     4.0520  -0.065
+## 
+## Correlation of Fixed Effects:
+##             (Intr) TllN-T FrtlzB FrtlzC TN-T:FB
+## TillagN-Tll -0.582                             
+## FertilizerB -0.582  0.500                      
+## FertilizerC -0.582  0.500  0.500               
+## TllgN-Tl:FB  0.412 -0.707 -0.707 -0.354        
+## TllgN-Tl:FC  0.412 -0.707 -0.354 -0.707  0.500</code></pre>
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div class="csl-entry">
+Fisher, R. A. 1932. <span>“Inverse Probability and the Use of <span>Likelihood</span>.”</span> <em>Mathematical Proceedings of the Cambridge Philosophical Society</em> 28 (3): 257–61. <a href="https://doi.org/10.1017/S0305004100010094">https://doi.org/10.1017/S0305004100010094</a>.
+</div>
+<div class="csl-entry">
+———. 1960. <em>The Design of Experiments</em>. 6th ed. London; Edinburgh: Oliver; Boyd.
+</div>
+<div class="csl-entry">
+Hagen, Richard L. n.d. <span>“In <span>Praise</span> of the <span>Null</span> <span>Hypothesis</span> <span>Statistical</span> <span>Test</span>.”</span>
+</div>
+<div class="csl-entry">
+Ioannidis, John P. A. 2005. <span>“Why <span>Most</span> <span>Published</span> <span>Research</span> <span>Findings</span> <span>Are</span> <span>False</span>.”</span> <em>PLoS Medicine</em> 2 (8): e124. <a href="https://doi.org/10.1371/journal.pmed.0020124">https://doi.org/10.1371/journal.pmed.0020124</a>.
+</div>
+<div class="csl-entry">
+Mayo, Deborah G. 2018. <em>Statistical <span>Inference</span> as <span>Severe</span> <span>Testing</span>: <span>How</span> to Get Beyond the <span>Statistics</span> <span>Wars</span></em>. New York: Cambridge University Press.
+</div>
+<div class="csl-entry">
+Ott, R. Lymann, and Michael Longnecker. 2016. <em>Statistical <span>Methods</span> and <span>Data</span> <span>Analysis</span></em>. 2nd ed. Boston, MA: Cengage Learning.
+</div>
+<div class="csl-entry">
+Perezgonzalez, Jose D. 2015. <span>“Fisher, <span>Neyman</span>-<span>Pearson</span> or <span>NHST</span>? <span>A</span> Tutorial for Teaching Data Testing.”</span> <em>Frontiers in Psychology</em> 6 (March). <a href="https://doi.org/10.3389/fpsyg.2015.00223">https://doi.org/10.3389/fpsyg.2015.00223</a>.
+</div>
+<div class="csl-entry">
+Sedgwick, Philip M. n.d. <span>“Trials and <span>Tribulations</span> of <span>Teaching</span> <span>NHST</span> in the <span>Health</span> <span>Sciences</span>.”</span>
+</div>
+<div class="csl-entry">
+Stephens, Philip A., Steven W. Buskirk, and Carlos Martínez Del Rio. 2007. <span>“Inference in Ecology and Evolution.”</span> <em>Trends in Ecology &amp; Evolution</em> 22 (4): 192–97. <a href="https://doi.org/10.1016/j.tree.2006.12.003">https://doi.org/10.1016/j.tree.2006.12.003</a>.
+</div>
+<div class="csl-entry">
+Wasserstein, Ronald L., and Nicole A. Lazar. 2016. <span>“The <span>ASA</span> <span>Statement</span> on <em>p</em> -<span>Values</span>: <span>Context</span>, <span>Process</span>, and <span>Purpose</span>.”</span> <em>The American Statistician</em> 70 (2): 129–33. <a href="https://doi.org/10.1080/00031305.2016.1154108">https://doi.org/10.1080/00031305.2016.1154108</a>.
+</div>
+<div class="csl-entry">
+Wu, Jinshan. 2018. <span>“Is There an Intrinsic Logical Error in Null Hypothesis Significance Tests? <span>Commentary</span> on: <span>‘<span>Null</span> Hypothesis Significance Tests. <span>A</span> Mix-up of Two Different Theories: The Basis for Widespread Confusion and Numerous Misinterpretations’</span>.”</span> <em>Scientometrics</em> 115 (1): 621–25. <a href="https://doi.org/10.1007/s11192-018-2656-3">https://doi.org/10.1007/s11192-018-2656-3</a>.
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="standard-statistics.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/03-frequentist.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["quantitative_thinking.pdf", "quantitative_thinking.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

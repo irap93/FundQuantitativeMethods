@@ -32,7 +32,13 @@ two-population-inference
 linear-models
 prediction-vs.-explanation
 simple-linear-models
-anovas
+simple-anovas
 demonstrating-equivalence
 liklihood-vs.-probability
-simple-anovas
+experimental-design
+why-is-sound-experimental-design-important
+completely-randomized
+randomized-complete-block-design
+latin-squares
+split-plot-design
+strip-plot-design
