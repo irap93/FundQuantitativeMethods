@@ -20,10 +20,10 @@
   <meta name="twitter:description" content="A workbook to accompany Quantitative Thinking in Range and Animal Sciences." />
   <meta name="twitter:image" content="https://iraparsons.com/FundQuantitativeMethods/images/BookCover.jpg" />
 
-<meta name="author" content="Yihui Xie" />
+<meta name="author" content="Ira Lloyd Parsons, PhD" />
 
 
-<meta name="date" content="2025-10-10" />
+<meta name="date" content="2025-11-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,11 +164,9 @@ div.csl-indent {
 <li><a href="./">Quantitative Thinking</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>The Nature of Knowledge</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>The Nature of Knowledge</a></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the Author</a></li>
+<li class="chapter" data-level="" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i>Disclaimer</a></li>
 <li class="chapter" data-level="1" data-path="science.html"><a href="science.html"><i class="fa fa-check"></i><b>1</b> Science</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="science.html"><a href="science.html#how-you-know-what-you-know-and-is-what-you-know-really-so"><i class="fa fa-check"></i><b>1.1</b> How you know what you know, and is what you know really so?</a></li>
@@ -269,33 +267,33 @@ div.csl-indent {
 <div id="completely-randomized" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Completely Randomized<a href="experimental-design.html#completely-randomized" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Completely randomized designs are used when comparing more than one treatment. Each experimental unit is assumed to be a random selection from the population.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="experimental-design.html#cb65-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb65-2"><a href="experimental-design.html#cb65-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb65-3"><a href="experimental-design.html#cb65-3" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="experimental-design.html#cb65-4" tabindex="-1"></a><span class="co"># Define parameters</span></span>
-<span id="cb65-5"><a href="experimental-design.html#cb65-5" tabindex="-1"></a>n_per_treatment <span class="ot">=</span> <span class="dv">10</span>  <span class="co"># number of replicates per treatment</span></span>
-<span id="cb65-6"><a href="experimental-design.html#cb65-6" tabindex="-1"></a>treatments <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb65-7"><a href="experimental-design.html#cb65-7" tabindex="-1"></a>n_total <span class="ot">=</span> n_per_treatment <span class="sc">*</span> <span class="fu">length</span>(treatments)</span>
-<span id="cb65-8"><a href="experimental-design.html#cb65-8" tabindex="-1"></a></span>
-<span id="cb65-9"><a href="experimental-design.html#cb65-9" tabindex="-1"></a><span class="co"># Create treatment vector (randomized)</span></span>
-<span id="cb65-10"><a href="experimental-design.html#cb65-10" tabindex="-1"></a>treatment <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each =</span> n_per_treatment))</span>
-<span id="cb65-11"><a href="experimental-design.html#cb65-11" tabindex="-1"></a></span>
-<span id="cb65-12"><a href="experimental-design.html#cb65-12" tabindex="-1"></a><span class="co"># Simulate response variable (e.g., plant height)</span></span>
-<span id="cb65-13"><a href="experimental-design.html#cb65-13" tabindex="-1"></a><span class="co"># Assume different means for each treatment</span></span>
-<span id="cb65-14"><a href="experimental-design.html#cb65-14" tabindex="-1"></a>response <span class="ot">=</span> <span class="fu">rnorm</span>(n_total,</span>
-<span id="cb65-15"><a href="experimental-design.html#cb65-15" tabindex="-1"></a>                  <span class="at">mean =</span> <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">20</span>,</span>
-<span id="cb65-16"><a href="experimental-design.html#cb65-16" tabindex="-1"></a>                          <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">25</span>, <span class="dv">30</span>)),</span>
-<span id="cb65-17"><a href="experimental-design.html#cb65-17" tabindex="-1"></a>                  <span class="at">sd =</span> <span class="dv">3</span>)</span>
-<span id="cb65-18"><a href="experimental-design.html#cb65-18" tabindex="-1"></a></span>
-<span id="cb65-19"><a href="experimental-design.html#cb65-19" tabindex="-1"></a><span class="co"># Create data frame</span></span>
-<span id="cb65-20"><a href="experimental-design.html#cb65-20" tabindex="-1"></a>crd_data <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
-<span id="cb65-21"><a href="experimental-design.html#cb65-21" tabindex="-1"></a>  <span class="at">PlantID =</span> <span class="dv">1</span><span class="sc">:</span>n_total,</span>
-<span id="cb65-22"><a href="experimental-design.html#cb65-22" tabindex="-1"></a>  <span class="at">Treatment =</span> treatment,</span>
-<span id="cb65-23"><a href="experimental-design.html#cb65-23" tabindex="-1"></a>  <span class="at">Height =</span> response</span>
-<span id="cb65-24"><a href="experimental-design.html#cb65-24" tabindex="-1"></a>)</span>
-<span id="cb65-25"><a href="experimental-design.html#cb65-25" tabindex="-1"></a></span>
-<span id="cb65-26"><a href="experimental-design.html#cb65-26" tabindex="-1"></a><span class="co"># View first few rows</span></span>
-<span id="cb65-27"><a href="experimental-design.html#cb65-27" tabindex="-1"></a><span class="fu">head</span>(crd_data)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="experimental-design.html#cb144-1" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb144-2"><a href="experimental-design.html#cb144-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb144-3"><a href="experimental-design.html#cb144-3" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="experimental-design.html#cb144-4" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb144-5"><a href="experimental-design.html#cb144-5" tabindex="-1"></a>n_per_treatment <span class="ot">=</span> <span class="dv">10</span>  <span class="co"># number of replicates per treatment</span></span>
+<span id="cb144-6"><a href="experimental-design.html#cb144-6" tabindex="-1"></a>treatments <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb144-7"><a href="experimental-design.html#cb144-7" tabindex="-1"></a>n_total <span class="ot">=</span> n_per_treatment <span class="sc">*</span> <span class="fu">length</span>(treatments)</span>
+<span id="cb144-8"><a href="experimental-design.html#cb144-8" tabindex="-1"></a></span>
+<span id="cb144-9"><a href="experimental-design.html#cb144-9" tabindex="-1"></a><span class="co"># Create treatment vector (randomized)</span></span>
+<span id="cb144-10"><a href="experimental-design.html#cb144-10" tabindex="-1"></a>treatment <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatments, <span class="at">each =</span> n_per_treatment))</span>
+<span id="cb144-11"><a href="experimental-design.html#cb144-11" tabindex="-1"></a></span>
+<span id="cb144-12"><a href="experimental-design.html#cb144-12" tabindex="-1"></a><span class="co"># Simulate response variable (e.g., plant height)</span></span>
+<span id="cb144-13"><a href="experimental-design.html#cb144-13" tabindex="-1"></a><span class="co"># Assume different means for each treatment</span></span>
+<span id="cb144-14"><a href="experimental-design.html#cb144-14" tabindex="-1"></a>response <span class="ot">=</span> <span class="fu">rnorm</span>(n_total,</span>
+<span id="cb144-15"><a href="experimental-design.html#cb144-15" tabindex="-1"></a>                  <span class="at">mean =</span> <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">20</span>,</span>
+<span id="cb144-16"><a href="experimental-design.html#cb144-16" tabindex="-1"></a>                          <span class="fu">ifelse</span>(treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">25</span>, <span class="dv">30</span>)),</span>
+<span id="cb144-17"><a href="experimental-design.html#cb144-17" tabindex="-1"></a>                  <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb144-18"><a href="experimental-design.html#cb144-18" tabindex="-1"></a></span>
+<span id="cb144-19"><a href="experimental-design.html#cb144-19" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb144-20"><a href="experimental-design.html#cb144-20" tabindex="-1"></a>crd_data <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb144-21"><a href="experimental-design.html#cb144-21" tabindex="-1"></a>  <span class="at">PlantID =</span> <span class="dv">1</span><span class="sc">:</span>n_total,</span>
+<span id="cb144-22"><a href="experimental-design.html#cb144-22" tabindex="-1"></a>  <span class="at">Treatment =</span> treatment,</span>
+<span id="cb144-23"><a href="experimental-design.html#cb144-23" tabindex="-1"></a>  <span class="at">Height =</span> response</span>
+<span id="cb144-24"><a href="experimental-design.html#cb144-24" tabindex="-1"></a>)</span>
+<span id="cb144-25"><a href="experimental-design.html#cb144-25" tabindex="-1"></a></span>
+<span id="cb144-26"><a href="experimental-design.html#cb144-26" tabindex="-1"></a><span class="co"># View first few rows</span></span>
+<span id="cb144-27"><a href="experimental-design.html#cb144-27" tabindex="-1"></a><span class="fu">head</span>(crd_data)</span></code></pre></div>
 <pre><code>##   PlantID Treatment   Height
 ## 1       1         B 21.74290
 ## 2       2         B 24.74373
@@ -303,93 +301,93 @@ div.csl-indent {
 ## 4       4         A 19.56382
 ## 5       5         A 16.50337
 ## 6       6         B 22.54445</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="experimental-design.html#cb67-1" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
-<span id="cb67-2"><a href="experimental-design.html#cb67-2" tabindex="-1"></a><span class="fu">aggregate</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="experimental-design.html#cb146-1" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb146-2"><a href="experimental-design.html#cb146-2" tabindex="-1"></a><span class="fu">aggregate</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data, mean)</span></code></pre></div>
 <pre><code>##   Treatment   Height
 ## 1         A 19.12492
 ## 2         B 23.89719
 ## 3         C 30.02318</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="experimental-design.html#cb69-1" tabindex="-1"></a><span class="co"># ANOVA</span></span>
-<span id="cb69-2"><a href="experimental-design.html#cb69-2" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data)</span>
-<span id="cb69-3"><a href="experimental-design.html#cb69-3" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="experimental-design.html#cb148-1" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb148-2"><a href="experimental-design.html#cb148-2" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data)</span>
+<span id="cb148-3"><a href="experimental-design.html#cb148-3" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 ## Treatment    2  596.9  298.46   32.55 6.4e-08 ***
 ## Residuals   27  247.6    9.17                    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="experimental-design.html#cb71-1" tabindex="-1"></a><span class="co"># Basic scatter plot</span></span>
-<span id="cb71-2"><a href="experimental-design.html#cb71-2" tabindex="-1"></a><span class="fu">ggplot</span>(crd_data, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Height)) <span class="sc">+</span></span>
-<span id="cb71-3"><a href="experimental-design.html#cb71-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb71-4"><a href="experimental-design.html#cb71-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
-<span id="cb71-5"><a href="experimental-design.html#cb71-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
-<span id="cb71-6"><a href="experimental-design.html#cb71-6" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Height (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb71-7"><a href="experimental-design.html#cb71-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="experimental-design.html#cb150-1" tabindex="-1"></a><span class="co"># Basic scatter plot</span></span>
+<span id="cb150-2"><a href="experimental-design.html#cb150-2" tabindex="-1"></a><span class="fu">ggplot</span>(crd_data, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb150-3"><a href="experimental-design.html#cb150-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb150-4"><a href="experimental-design.html#cb150-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
+<span id="cb150-5"><a href="experimental-design.html#cb150-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
+<span id="cb150-6"><a href="experimental-design.html#cb150-6" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Height (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb150-7"><a href="experimental-design.html#cb150-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="experimental-design.html#cb72-1" tabindex="-1"></a><span class="co"># Boxplot</span></span>
-<span id="cb72-2"><a href="experimental-design.html#cb72-2" tabindex="-1"></a><span class="fu">boxplot</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data,</span>
-<span id="cb72-3"><a href="experimental-design.html#cb72-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
-<span id="cb72-4"><a href="experimental-design.html#cb72-4" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Height (cm)&quot;</span>,</span>
-<span id="cb72-5"><a href="experimental-design.html#cb72-5" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightpink&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="experimental-design.html#cb151-1" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb151-2"><a href="experimental-design.html#cb151-2" tabindex="-1"></a><span class="fu">boxplot</span>(Height <span class="sc">~</span> Treatment, <span class="at">data =</span> crd_data,</span>
+<span id="cb151-3"><a href="experimental-design.html#cb151-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Plant Height by Fertilizer Treatment&quot;</span>,</span>
+<span id="cb151-4"><a href="experimental-design.html#cb151-4" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Height (cm)&quot;</span>,</span>
+<span id="cb151-5"><a href="experimental-design.html#cb151-5" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;lightblue&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;lightpink&quot;</span>))</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="experimental-design.html#cb73-1" tabindex="-1"></a><span class="co"># Assume crd_data is already created from previous simulation</span></span>
-<span id="cb73-2"><a href="experimental-design.html#cb73-2" tabindex="-1"></a><span class="co"># If not, run the CRD simulation code first</span></span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="experimental-design.html#cb152-1" tabindex="-1"></a><span class="co"># Assume crd_data is already created from previous simulation</span></span>
+<span id="cb152-2"><a href="experimental-design.html#cb152-2" tabindex="-1"></a><span class="co"># If not, run the CRD simulation code first</span></span></code></pre></div>
 </div>
 <div id="randomized-complete-block-design" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Randomized Complete Block Design<a href="experimental-design.html#randomized-complete-block-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The randomized complete block is useful for blocking across some known source of variation. It allows for more precise comparison between treatments when their is known varation within the experimental units. It has the added advantage of providing a comparison across the blocks if desired.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="experimental-design.html#cb74-1" tabindex="-1"></a><span class="co"># Randomized Complete Block -----</span></span>
-<span id="cb74-2"><a href="experimental-design.html#cb74-2" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb74-3"><a href="experimental-design.html#cb74-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb74-4"><a href="experimental-design.html#cb74-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb74-5"><a href="experimental-design.html#cb74-5" tabindex="-1"></a></span>
-<span id="cb74-6"><a href="experimental-design.html#cb74-6" tabindex="-1"></a><span class="co"># Define factors</span></span>
-<span id="cb74-7"><a href="experimental-design.html#cb74-7" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
-<span id="cb74-8"><a href="experimental-design.html#cb74-8" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb74-9"><a href="experimental-design.html#cb74-9" tabindex="-1"></a></span>
-<span id="cb74-10"><a href="experimental-design.html#cb74-10" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
-<span id="cb74-11"><a href="experimental-design.html#cb74-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb74-12"><a href="experimental-design.html#cb74-12" tabindex="-1"></a></span>
-<span id="cb74-13"><a href="experimental-design.html#cb74-13" tabindex="-1"></a><span class="co"># Define factors</span></span>
-<span id="cb74-14"><a href="experimental-design.html#cb74-14" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
-<span id="cb74-15"><a href="experimental-design.html#cb74-15" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Block&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb74-16"><a href="experimental-design.html#cb74-16" tabindex="-1"></a></span>
-<span id="cb74-17"><a href="experimental-design.html#cb74-17" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
-<span id="cb74-18"><a href="experimental-design.html#cb74-18" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks, <span class="at">Treatment =</span> treatments) <span class="sc">%&gt;%</span></span>
-<span id="cb74-19"><a href="experimental-design.html#cb74-19" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
-<span id="cb74-20"><a href="experimental-design.html#cb74-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">sample</span>(Treatment)) <span class="sc">%&gt;%</span></span>
-<span id="cb74-21"><a href="experimental-design.html#cb74-21" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb74-22"><a href="experimental-design.html#cb74-22" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb74-23"><a href="experimental-design.html#cb74-23" tabindex="-1"></a>    <span class="co"># Simulate subplot-level variation within each block</span></span>
-<span id="cb74-24"><a href="experimental-design.html#cb74-24" tabindex="-1"></a>    <span class="at">SubplotNoise =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">4</span>),  <span class="co"># Increased SD for within-field variation</span></span>
-<span id="cb74-25"><a href="experimental-design.html#cb74-25" tabindex="-1"></a>    </span>
-<span id="cb74-26"><a href="experimental-design.html#cb74-26" tabindex="-1"></a>    <span class="co"># Simulate yield: treatment + block + subplot noise + residual error</span></span>
-<span id="cb74-27"><a href="experimental-design.html#cb74-27" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span></span>
-<span id="cb74-28"><a href="experimental-design.html#cb74-28" tabindex="-1"></a>      <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
-<span id="cb74-29"><a href="experimental-design.html#cb74-29" tabindex="-1"></a>             <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
-<span id="cb74-30"><a href="experimental-design.html#cb74-30" tabindex="-1"></a>                    <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
-<span id="cb74-31"><a href="experimental-design.html#cb74-31" tabindex="-1"></a>      <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Block&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb74-32"><a href="experimental-design.html#cb74-32" tabindex="-1"></a>      SubplotNoise <span class="sc">+</span></span>
-<span id="cb74-33"><a href="experimental-design.html#cb74-33" tabindex="-1"></a>      <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb74-34"><a href="experimental-design.html#cb74-34" tabindex="-1"></a>  )</span>
-<span id="cb74-35"><a href="experimental-design.html#cb74-35" tabindex="-1"></a></span>
-<span id="cb74-36"><a href="experimental-design.html#cb74-36" tabindex="-1"></a><span class="co"># Add numeric position for plotting</span></span>
-<span id="cb74-37"><a href="experimental-design.html#cb74-37" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> rcbd <span class="sc">%&gt;%</span></span>
-<span id="cb74-38"><a href="experimental-design.html#cb74-38" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
-<span id="cb74-39"><a href="experimental-design.html#cb74-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb74-40"><a href="experimental-design.html#cb74-40" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb74-41"><a href="experimental-design.html#cb74-41" tabindex="-1"></a></span>
-<span id="cb74-42"><a href="experimental-design.html#cb74-42" tabindex="-1"></a><span class="co"># Plot layout</span></span>
-<span id="cb74-43"><a href="experimental-design.html#cb74-43" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
-<span id="cb74-44"><a href="experimental-design.html#cb74-44" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-45"><a href="experimental-design.html#cb74-45" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb74-46"><a href="experimental-design.html#cb74-46" tabindex="-1"></a>  <span class="co"># scale_y_reverse(breaks = rcbd$Block, labels = rcbd$Block) +</span></span>
-<span id="cb74-47"><a href="experimental-design.html#cb74-47" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-48"><a href="experimental-design.html#cb74-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD Treatment Layout&quot;</span>,</span>
-<span id="cb74-49"><a href="experimental-design.html#cb74-49" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Plot within Block&quot;</span>,</span>
-<span id="cb74-50"><a href="experimental-design.html#cb74-50" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>) <span class="sc">+</span></span>
-<span id="cb74-51"><a href="experimental-design.html#cb74-51" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="experimental-design.html#cb153-1" tabindex="-1"></a><span class="co"># Randomized Complete Block -----</span></span>
+<span id="cb153-2"><a href="experimental-design.html#cb153-2" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb153-3"><a href="experimental-design.html#cb153-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb153-4"><a href="experimental-design.html#cb153-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb153-5"><a href="experimental-design.html#cb153-5" tabindex="-1"></a></span>
+<span id="cb153-6"><a href="experimental-design.html#cb153-6" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb153-7"><a href="experimental-design.html#cb153-7" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb153-8"><a href="experimental-design.html#cb153-8" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb153-9"><a href="experimental-design.html#cb153-9" tabindex="-1"></a></span>
+<span id="cb153-10"><a href="experimental-design.html#cb153-10" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
+<span id="cb153-11"><a href="experimental-design.html#cb153-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb153-12"><a href="experimental-design.html#cb153-12" tabindex="-1"></a></span>
+<span id="cb153-13"><a href="experimental-design.html#cb153-13" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb153-14"><a href="experimental-design.html#cb153-14" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb153-15"><a href="experimental-design.html#cb153-15" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Block&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb153-16"><a href="experimental-design.html#cb153-16" tabindex="-1"></a></span>
+<span id="cb153-17"><a href="experimental-design.html#cb153-17" tabindex="-1"></a><span class="co"># Create RCBD layout</span></span>
+<span id="cb153-18"><a href="experimental-design.html#cb153-18" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks, <span class="at">Treatment =</span> treatments) <span class="sc">%&gt;%</span></span>
+<span id="cb153-19"><a href="experimental-design.html#cb153-19" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
+<span id="cb153-20"><a href="experimental-design.html#cb153-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">sample</span>(Treatment)) <span class="sc">%&gt;%</span></span>
+<span id="cb153-21"><a href="experimental-design.html#cb153-21" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb153-22"><a href="experimental-design.html#cb153-22" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb153-23"><a href="experimental-design.html#cb153-23" tabindex="-1"></a>    <span class="co"># Simulate subplot-level variation within each block</span></span>
+<span id="cb153-24"><a href="experimental-design.html#cb153-24" tabindex="-1"></a>    <span class="at">SubplotNoise =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">4</span>),  <span class="co"># Increased SD for within-field variation</span></span>
+<span id="cb153-25"><a href="experimental-design.html#cb153-25" tabindex="-1"></a>    </span>
+<span id="cb153-26"><a href="experimental-design.html#cb153-26" tabindex="-1"></a>    <span class="co"># Simulate yield: treatment + block + subplot noise + residual error</span></span>
+<span id="cb153-27"><a href="experimental-design.html#cb153-27" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span></span>
+<span id="cb153-28"><a href="experimental-design.html#cb153-28" tabindex="-1"></a>      <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
+<span id="cb153-29"><a href="experimental-design.html#cb153-29" tabindex="-1"></a>             <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
+<span id="cb153-30"><a href="experimental-design.html#cb153-30" tabindex="-1"></a>                    <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
+<span id="cb153-31"><a href="experimental-design.html#cb153-31" tabindex="-1"></a>      <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Block&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb153-32"><a href="experimental-design.html#cb153-32" tabindex="-1"></a>      SubplotNoise <span class="sc">+</span></span>
+<span id="cb153-33"><a href="experimental-design.html#cb153-33" tabindex="-1"></a>      <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb153-34"><a href="experimental-design.html#cb153-34" tabindex="-1"></a>  )</span>
+<span id="cb153-35"><a href="experimental-design.html#cb153-35" tabindex="-1"></a></span>
+<span id="cb153-36"><a href="experimental-design.html#cb153-36" tabindex="-1"></a><span class="co"># Add numeric position for plotting</span></span>
+<span id="cb153-37"><a href="experimental-design.html#cb153-37" tabindex="-1"></a>rcbd <span class="ot">&lt;-</span> rcbd <span class="sc">%&gt;%</span></span>
+<span id="cb153-38"><a href="experimental-design.html#cb153-38" tabindex="-1"></a>  <span class="fu">group_by</span>(Block) <span class="sc">%&gt;%</span></span>
+<span id="cb153-39"><a href="experimental-design.html#cb153-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb153-40"><a href="experimental-design.html#cb153-40" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb153-41"><a href="experimental-design.html#cb153-41" tabindex="-1"></a></span>
+<span id="cb153-42"><a href="experimental-design.html#cb153-42" tabindex="-1"></a><span class="co"># Plot layout</span></span>
+<span id="cb153-43"><a href="experimental-design.html#cb153-43" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb153-44"><a href="experimental-design.html#cb153-44" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-45"><a href="experimental-design.html#cb153-45" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb153-46"><a href="experimental-design.html#cb153-46" tabindex="-1"></a>  <span class="co"># scale_y_reverse(breaks = rcbd$Block, labels = rcbd$Block) +</span></span>
+<span id="cb153-47"><a href="experimental-design.html#cb153-47" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-48"><a href="experimental-design.html#cb153-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD Treatment Layout&quot;</span>,</span>
+<span id="cb153-49"><a href="experimental-design.html#cb153-49" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Plot within Block&quot;</span>,</span>
+<span id="cb153-50"><a href="experimental-design.html#cb153-50" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>) <span class="sc">+</span></span>
+<span id="cb153-51"><a href="experimental-design.html#cb153-51" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="experimental-design.html#cb75-1" tabindex="-1"></a><span class="fu">head</span>(rcbd)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="experimental-design.html#cb154-1" tabindex="-1"></a><span class="fu">head</span>(rcbd)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   Block  Treatment SubplotNoise Yield  Plot
 ##   &lt;fct&gt;  &lt;fct&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
@@ -399,34 +397,34 @@ div.csl-indent {
 ## 4 Block4 D                5.26   89.2     1
 ## 5 Block5 D                3.91   87.5     1
 ## 6 Block1 D                3.53   74.4     2</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="experimental-design.html#cb77-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">fill =</span> Block)) <span class="sc">+</span></span>
-<span id="cb77-2"><a href="experimental-design.html#cb77-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb77-3"><a href="experimental-design.html#cb77-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb77-4"><a href="experimental-design.html#cb77-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD: Treatment Effects Across Blocks&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="experimental-design.html#cb156-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">fill =</span> Block)) <span class="sc">+</span></span>
+<span id="cb156-2"><a href="experimental-design.html#cb156-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb156-3"><a href="experimental-design.html#cb156-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb156-4"><a href="experimental-design.html#cb156-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD: Treatment Effects Across Blocks&quot;</span>)</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="experimental-design.html#cb78-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">color =</span> Block)) <span class="sc">+</span></span>
-<span id="cb78-2"><a href="experimental-design.html#cb78-2" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb78-3"><a href="experimental-design.html#cb78-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb78-4"><a href="experimental-design.html#cb78-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD with Increased Within-Block Variation&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="experimental-design.html#cb157-1" tabindex="-1"></a><span class="fu">ggplot</span>(rcbd, <span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> Yield, <span class="at">color =</span> Block)) <span class="sc">+</span></span>
+<span id="cb157-2"><a href="experimental-design.html#cb157-2" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb157-3"><a href="experimental-design.html#cb157-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb157-4"><a href="experimental-design.html#cb157-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;RCBD with Increased Within-Block Variation&quot;</span>)</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="experimental-design.html#cb79-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
-<span id="cb79-2"><a href="experimental-design.html#cb79-2" tabindex="-1"></a>model_rcbd <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> Block, <span class="at">data =</span> rcbd)</span>
-<span id="cb79-3"><a href="experimental-design.html#cb79-3" tabindex="-1"></a><span class="fu">summary</span>(model_rcbd)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="experimental-design.html#cb158-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb158-2"><a href="experimental-design.html#cb158-2" tabindex="-1"></a>model_rcbd <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> Block, <span class="at">data =</span> rcbd)</span>
+<span id="cb158-3"><a href="experimental-design.html#cb158-3" tabindex="-1"></a><span class="fu">summary</span>(model_rcbd)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Treatment    3  780.3  260.09  14.911 0.000238 ***
 ## Block        4  497.1  124.28   7.125 0.003534 ** 
 ## Residuals   12  209.3   17.44                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="experimental-design.html#cb81-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="experimental-design.html#cb160-1" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;Matrix&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
 ## 
 ##     expand, pack, unpack</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="experimental-design.html#cb85-1" tabindex="-1"></a>model_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> rcbd)</span>
-<span id="cb85-2"><a href="experimental-design.html#cb85-2" tabindex="-1"></a><span class="fu">summary</span>(model_mixed)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="experimental-design.html#cb164-1" tabindex="-1"></a>model_mixed <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Treatment <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> rcbd)</span>
+<span id="cb164-2"><a href="experimental-design.html#cb164-2" tabindex="-1"></a><span class="fu">summary</span>(model_mixed)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Yield ~ Treatment + (1 | Block)
 ##    Data: rcbd
@@ -459,28 +457,28 @@ div.csl-indent {
 <div id="latin-squares" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Latin Squares<a href="experimental-design.html#latin-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The Latin Square is an extension of the randomized complete block design, but rather than the treatments being randomly assigned within each block, they are strategically allocated such that each treatment occurs once between each row and each column.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="experimental-design.html#cb87-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
-<span id="cb87-2"><a href="experimental-design.html#cb87-2" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
-<span id="cb87-3"><a href="experimental-design.html#cb87-3" tabindex="-1"></a>latin_square <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>,</span>
-<span id="cb87-4"><a href="experimental-design.html#cb87-4" tabindex="-1"></a>                         <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb87-5"><a href="experimental-design.html#cb87-5" tabindex="-1"></a>                         <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,</span>
-<span id="cb87-6"><a href="experimental-design.html#cb87-6" tabindex="-1"></a>                         <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), </span>
-<span id="cb87-7"><a href="experimental-design.html#cb87-7" tabindex="-1"></a>                       <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb87-8"><a href="experimental-design.html#cb87-8" tabindex="-1"></a></span>
-<span id="cb87-9"><a href="experimental-design.html#cb87-9" tabindex="-1"></a><span class="co"># Create data frame</span></span>
-<span id="cb87-10"><a href="experimental-design.html#cb87-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Row =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
-<span id="cb87-11"><a href="experimental-design.html#cb87-11" tabindex="-1"></a>                  <span class="at">Column =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb87-12"><a href="experimental-design.html#cb87-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">as.vector</span>(<span class="fu">t</span>(latin_square)),</span>
-<span id="cb87-13"><a href="experimental-design.html#cb87-13" tabindex="-1"></a>         <span class="co"># Simulate yield with treatment effect + row/column noise</span></span>
-<span id="cb87-14"><a href="experimental-design.html#cb87-14" tabindex="-1"></a>         <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> </span>
-<span id="cb87-15"><a href="experimental-design.html#cb87-15" tabindex="-1"></a>           <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
-<span id="cb87-16"><a href="experimental-design.html#cb87-16" tabindex="-1"></a>                  <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
-<span id="cb87-17"><a href="experimental-design.html#cb87-17" tabindex="-1"></a>                         <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
-<span id="cb87-18"><a href="experimental-design.html#cb87-18" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Row)<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> </span>
-<span id="cb87-19"><a href="experimental-design.html#cb87-19" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Column)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span></span>
-<span id="cb87-20"><a href="experimental-design.html#cb87-20" tabindex="-1"></a>           <span class="fu">rnorm</span>(<span class="dv">16</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
-<span id="cb87-21"><a href="experimental-design.html#cb87-21" tabindex="-1"></a></span>
-<span id="cb87-22"><a href="experimental-design.html#cb87-22" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="experimental-design.html#cb166-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb166-2"><a href="experimental-design.html#cb166-2" tabindex="-1"></a>treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb166-3"><a href="experimental-design.html#cb166-3" tabindex="-1"></a>latin_square <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb166-4"><a href="experimental-design.html#cb166-4" tabindex="-1"></a>                         <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb166-5"><a href="experimental-design.html#cb166-5" tabindex="-1"></a>                         <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,</span>
+<span id="cb166-6"><a href="experimental-design.html#cb166-6" tabindex="-1"></a>                         <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), </span>
+<span id="cb166-7"><a href="experimental-design.html#cb166-7" tabindex="-1"></a>                       <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb166-8"><a href="experimental-design.html#cb166-8" tabindex="-1"></a></span>
+<span id="cb166-9"><a href="experimental-design.html#cb166-9" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb166-10"><a href="experimental-design.html#cb166-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Row =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),</span>
+<span id="cb166-11"><a href="experimental-design.html#cb166-11" tabindex="-1"></a>                  <span class="at">Column =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb166-12"><a href="experimental-design.html#cb166-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">as.vector</span>(<span class="fu">t</span>(latin_square)),</span>
+<span id="cb166-13"><a href="experimental-design.html#cb166-13" tabindex="-1"></a>         <span class="co"># Simulate yield with treatment effect + row/column noise</span></span>
+<span id="cb166-14"><a href="experimental-design.html#cb166-14" tabindex="-1"></a>         <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> </span>
+<span id="cb166-15"><a href="experimental-design.html#cb166-15" tabindex="-1"></a>           <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">5</span>,</span>
+<span id="cb166-16"><a href="experimental-design.html#cb166-16" tabindex="-1"></a>                  <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">10</span>,</span>
+<span id="cb166-17"><a href="experimental-design.html#cb166-17" tabindex="-1"></a>                         <span class="fu">ifelse</span>(Treatment <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">15</span>, <span class="dv">20</span>))) <span class="sc">+</span></span>
+<span id="cb166-18"><a href="experimental-design.html#cb166-18" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Row)<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> </span>
+<span id="cb166-19"><a href="experimental-design.html#cb166-19" tabindex="-1"></a>           <span class="fu">as.numeric</span>(Column)<span class="sc">*</span><span class="fl">1.5</span> <span class="sc">+</span></span>
+<span id="cb166-20"><a href="experimental-design.html#cb166-20" tabindex="-1"></a>           <span class="fu">rnorm</span>(<span class="dv">16</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>))</span>
+<span id="cb166-21"><a href="experimental-design.html#cb166-21" tabindex="-1"></a></span>
+<span id="cb166-22"><a href="experimental-design.html#cb166-22" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre><code>##   Row Column Treatment    Yield
 ## 1   1      1         A 57.93586
 ## 2   2      1         B 69.06357
@@ -488,16 +486,16 @@ div.csl-indent {
 ## 4   4      1         D 73.82487
 ## 5   1      2         B 66.96279
 ## 6   2      2         C 71.76247</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="experimental-design.html#cb89-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> Row, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
-<span id="cb89-2"><a href="experimental-design.html#cb89-2" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb89-3"><a href="experimental-design.html#cb89-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb89-4"><a href="experimental-design.html#cb89-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb89-5"><a href="experimental-design.html#cb89-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb89-6"><a href="experimental-design.html#cb89-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Latin Square Design Layout&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="experimental-design.html#cb168-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> Row, <span class="at">fill =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb168-2"><a href="experimental-design.html#cb168-2" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-3"><a href="experimental-design.html#cb168-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Treatment), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb168-4"><a href="experimental-design.html#cb168-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-5"><a href="experimental-design.html#cb168-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb168-6"><a href="experimental-design.html#cb168-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Latin Square Design Layout&quot;</span>)</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="experimental-design.html#cb90-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
-<span id="cb90-2"><a href="experimental-design.html#cb90-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Row <span class="sc">+</span> Column <span class="sc">+</span> Treatment, <span class="at">data =</span> df)</span>
-<span id="cb90-3"><a href="experimental-design.html#cb90-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="experimental-design.html#cb169-1" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb169-2"><a href="experimental-design.html#cb169-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(Yield <span class="sc">~</span> Row <span class="sc">+</span> Column <span class="sc">+</span> Treatment, <span class="at">data =</span> df)</span>
+<span id="cb169-3"><a href="experimental-design.html#cb169-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Row          3   27.8    9.25   1.698 0.265817    
 ## Column       3  102.4   34.15   6.264 0.028037 *  
@@ -508,52 +506,52 @@ div.csl-indent {
 </div>
 <div id="split-plot-design" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Split plot design<a href="experimental-design.html#split-plot-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="experimental-design.html#cb92-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb92-2"><a href="experimental-design.html#cb92-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb92-3"><a href="experimental-design.html#cb92-3" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb92-4"><a href="experimental-design.html#cb92-4" tabindex="-1"></a></span>
-<span id="cb92-5"><a href="experimental-design.html#cb92-5" tabindex="-1"></a><span class="co"># Define factors</span></span>
-<span id="cb92-6"><a href="experimental-design.html#cb92-6" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb92-7"><a href="experimental-design.html#cb92-7" tabindex="-1"></a>irrigation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>)</span>
-<span id="cb92-8"><a href="experimental-design.html#cb92-8" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb92-9"><a href="experimental-design.html#cb92-9" tabindex="-1"></a></span>
-<span id="cb92-10"><a href="experimental-design.html#cb92-10" tabindex="-1"></a><span class="co"># Create layout</span></span>
-<span id="cb92-11"><a href="experimental-design.html#cb92-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb92-12"><a href="experimental-design.html#cb92-12" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
-<span id="cb92-13"><a href="experimental-design.html#cb92-13" tabindex="-1"></a>                         <span class="at">Irrigation =</span> irrigation,</span>
-<span id="cb92-14"><a href="experimental-design.html#cb92-14" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
-<span id="cb92-15"><a href="experimental-design.html#cb92-15" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb92-16"><a href="experimental-design.html#cb92-16" tabindex="-1"></a>    <span class="co"># Simulate effects</span></span>
-<span id="cb92-17"><a href="experimental-design.html#cb92-17" tabindex="-1"></a>    <span class="at">IrrigationEff =</span> <span class="fu">ifelse</span>(Irrigation <span class="sc">==</span> <span class="st">&quot;High&quot;</span>, <span class="dv">10</span>, <span class="dv">0</span>),</span>
-<span id="cb92-18"><a href="experimental-design.html#cb92-18" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
-<span id="cb92-19"><a href="experimental-design.html#cb92-19" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb92-20"><a href="experimental-design.html#cb92-20" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
-<span id="cb92-21"><a href="experimental-design.html#cb92-21" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
-<span id="cb92-22"><a href="experimental-design.html#cb92-22" tabindex="-1"></a>    ),</span>
-<span id="cb92-23"><a href="experimental-design.html#cb92-23" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">2</span>,</span>
-<span id="cb92-24"><a href="experimental-design.html#cb92-24" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb92-25"><a href="experimental-design.html#cb92-25" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> IrrigationEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
-<span id="cb92-26"><a href="experimental-design.html#cb92-26" tabindex="-1"></a>  )</span>
-<span id="cb92-27"><a href="experimental-design.html#cb92-27" tabindex="-1"></a></span>
-<span id="cb92-28"><a href="experimental-design.html#cb92-28" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
-<span id="cb92-29"><a href="experimental-design.html#cb92-29" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> splitplot <span class="sc">%&gt;%</span></span>
-<span id="cb92-30"><a href="experimental-design.html#cb92-30" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Irrigation) <span class="sc">%&gt;%</span></span>
-<span id="cb92-31"><a href="experimental-design.html#cb92-31" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb92-32"><a href="experimental-design.html#cb92-32" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb92-33"><a href="experimental-design.html#cb92-33" tabindex="-1"></a></span>
-<span id="cb92-34"><a href="experimental-design.html#cb92-34" tabindex="-1"></a><span class="fu">ggplot</span>(splitplot, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
-<span id="cb92-35"><a href="experimental-design.html#cb92-35" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb92-36"><a href="experimental-design.html#cb92-36" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Irrigation) <span class="sc">+</span></span>
-<span id="cb92-37"><a href="experimental-design.html#cb92-37" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Fertilizer), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb92-38"><a href="experimental-design.html#cb92-38" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb92-39"><a href="experimental-design.html#cb92-39" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb92-40"><a href="experimental-design.html#cb92-40" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Split-Plot Layout: Irrigation × Fertilizer&quot;</span>,</span>
-<span id="cb92-41"><a href="experimental-design.html#cb92-41" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Subplot within Irrigation&quot;</span>,</span>
-<span id="cb92-42"><a href="experimental-design.html#cb92-42" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="experimental-design.html#cb171-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb171-2"><a href="experimental-design.html#cb171-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb171-3"><a href="experimental-design.html#cb171-3" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb171-4"><a href="experimental-design.html#cb171-4" tabindex="-1"></a></span>
+<span id="cb171-5"><a href="experimental-design.html#cb171-5" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb171-6"><a href="experimental-design.html#cb171-6" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb171-7"><a href="experimental-design.html#cb171-7" tabindex="-1"></a>irrigation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>)</span>
+<span id="cb171-8"><a href="experimental-design.html#cb171-8" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb171-9"><a href="experimental-design.html#cb171-9" tabindex="-1"></a></span>
+<span id="cb171-10"><a href="experimental-design.html#cb171-10" tabindex="-1"></a><span class="co"># Create layout</span></span>
+<span id="cb171-11"><a href="experimental-design.html#cb171-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb171-12"><a href="experimental-design.html#cb171-12" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
+<span id="cb171-13"><a href="experimental-design.html#cb171-13" tabindex="-1"></a>                         <span class="at">Irrigation =</span> irrigation,</span>
+<span id="cb171-14"><a href="experimental-design.html#cb171-14" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
+<span id="cb171-15"><a href="experimental-design.html#cb171-15" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb171-16"><a href="experimental-design.html#cb171-16" tabindex="-1"></a>    <span class="co"># Simulate effects</span></span>
+<span id="cb171-17"><a href="experimental-design.html#cb171-17" tabindex="-1"></a>    <span class="at">IrrigationEff =</span> <span class="fu">ifelse</span>(Irrigation <span class="sc">==</span> <span class="st">&quot;High&quot;</span>, <span class="dv">10</span>, <span class="dv">0</span>),</span>
+<span id="cb171-18"><a href="experimental-design.html#cb171-18" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
+<span id="cb171-19"><a href="experimental-design.html#cb171-19" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb171-20"><a href="experimental-design.html#cb171-20" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
+<span id="cb171-21"><a href="experimental-design.html#cb171-21" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
+<span id="cb171-22"><a href="experimental-design.html#cb171-22" tabindex="-1"></a>    ),</span>
+<span id="cb171-23"><a href="experimental-design.html#cb171-23" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb171-24"><a href="experimental-design.html#cb171-24" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb171-25"><a href="experimental-design.html#cb171-25" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> IrrigationEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
+<span id="cb171-26"><a href="experimental-design.html#cb171-26" tabindex="-1"></a>  )</span>
+<span id="cb171-27"><a href="experimental-design.html#cb171-27" tabindex="-1"></a></span>
+<span id="cb171-28"><a href="experimental-design.html#cb171-28" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
+<span id="cb171-29"><a href="experimental-design.html#cb171-29" tabindex="-1"></a>splitplot <span class="ot">&lt;-</span> splitplot <span class="sc">%&gt;%</span></span>
+<span id="cb171-30"><a href="experimental-design.html#cb171-30" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Irrigation) <span class="sc">%&gt;%</span></span>
+<span id="cb171-31"><a href="experimental-design.html#cb171-31" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb171-32"><a href="experimental-design.html#cb171-32" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb171-33"><a href="experimental-design.html#cb171-33" tabindex="-1"></a></span>
+<span id="cb171-34"><a href="experimental-design.html#cb171-34" tabindex="-1"></a><span class="fu">ggplot</span>(splitplot, <span class="fu">aes</span>(<span class="at">x =</span> Plot, <span class="at">y =</span> Block, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
+<span id="cb171-35"><a href="experimental-design.html#cb171-35" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-36"><a href="experimental-design.html#cb171-36" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Irrigation) <span class="sc">+</span></span>
+<span id="cb171-37"><a href="experimental-design.html#cb171-37" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Fertilizer), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb171-38"><a href="experimental-design.html#cb171-38" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb171-39"><a href="experimental-design.html#cb171-39" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb171-40"><a href="experimental-design.html#cb171-40" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Split-Plot Layout: Irrigation × Fertilizer&quot;</span>,</span>
+<span id="cb171-41"><a href="experimental-design.html#cb171-41" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Subplot within Irrigation&quot;</span>,</span>
+<span id="cb171-42"><a href="experimental-design.html#cb171-42" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Block&quot;</span>)</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="experimental-design.html#cb93-1" tabindex="-1"></a><span class="co"># Mixed model: Irrigation as main plot, Fertilizer as subplot</span></span>
-<span id="cb93-2"><a href="experimental-design.html#cb93-2" tabindex="-1"></a>model_split <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Irrigation <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block<span class="sc">/</span>Irrigation), <span class="at">data =</span> splitplot)</span>
-<span id="cb93-3"><a href="experimental-design.html#cb93-3" tabindex="-1"></a><span class="fu">summary</span>(model_split)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="experimental-design.html#cb172-1" tabindex="-1"></a><span class="co"># Mixed model: Irrigation as main plot, Fertilizer as subplot</span></span>
+<span id="cb172-2"><a href="experimental-design.html#cb172-2" tabindex="-1"></a>model_split <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Irrigation <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block<span class="sc">/</span>Irrigation), <span class="at">data =</span> splitplot)</span>
+<span id="cb172-3"><a href="experimental-design.html#cb172-3" tabindex="-1"></a><span class="fu">summary</span>(model_split)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Yield ~ Irrigation * Fertilizer + (1 | Block/Irrigation)
 ##    Data: splitplot
@@ -590,47 +588,47 @@ div.csl-indent {
 </div>
 <div id="strip-plot-design" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Strip Plot design<a href="experimental-design.html#strip-plot-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="experimental-design.html#cb95-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
-<span id="cb95-2"><a href="experimental-design.html#cb95-2" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb95-3"><a href="experimental-design.html#cb95-3" tabindex="-1"></a>tillage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Conventional&quot;</span>, <span class="st">&quot;No-Till&quot;</span>)</span>
-<span id="cb95-4"><a href="experimental-design.html#cb95-4" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb95-5"><a href="experimental-design.html#cb95-5" tabindex="-1"></a></span>
-<span id="cb95-6"><a href="experimental-design.html#cb95-6" tabindex="-1"></a><span class="co"># Create layout</span></span>
-<span id="cb95-7"><a href="experimental-design.html#cb95-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb95-8"><a href="experimental-design.html#cb95-8" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
-<span id="cb95-9"><a href="experimental-design.html#cb95-9" tabindex="-1"></a>                         <span class="at">Tillage =</span> tillage,</span>
-<span id="cb95-10"><a href="experimental-design.html#cb95-10" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
-<span id="cb95-11"><a href="experimental-design.html#cb95-11" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb95-12"><a href="experimental-design.html#cb95-12" tabindex="-1"></a>    <span class="at">TillageEff =</span> <span class="fu">ifelse</span>(Tillage <span class="sc">==</span> <span class="st">&quot;No-Till&quot;</span>, <span class="dv">8</span>, <span class="dv">0</span>),</span>
-<span id="cb95-13"><a href="experimental-design.html#cb95-13" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
-<span id="cb95-14"><a href="experimental-design.html#cb95-14" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb95-15"><a href="experimental-design.html#cb95-15" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
-<span id="cb95-16"><a href="experimental-design.html#cb95-16" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
-<span id="cb95-17"><a href="experimental-design.html#cb95-17" tabindex="-1"></a>    ),</span>
-<span id="cb95-18"><a href="experimental-design.html#cb95-18" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span>,</span>
-<span id="cb95-19"><a href="experimental-design.html#cb95-19" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb95-20"><a href="experimental-design.html#cb95-20" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> TillageEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
-<span id="cb95-21"><a href="experimental-design.html#cb95-21" tabindex="-1"></a>  )</span>
-<span id="cb95-22"><a href="experimental-design.html#cb95-22" tabindex="-1"></a></span>
-<span id="cb95-23"><a href="experimental-design.html#cb95-23" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
-<span id="cb95-24"><a href="experimental-design.html#cb95-24" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> stripplot <span class="sc">%&gt;%</span></span>
-<span id="cb95-25"><a href="experimental-design.html#cb95-25" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Tillage) <span class="sc">%&gt;%</span></span>
-<span id="cb95-26"><a href="experimental-design.html#cb95-26" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb95-27"><a href="experimental-design.html#cb95-27" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb95-28"><a href="experimental-design.html#cb95-28" tabindex="-1"></a></span>
-<span id="cb95-29"><a href="experimental-design.html#cb95-29" tabindex="-1"></a><span class="fu">ggplot</span>(stripplot, <span class="fu">aes</span>(<span class="at">x =</span> Fertilizer, <span class="at">y =</span> Tillage, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
-<span id="cb95-30"><a href="experimental-design.html#cb95-30" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb95-31"><a href="experimental-design.html#cb95-31" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Block) <span class="sc">+</span></span>
-<span id="cb95-32"><a href="experimental-design.html#cb95-32" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Yield, <span class="dv">1</span>)), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb95-33"><a href="experimental-design.html#cb95-33" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb95-34"><a href="experimental-design.html#cb95-34" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb95-35"><a href="experimental-design.html#cb95-35" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Strip Plot Layout: Tillage × Fertilizer&quot;</span>,</span>
-<span id="cb95-36"><a href="experimental-design.html#cb95-36" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Vertical Strip (Fertilizer)&quot;</span>,</span>
-<span id="cb95-37"><a href="experimental-design.html#cb95-37" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Horizontal Strip (Tillage)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="experimental-design.html#cb174-1" tabindex="-1"></a><span class="co"># Define factors</span></span>
+<span id="cb174-2"><a href="experimental-design.html#cb174-2" tabindex="-1"></a>blocks <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Field&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb174-3"><a href="experimental-design.html#cb174-3" tabindex="-1"></a>tillage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Conventional&quot;</span>, <span class="st">&quot;No-Till&quot;</span>)</span>
+<span id="cb174-4"><a href="experimental-design.html#cb174-4" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb174-5"><a href="experimental-design.html#cb174-5" tabindex="-1"></a></span>
+<span id="cb174-6"><a href="experimental-design.html#cb174-6" tabindex="-1"></a><span class="co"># Create layout</span></span>
+<span id="cb174-7"><a href="experimental-design.html#cb174-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb174-8"><a href="experimental-design.html#cb174-8" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">Block =</span> blocks,</span>
+<span id="cb174-9"><a href="experimental-design.html#cb174-9" tabindex="-1"></a>                         <span class="at">Tillage =</span> tillage,</span>
+<span id="cb174-10"><a href="experimental-design.html#cb174-10" tabindex="-1"></a>                         <span class="at">Fertilizer =</span> fertilizer) <span class="sc">%&gt;%</span></span>
+<span id="cb174-11"><a href="experimental-design.html#cb174-11" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb174-12"><a href="experimental-design.html#cb174-12" tabindex="-1"></a>    <span class="at">TillageEff =</span> <span class="fu">ifelse</span>(Tillage <span class="sc">==</span> <span class="st">&quot;No-Till&quot;</span>, <span class="dv">8</span>, <span class="dv">0</span>),</span>
+<span id="cb174-13"><a href="experimental-design.html#cb174-13" tabindex="-1"></a>    <span class="at">FertilizerEff =</span> <span class="fu">case_when</span>(</span>
+<span id="cb174-14"><a href="experimental-design.html#cb174-14" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb174-15"><a href="experimental-design.html#cb174-15" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> <span class="dv">10</span>,</span>
+<span id="cb174-16"><a href="experimental-design.html#cb174-16" tabindex="-1"></a>      Fertilizer <span class="sc">==</span> <span class="st">&quot;C&quot;</span> <span class="sc">~</span> <span class="dv">15</span></span>
+<span id="cb174-17"><a href="experimental-design.html#cb174-17" tabindex="-1"></a>    ),</span>
+<span id="cb174-18"><a href="experimental-design.html#cb174-18" tabindex="-1"></a>    <span class="at">BlockEff =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;Field&quot;</span>, <span class="st">&quot;&quot;</span>, Block)) <span class="sc">*</span> <span class="dv">3</span>,</span>
+<span id="cb174-19"><a href="experimental-design.html#cb174-19" tabindex="-1"></a>    <span class="at">Residual =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb174-20"><a href="experimental-design.html#cb174-20" tabindex="-1"></a>    <span class="at">Yield =</span> <span class="dv">50</span> <span class="sc">+</span> TillageEff <span class="sc">+</span> FertilizerEff <span class="sc">+</span> BlockEff <span class="sc">+</span> Residual</span>
+<span id="cb174-21"><a href="experimental-design.html#cb174-21" tabindex="-1"></a>  )</span>
+<span id="cb174-22"><a href="experimental-design.html#cb174-22" tabindex="-1"></a></span>
+<span id="cb174-23"><a href="experimental-design.html#cb174-23" tabindex="-1"></a><span class="co"># Add plot position for layout</span></span>
+<span id="cb174-24"><a href="experimental-design.html#cb174-24" tabindex="-1"></a>stripplot <span class="ot">&lt;-</span> stripplot <span class="sc">%&gt;%</span></span>
+<span id="cb174-25"><a href="experimental-design.html#cb174-25" tabindex="-1"></a>  <span class="fu">group_by</span>(Block, Tillage) <span class="sc">%&gt;%</span></span>
+<span id="cb174-26"><a href="experimental-design.html#cb174-26" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Plot =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb174-27"><a href="experimental-design.html#cb174-27" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb174-28"><a href="experimental-design.html#cb174-28" tabindex="-1"></a></span>
+<span id="cb174-29"><a href="experimental-design.html#cb174-29" tabindex="-1"></a><span class="fu">ggplot</span>(stripplot, <span class="fu">aes</span>(<span class="at">x =</span> Fertilizer, <span class="at">y =</span> Tillage, <span class="at">fill =</span> Fertilizer)) <span class="sc">+</span></span>
+<span id="cb174-30"><a href="experimental-design.html#cb174-30" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb174-31"><a href="experimental-design.html#cb174-31" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Block) <span class="sc">+</span></span>
+<span id="cb174-32"><a href="experimental-design.html#cb174-32" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Yield, <span class="dv">1</span>)), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb174-33"><a href="experimental-design.html#cb174-33" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb174-34"><a href="experimental-design.html#cb174-34" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb174-35"><a href="experimental-design.html#cb174-35" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Strip Plot Layout: Tillage × Fertilizer&quot;</span>,</span>
+<span id="cb174-36"><a href="experimental-design.html#cb174-36" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Vertical Strip (Fertilizer)&quot;</span>,</span>
+<span id="cb174-37"><a href="experimental-design.html#cb174-37" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Horizontal Strip (Tillage)&quot;</span>)</span></code></pre></div>
 <p><img src="03-frequentist_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="experimental-design.html#cb96-1" tabindex="-1"></a><span class="co"># Mixed model: Tillage and Fertilizer as fixed, Block as random</span></span>
-<span id="cb96-2"><a href="experimental-design.html#cb96-2" tabindex="-1"></a>model_strip <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Tillage <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> stripplot)</span>
-<span id="cb96-3"><a href="experimental-design.html#cb96-3" tabindex="-1"></a><span class="fu">summary</span>(model_strip)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="experimental-design.html#cb175-1" tabindex="-1"></a><span class="co"># Mixed model: Tillage and Fertilizer as fixed, Block as random</span></span>
+<span id="cb175-2"><a href="experimental-design.html#cb175-2" tabindex="-1"></a>model_strip <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> Tillage <span class="sc">*</span> Fertilizer <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Block), <span class="at">data =</span> stripplot)</span>
+<span id="cb175-3"><a href="experimental-design.html#cb175-3" tabindex="-1"></a><span class="fu">summary</span>(model_strip)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Yield ~ Tillage * Fertilizer + (1 | Block)
 ##    Data: stripplot

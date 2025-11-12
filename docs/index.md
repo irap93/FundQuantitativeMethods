@@ -1,7 +1,7 @@
 ---
 title: "An introduction to Quantitative Thinking"
-author: "Yihui Xie"
-date: "2025-10-10"
+author: "Ira Lloyd Parsons, PhD"
+date: "2025-11-12"
 knit: "bookdown::render_book"
 documentclass: krantz
 bibliography: [Quantitative Thinking.bib, packages.bib]
